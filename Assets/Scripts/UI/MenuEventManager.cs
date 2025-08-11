@@ -80,7 +80,6 @@ public class MenuEventManager : MonoBehaviour
     protected virtual IEnumerator SelectAfterDelay()
     {
         yield return null;
-        Debug.Log("Selecting first: " + _firstSelected.name);
         EventSystem.current.SetSelectedGameObject(_firstSelected.gameObject);        
     }
     #endregion                                         
@@ -95,7 +94,16 @@ public class MenuEventManager : MonoBehaviour
         _scaleUpTween.Kill(true);
         _scaleDownTween.Kill(true);
     }
-    #endregion 
+    #endregion
+
+    #region OnDestroy
+    private void OnDestroy()
+    {
+        //kill all tweens (we will use this so the tweens are destroyed when we change scenes)
+        _scaleUpTween.Kill(true);
+        _scaleDownTween.Kill(true);
+    }
+    #endregion
 
     #region Method/Functions
 
