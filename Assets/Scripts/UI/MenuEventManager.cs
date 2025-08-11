@@ -37,6 +37,7 @@ public class MenuEventManager : MonoBehaviour
 
     //What selectable did we select last
     protected Selectable _lastSelected;
+    
     #endregion
 
     #region Awake
@@ -50,6 +51,14 @@ public class MenuEventManager : MonoBehaviour
             //Add the scales of each selectable button into our dictionary
             _selectableButtonScales.Add(selectableButtons,selectableButtons.transform.localScale);
         }
+    }
+    #endregion
+
+    #region Start
+    private void Start()
+    {
+        //Disable the navigation event in the unity built in event system (this is to prevent the event system from looping between on pointer enter and the built in event navigation system)
+        EventSystem.current.sendNavigationEvents = false;
     }
     #endregion
 
@@ -68,17 +77,13 @@ public class MenuEventManager : MonoBehaviour
 
         StartCoroutine(SelectAfterDelay());
     }
-    #endregion
-
-    #region Coroutine 
-    //Coroutine to allow atleast 1 frame allow the UI system to get set up before allowing this coroutine to be called
     protected virtual IEnumerator SelectAfterDelay()
     {
         yield return null;
-        //Set the selected game object as the first selected game object
-        EventSystem.current.SetSelectedGameObject(_firstSelected.gameObject);    
+        Debug.Log("Selecting first: " + _firstSelected.name);
+        EventSystem.current.SetSelectedGameObject(_firstSelected.gameObject);        
     }
-    #endregion
+    #endregion                                         
 
     #region OnDisable
     public virtual void OnDisable()
@@ -93,7 +98,7 @@ public class MenuEventManager : MonoBehaviour
     #endregion 
 
     #region Method/Functions
-    //Listeners that will be added to specified objects
+
     protected virtual void AddSelectionListeners(Selectable selectable)
     {
         //add listener if there is no listener
@@ -132,7 +137,7 @@ public class MenuEventManager : MonoBehaviour
         {
             //Select the desired event ID from the event trigger options available (in this case we want OnPointerEnter)
             eventID = EventTriggerType.PointerEnter
-        };
+        };        
         //When the pointer is over the button
         PointerEnter.callback.AddListener(OnPointerEnter);
         //Add this trigger to our trigger entry
@@ -143,15 +148,13 @@ public class MenuEventManager : MonoBehaviour
         {
             //Select the desired event ID from the event trigger options available (in this case we want OnPointerExit)
             eventID = EventTriggerType.PointerExit
-        };
+        };        
         //When the pointer leaves the object it is over
-        PointerExit.callback.AddListener(OnPointerExit);
+        PointerExit.callback.AddListener(OnPointerExit);        
         //Add this trigger to our trigger entry
         trigger.triggers.Add(PointerExit);
     }
-
-    //This function using baseeventdata parameter will tell whatever wants to know that that something has trigger this function. 
-    //In this case when a button has been pressed
+    
     public void OnSelect(BaseEventData eventData)
     {       
         //If the selected object is in our animation exclusion list do not animate the object
@@ -166,15 +169,11 @@ public class MenuEventManager : MonoBehaviour
         Vector3 newScale = eventData.selectedObject.transform.localScale * _selectedAnimationScale;
         //Tween the scale of the selected object upwards (changing the scale value smoothly overtime)
         _scaleUpTween = eventData.selectedObject.transform.DOScale(newScale, _scaleDuration);
-
-        Debug.Log(eventData.selectedObject);
     }
 
-    //This function using baseeventdata parameter will tell whatever wants to know that that something has trigger this function
-    //In this case when a button has been deselected
     public void OnDeselect(BaseEventData eventData)
-    {
-        //If the selected object is in our animation exclusion list do not animate the object
+    {   
+
         if (_animationExclusions.Contains(eventData.selectedObject))
         {
             return;
@@ -186,7 +185,6 @@ public class MenuEventManager : MonoBehaviour
         _scaleDownTween = eventData.selectedObject.transform.DOScale(_selectableButtonScales[selectable], _scaleDuration);
     }  
 
-    //When this method is called - check to see if the pointer is over an object
     public void OnPointerEnter(BaseEventData eventData)
     {
         //Get the pointer event data from the event data (Pointer event data inherites from base event data)
@@ -209,8 +207,7 @@ public class MenuEventManager : MonoBehaviour
             pointerEventData.selectedObject = selectable.gameObject;
         }
     }
-
-    //When this function is called check to see if the pointer is no longer over an object
+  
     public void OnPointerExit(BaseEventData eventData)
     {
         //Get the pointer event data from the event data (Pointer event data inherites from base event data)
@@ -224,17 +221,15 @@ public class MenuEventManager : MonoBehaviour
         }
     }
 
-    //Detect when we press a button from our input action reference
     protected virtual void OnNavigate(InputAction.CallbackContext navigateContext)
     {
-        //When we press a button (up, down, left right) fire an event.
-        //This will allow us to navigate the menu with our keyboard even when the mouse pointer is not over a selectable object
-
         //If we have nothing selected and the last object selected variable is not null
         if (EventSystem.current.currentSelectedGameObject == null && _lastSelected != null)
         {
             //Set the selected object to the last selected object
             EventSystem.current.SetSelectedGameObject(_lastSelected.gameObject);
+            //Enable the navigation event in the unity built in event system (this is to prevent the event system from looping between on pointer enter and the built in event navigation system)
+            EventSystem.current.sendNavigationEvents = true;
         }
     }
     #endregion
