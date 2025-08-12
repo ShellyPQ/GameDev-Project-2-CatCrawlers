@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _extraHeight = 0.25f;
     [SerializeField] private LayerMask _groundMask;
 
+    [Header("Camera Properties")]
+    [SerializeField] private GameObject _cameraFollowObject;
+
 
     //Variable that will hold the players sprite renderer
     private SpriteRenderer _renderer;
@@ -27,6 +30,8 @@ public class PlayerController : MonoBehaviour
     private Collider2D _playerCollider;
     //Variable that will hold the float movement input
     private float _moveInput;
+    //bool to check in what direction the player is moving
+    public bool _isFacingRight = true;
 
     //Bool to check if the player is jumping
     private bool _isJumping;
@@ -36,6 +41,11 @@ public class PlayerController : MonoBehaviour
     private float _jumpTimeCounter;
 
     private RaycastHit2D _groundHit;
+
+    //Access the camera follow script
+    private CameraFollow _cameraFollow;
+    //speed threshold when the player is falling
+    private float _fallSpeedYDampingChangeThreshold;
     #endregion
 
     #region Awake
@@ -44,6 +54,10 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _renderer = GetComponent<SpriteRenderer>();
         _playerCollider = GetComponent<Collider2D>();
+
+        _cameraFollow = _cameraFollowObject.GetComponent<CameraFollow>();
+
+        _fallSpeedYDampingChangeThreshold = CameraManager.instance.fallSpeedYDampingChangeThreshold;        
     }
     #endregion
 
@@ -51,6 +65,8 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         Jump();
+
+        FallingSpeedDamp();
     }
     #endregion
 
@@ -69,17 +85,42 @@ public class PlayerController : MonoBehaviour
 
         _rb.velocity = new Vector2(_moveInput * _playerSpeed, _rb.velocity.y);
 
-        //Have the players sprite face in the direction it is moving (only check if we are moving)
-        if (_moveInput > 0 || _moveInput < 0)
+        DirCheck();
+    }
+
+    //Check in what direction the player is checking
+    private void DirCheck()
+    {        
+        if (PlayerInput.instance.moveInput.x > 0 && !_isFacingRight)
         {
-            if (_rb.velocity.x > 0.01f)
-            {
-                _renderer.flipX = false;
-            }
-            else if (_rb.velocity.x < -0.01f)
-            {
-                _renderer.flipX = true;
-            }
+            FlipDir();
+        }
+        else if (PlayerInput.instance.moveInput.x < 0 && _isFacingRight)
+        {
+            FlipDir();
+        }
+    }
+
+    //flip sprite in the direction the player is moving
+    private void FlipDir()
+    {
+        if (_isFacingRight)
+        {
+            Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
+            transform.rotation = Quaternion.Euler(rotator);
+            _isFacingRight = !_isFacingRight;
+
+            //turn the camera follow object
+            _cameraFollow.CallSpriteFlip();
+        }
+        else
+        {
+            Vector3 rotator = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
+            transform.rotation = Quaternion.Euler(rotator);
+            _isFacingRight = !_isFacingRight;
+
+            //turn the camera follow object
+            _cameraFollow.CallSpriteFlip();
         }
     }
 
@@ -120,10 +161,28 @@ public class PlayerController : MonoBehaviour
 
         DrawGroundCheck();
     }
+
+    private void FallingSpeedDamp()
+    {
+        //if we are falling past a certain speed threshold
+        if (_rb.velocity.y < _fallSpeedYDampingChangeThreshold && !CameraManager.instance.isLerpingYDamping && !CameraManager.instance.LerpedFromPlayerFalling)
+        {
+            CameraManager.instance.LerpYDamping(true);
+        }
+
+        //if we are standing still or moving up
+        if (_rb.velocity.y >= 0f && !CameraManager.instance.isLerpingYDamping && CameraManager.instance.LerpedFromPlayerFalling)
+        {
+            //reset so it can be called again
+            CameraManager.instance.LerpedFromPlayerFalling = false;
+
+            CameraManager.instance.LerpYDamping(false);
+        }
+    }
     #endregion
 
     #region GroundCheck
-    
+
     private bool GroundCheck()
     {
         //create a box collider at the players feet to check if the player is grounded
