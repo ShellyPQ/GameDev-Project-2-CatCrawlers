@@ -33,7 +33,7 @@ public class CameraFollow : MonoBehaviour
     #endregion
 
     #region Update
-    private void FixedUpdate()
+    private void lateUpdate()
     {
         //Have this object (camera follow) follow the player's positions
         //The camera will follow this object instead of the player

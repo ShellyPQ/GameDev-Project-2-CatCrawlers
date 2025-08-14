@@ -27,6 +27,7 @@ public class CameraManager : MonoBehaviour
     #region Awake
     private void Awake()
     {
+
         if (instance == null)
         {
             instance = this;

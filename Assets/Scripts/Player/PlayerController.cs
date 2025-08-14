@@ -55,11 +55,16 @@ public class PlayerController : MonoBehaviour
         _renderer = GetComponent<SpriteRenderer>();
         _playerCollider = GetComponent<Collider2D>();
 
-        _cameraFollow = _cameraFollowObject.GetComponent<CameraFollow>();
-
-        _fallSpeedYDampingChangeThreshold = CameraManager.instance.fallSpeedYDampingChangeThreshold;        
+        _cameraFollow = _cameraFollowObject.GetComponent<CameraFollow>();        
     }
     #endregion
+
+    #region Start
+    private void Start()
+    {
+        _fallSpeedYDampingChangeThreshold = CameraManager.instance.fallSpeedYDampingChangeThreshold;
+    }
+#endregion
 
     #region Update
     private void Update()
