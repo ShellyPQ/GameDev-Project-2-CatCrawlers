@@ -1,6 +1,4 @@
-using DG.Tweening;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
@@ -13,7 +11,7 @@ public class CameraFollow : MonoBehaviour
     [Header("Sprite Rotation Properties")]
     [Tooltip("Sprite rotation lerp time")]
     [SerializeField] private float _spriteYRotationTime = 0.15f;
-
+    
     private Coroutine _spriteRotationCoroutine;
 
     private PlayerController _playerController;
@@ -33,11 +31,12 @@ public class CameraFollow : MonoBehaviour
     #endregion
 
     #region Update
-    private void lateUpdate()
+    private void LateUpdate()
     {
         //Have this object (camera follow) follow the player's positions
         //The camera will follow this object instead of the player
         transform.position = _playerTransform.position;
+        
     }
     #endregion
 
