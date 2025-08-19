@@ -169,6 +169,142 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""569465a2-b662-42e0-869f-abcbb67c3675"",
+            ""actions"": [
+                {
+                    ""name"": ""Keyboard"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""3f59248e-6764-4708-a44a-f0e7d73b09e1"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Enter"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""66c297f3-3372-4ab8-accf-acb4b6fb178e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""2f045943-208e-4df5-9c2e-f611816e4997"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Keyboard"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""61f926a6-e4b8-457a-9db9-0b0050d7b7e5"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Keyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""5563dbe1-7d33-4d67-b20e-6a43727c89e1"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Keyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""e2b7125a-7285-42ea-904d-98003326a144"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Keyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""7e8c186c-b796-4eed-8bbe-92998ef579b9"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Keyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Up"",
+                    ""id"": ""2af060fb-03ad-4162-9024-27b61da72cc7"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Keyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Down"",
+                    ""id"": ""457e1731-eebd-4652-87b2-c074e52ae4b0"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Keyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Left"",
+                    ""id"": ""e68486ec-f8a6-485f-aeab-34d401c95cbc"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Keyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""75567339-8a03-4563-a309-a96a5f223722"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Keyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e6b8ba66-d3df-4af2-81fd-75aa65ab9a52"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Enter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -183,11 +319,16 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
         m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
         m_Movement_Jump = m_Movement.FindAction("Jump", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Keyboard = m_UI.FindAction("Keyboard", throwIfNotFound: true);
+        m_UI_Enter = m_UI.FindAction("Enter", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
     {
         UnityEngine.Debug.Assert(!m_Movement.enabled, "This will cause a leak and performance issues, PlayerControls.Movement.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, PlayerControls.UI.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -299,6 +440,60 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public MovementActions @Movement => new MovementActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_Keyboard;
+    private readonly InputAction m_UI_Enter;
+    public struct UIActions
+    {
+        private @PlayerControls m_Wrapper;
+        public UIActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Keyboard => m_Wrapper.m_UI_Keyboard;
+        public InputAction @Enter => m_Wrapper.m_UI_Enter;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void AddCallbacks(IUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            @Keyboard.started += instance.OnKeyboard;
+            @Keyboard.performed += instance.OnKeyboard;
+            @Keyboard.canceled += instance.OnKeyboard;
+            @Enter.started += instance.OnEnter;
+            @Enter.performed += instance.OnEnter;
+            @Enter.canceled += instance.OnEnter;
+        }
+
+        private void UnregisterCallbacks(IUIActions instance)
+        {
+            @Keyboard.started -= instance.OnKeyboard;
+            @Keyboard.performed -= instance.OnKeyboard;
+            @Keyboard.canceled -= instance.OnKeyboard;
+            @Enter.started -= instance.OnEnter;
+            @Enter.performed -= instance.OnEnter;
+            @Enter.canceled -= instance.OnEnter;
+        }
+
+        public void RemoveCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -312,5 +507,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnKeyboard(InputAction.CallbackContext context);
+        void OnEnter(InputAction.CallbackContext context);
     }
 }
