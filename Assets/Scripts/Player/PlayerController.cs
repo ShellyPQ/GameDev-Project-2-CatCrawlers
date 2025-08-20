@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _jumpTime = 0.5f;
 
     [Header("Ground Check Properties")]
-    [SerializeField] private float _extraHeight = 0.25f;
+    [SerializeField] private float _extraHeight = 0.35f;
     [SerializeField] private LayerMask _groundMask;
 
     [Header("Camera Properties")]
