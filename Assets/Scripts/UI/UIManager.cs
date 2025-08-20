@@ -13,7 +13,10 @@ public class UIManager : MonoBehaviour
     [Tooltip("Variable to hold the quit button.")]
     [SerializeField] Button _quitButton;
     [SerializeField] Image _brightnessOverlay;
-    [SerializeField] TextMeshProUGUI _brightnessText;
+
+    [Header("Brightness Image Slider Properties")]
+    [SerializeField] private Image _brightnessImage;
+    [SerializeField] private Sprite[] _brightnessSprites;   
     #endregion
 
     #region Start
@@ -48,18 +51,20 @@ public class UIManager : MonoBehaviour
     //slider value 0 - bright and 1 = dark
     public void SetBrightnessLevel(float value)
     {
+        //snap to the nearest 10% increment
+        float snapped = Mathf.Round(value * 10f) / 10f;
+
         if (_brightnessOverlay != null)
         {
             Color adjColor = _brightnessOverlay.color;
-            adjColor.a = value; 
+            adjColor.a = snapped; 
             _brightnessOverlay.color = adjColor;
         }
 
-        if (_brightnessText != null)
+        if (_brightnessImage != null && _brightnessSprites.Length == 11)
         {
-            int percent = Mathf.RoundToInt((1f - value) * 100f);
-            //invert so 0 - 0% and 1 = 100% brightness
-            _brightnessText.text = percent + "%";
+            int index = Mathf.Clamp(Mathf.RoundToInt(snapped * 10f), 0, 10);
+            _brightnessImage.sprite = _brightnessSprites[index];
         }
     }
 
