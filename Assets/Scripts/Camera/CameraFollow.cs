@@ -11,32 +11,29 @@ public class CameraFollow : MonoBehaviour
     [Header("Sprite Rotation Properties")]
     [Tooltip("Sprite rotation lerp time")]
     [SerializeField] private float _spriteYRotationTime = 0.15f;
-    
+
     private Coroutine _spriteRotationCoroutine;
-
     private PlayerController _playerController;
-
     private bool _isFacingRight;
     #endregion
 
     #region Awake
     private void Awake()
     {
-        //Assign the player object holding the player controller script 
+        //Assign the player object holding the player controller script
         _playerController = _playerTransform.gameObject.GetComponent<PlayerController>();
 
-        //Check in what direction the player is facing 
+        //Check in what direction the player is facing
         _isFacingRight = _playerController._isFacingRight;
     }
     #endregion
 
-    #region Update
+    #region LateUpdate
     private void LateUpdate()
     {
-        //Have this object (camera follow) follow the player's positions
+        //Have this object (camera follow) follow the player's positions 
         //The camera will follow this object instead of the player
         transform.position = _playerTransform.position;
-        
     }
     #endregion
 
@@ -61,10 +58,10 @@ public class CameraFollow : MonoBehaviour
             elapsedTime += Time.deltaTime;
 
             //lerp the y rotation
-            yRot = Mathf.Lerp(startRotation,endRotationAmount, (elapsedTime / _spriteYRotationTime));
+            yRot = Mathf.Lerp(startRotation, endRotationAmount, (elapsedTime / _spriteYRotationTime));
             transform.rotation = Quaternion.Euler(0f, yRot, 0f);
 
-           yield return null;
+            yield return null;
         }
     }
 

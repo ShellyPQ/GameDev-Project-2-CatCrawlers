@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
         _renderer = GetComponent<SpriteRenderer>();
         _playerCollider = GetComponent<Collider2D>();
 
-        _cameraFollow = _cameraFollowObject.GetComponent<CameraFollow>();        
+        _cameraFollow = _cameraFollowObject.GetComponent<CameraFollow>();
     }
     #endregion
 
@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
     {
         _fallSpeedYDampingChangeThreshold = CameraManager.instance.fallSpeedYDampingChangeThreshold;
     }
-#endregion
+    #endregion
 
     #region Update
     private void Update()
@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
 
     //Check in what direction the player is checking
     private void DirCheck()
-    {        
+    {
         if (PlayerInput.instance.moveInput.x > 0 && !_isFacingRight)
         {
             FlipDir();
@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             Vector3 rotator = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
-            transform.rotation = Quaternion.Euler(rotator);
+            transform.rotation = Quaternion.Euler(rotator); 
             _isFacingRight = !_isFacingRight;
 
             //turn the camera follow object
@@ -169,20 +169,19 @@ public class PlayerController : MonoBehaviour
 
     private void FallingSpeedDamp()
     {
-        //if we are falling past a certain speed threshold
-        if (_rb.velocity.y < _fallSpeedYDampingChangeThreshold && !CameraManager.instance.isLerpingYDamping && !CameraManager.instance.LerpedFromPlayerFalling)
+        if (_isJumping)
         {
-            CameraManager.instance.LerpYDamping(true);
+            CameraManager.instance.LerpYPanAndOffset(true, false);
+        }
+        else if (_rb.velocity.y < 0 && !_isJumping)
+        {
+            CameraManager.instance.LerpYPanAndOffset(false, true);
+        }
+        else
+        {
+            CameraManager.instance.LerpYPanAndOffset(false, false);
         }
 
-        //if we are standing still or moving up
-        if (_rb.velocity.y >= 0f && !CameraManager.instance.isLerpingYDamping && CameraManager.instance.LerpedFromPlayerFalling)
-        {
-            //reset so it can be called again
-            CameraManager.instance.LerpedFromPlayerFalling = false;
-
-            CameraManager.instance.LerpYDamping(false);
-        }
     }
     #endregion
 

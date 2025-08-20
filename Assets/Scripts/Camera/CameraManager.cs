@@ -9,20 +9,28 @@ public class CameraManager : MonoBehaviour
 
     [SerializeField] private CinemachineVirtualCamera[] _allVirtualCameras;
 
-    [Header("Controls for lerping the Y Damping during player jump/fall")]
+    [Header("Jump/Fall Pan Properties")]
+    [Tooltip("Damping change when falling")]
     [SerializeField] private float _fallPanAmount = 0.25f;
+    [Tooltip("Time to lerp")]
     [SerializeField] private float _fallYPanTime = 0.35f;
+    [Tooltip("How far the camera pans down")]
+    [SerializeField] private float _fallYOffset = -2f;
+    [Tooltip("Camera pan up on jump")]
+    [SerializeField] private float _jumpYOffset = 1f;
+    [Tooltip("Velocity threshold")]
     public float fallSpeedYDampingChangeThreshold = -15f;
 
     public bool isLerpingYDamping { get; private set; }
     public bool LerpedFromPlayerFalling { get; set; }
 
-    private Coroutine _lerpYPanCoroutine;
+    private Coroutine _lerpCoroutine;
 
     private CinemachineVirtualCamera _currentCamera;
     private CinemachineFramingTransposer _framingTransposer;
 
-    private float _normYPanAmout;
+    private float _normYPanDamping;
+    private Vector3 _normTrackedOffset;
 
     #region Awake
     private void Awake()
@@ -42,53 +50,66 @@ public class CameraManager : MonoBehaviour
 
                 //set the framing transposer
                 _framingTransposer = _currentCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
-            }            
+            }
         }
 
-        //set the yDamping amount so its based on the inspector value
-        _normYPanAmout = _framingTransposer.m_YDamping;
+        //Store the normal values
+        _normYPanDamping = _framingTransposer.m_YDamping;
+        _normTrackedOffset = _framingTransposer.m_TrackedObjectOffset;
     }
     #endregion
 
     #region Method/Functions
 
     #region Lerp Y Damping
-    public void LerpYDamping(bool isPlayerFalling)
+    //call this when the player starts falling
+    public void LerpYPanAndOffset(bool isJumping, bool isFalling)
     {
-        _lerpYPanCoroutine = StartCoroutine(LerpYAction(isPlayerFalling));
+        if (_lerpCoroutine != null)
+        {
+            StopCoroutine(_lerpCoroutine);
+        }
+        _lerpCoroutine = StartCoroutine(LerpPanCoroutine(isJumping, isFalling));
     }
 
-    private IEnumerator LerpYAction(bool isPlayerFalling)
+    private IEnumerator LerpPanCoroutine(bool isJumping, bool isFalling)
     {
         isLerpingYDamping = true;
 
-        //grab the starting damping amount
-        float startDampAmount = _framingTransposer.m_YDamping;
-        float endDampAmount = 0f;
+        //starting values
+        float startDamping = _framingTransposer.m_YDamping;
+        Vector3 startOffset = _framingTransposer.m_TrackedObjectOffset;
 
-        //determine the end damping amount
-        if (isPlayerFalling)
+        //target values
+        float targetDamping = _normYPanDamping;
+        Vector3 targetOffset = _normTrackedOffset;
+
+        float lerpDuration = _fallYPanTime;
+
+        if (isFalling)
         {
-            endDampAmount = _fallPanAmount;
+            targetDamping = _fallPanAmount;
+            targetOffset = _normTrackedOffset + new Vector3(0, _fallYOffset, 0);
+            lerpDuration = _fallYPanTime;
             LerpedFromPlayerFalling = true;
         }
-        else
+        else if (isJumping)
         {
-            endDampAmount = _normYPanAmout;
+            targetOffset = _normTrackedOffset + new Vector3(0, _jumpYOffset, 0);
+            lerpDuration = 0.1f;
         }
 
-        //lerp the pan amount
-        float elapsedTime = 0f;
-        while (elapsedTime < _fallYPanTime)
+        float elapsed = 0f;
+        while (elapsed < lerpDuration)
         {
-            elapsedTime += Time.deltaTime;
+            elapsed += Time.deltaTime;
+            float t = elapsed / lerpDuration;
 
-            float lerpedPanAmount = Mathf.Lerp(startDampAmount, endDampAmount, (elapsedTime / _fallYPanTime));
-            _framingTransposer.m_YDamping = lerpedPanAmount;
+            _framingTransposer.m_YDamping = Mathf.Lerp(startDamping, targetDamping, t);
+            _framingTransposer.m_TrackedObjectOffset = Vector3.Lerp(startOffset, targetOffset, t);
 
             yield return null;
         }
-
         isLerpingYDamping = false;
     }
     #endregion
