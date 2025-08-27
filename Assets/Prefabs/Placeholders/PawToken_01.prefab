@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1941214949973673328}
   - component: {fileID: 885761205253191422}
   - component: {fileID: 1493882474417156496}
+  - component: {fileID: -6158870193105573786}
+  - component: {fileID: -4939696771598222372}
   m_Layer: 0
   m_Name: PawToken_01
   m_TagString: Untagged
@@ -120,3 +122,28 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
+--- !u!114 &-6158870193105573786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3291179815968505896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ffbc2a1437f1584a9a9d30149472576, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4939696771598222372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3291179815968505896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e02c19b0ededcb14c9dc9b74374b9183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collectable: {fileID: 11400000, guid: fe31971e3a82581459911b26532dd1de, type: 2}
