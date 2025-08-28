@@ -36,7 +36,7 @@ public class PlayerAttack : MonoBehaviour
             enemy.GetComponent<EnemyController>()?.TakeDamage(damage, hitDir);
         }
     }
-
+    #region Debug Gizmos
     private void OnDrawGizmosSelected()
     {
         if (attackPoint != null)
@@ -45,5 +45,7 @@ public class PlayerAttack : MonoBehaviour
             Gizmos.DrawWireSphere(attackPoint.position, attackRange);
         }
     }
+    #endregion
+
     #endregion
 }

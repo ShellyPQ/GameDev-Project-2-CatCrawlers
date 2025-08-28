@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1493882474417156496}
   - component: {fileID: -6158870193105573786}
   - component: {fileID: -4939696771598222372}
+  - component: {fileID: 2541847533953288426}
   m_Layer: 0
   m_Name: PawToken_01
   m_TagString: Untagged
@@ -147,3 +148,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collectable: {fileID: 11400000, guid: fe31971e3a82581459911b26532dd1de, type: 2}
+--- !u!95 &2541847533953288426
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3291179815968505896}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ab91a64f1ed3bf146a2f33851b77cced, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -19,11 +19,15 @@ public class ScenesManager : MonoBehaviour
     {
         //Add to this enum as new scenes are added (Ensure naming here match the scene names)
         MainMenu,
-        Test_Scene
+        Intro_Cutscene,
+        Level_Select_Scene,
+        Tutorial_Level
     }
     #endregion
 
     #region Function/Methods
+    //TO DO: REFACTOR THIS INTO A SWITCH STATEMENT 
+
     //Load in a specified scene
     public void LoadScene(Scene scene)
     {
@@ -33,7 +37,7 @@ public class ScenesManager : MonoBehaviour
     //Load in the scene that will start a new game
     public void LoadNewGame()
     {
-        SceneManager.LoadScene(Scene.Test_Scene.ToString());
+        SceneManager.LoadScene(Scene.Intro_Cutscene.ToString());
     }
 
     //Load the next scene (when a level is complete)
@@ -46,6 +50,18 @@ public class ScenesManager : MonoBehaviour
     public void LoadMainMenu()
     {
         SceneManager.LoadScene(Scene.MainMenu.ToString());
+    }
+
+    //Load the level select scene
+    public void LoadLevelSelect()
+    {
+        SceneManager.LoadScene(Scene.Level_Select_Scene.ToString());
+    }
+
+    //Load the tutorial level
+    public void LoadTutorialLevel()
+    {
+        SceneManager.LoadScene(Scene.Tutorial_Level.ToString());
     }
 
     //Quit the game and or playmode (in unity) when this function/method is called
