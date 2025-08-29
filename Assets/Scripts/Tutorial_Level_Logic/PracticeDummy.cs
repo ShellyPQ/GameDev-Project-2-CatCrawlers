@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleePracticeDummy : MonoBehaviour
+public class PracticeDummy : MonoBehaviour
 {
     #region Variables
     [Header("References")]
     //Reference to player to access attack script
     private GameObject _player;
+
+    [Header("Properties")]
+    [Tooltip("Melee Training Dummy Trigger")]
+    [SerializeField] private int _DummyHealth = 1;
+    private bool _isDead = false;
     #endregion
 
     #region Awake
@@ -22,6 +27,34 @@ public class MeleePracticeDummy : MonoBehaviour
     {
         //disable the players attack at the start of the tutorial
         _player.gameObject.GetComponent<PlayerAttack>().enabled = false;
+    }
+    #endregion
+
+    #region Method/Functions
+    public void TakeDamage(int dmg, Vector2 hitDirection)
+    {
+        if (_isDead)
+        {
+            return;
+        }
+
+        _DummyHealth -= dmg;
+
+        if (_DummyHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+        _isDead = true;
+
+        //trigger fall over animation
+
+        //trigger gate animation
+
+        //have dummy stay in background like the cat
     }
     #endregion
 

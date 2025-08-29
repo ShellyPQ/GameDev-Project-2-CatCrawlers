@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1685228880490675684}
   - component: {fileID: 396887800118752494}
   - component: {fileID: 8915753044596429734}
+  - component: {fileID: -2662433355024758719}
   m_Layer: 0
   m_Name: Slime_1
   m_TagString: Enemy
@@ -149,7 +150,7 @@ BoxCollider2D:
   m_Offset: {x: 1.0078799, y: -0.17213583}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5487637, y: 0.47435892}
     oldSize: {x: 19.2, y: 10.8}
     newSize: {x: 19.2, y: 10.8}
     adaptiveTilingThreshold: 0.5
@@ -171,3 +172,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f859881d00fa1c458638c5fa6bd292d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyAI: {fileID: 6493674211621813125}
+  maxHealth: 3
+  spriteRenderer: {fileID: 1017586264668449285}
+  catSprite: {fileID: 21300000, guid: 6d48a33d306732248b149b22e00f6e6b, type: 3}
+  knockBackForce: 5
+  knockBackDuration: 0.2
+  _isKnockedBack: 0
+  damage: 1
+  damageCooldown: 0.5
+  _rb: {fileID: 0}
+  _isDead: 0
+  _groundCheck: {fileID: 0}
+  _checkRadius: 0.1
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &-2662433355024758719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6493674211621813125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c159c033c6dea44aad62eae56f0e158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointA: {fileID: 0}
+  pointB: {fileID: 0}
+  _hopForceX: 3
+  _hopForceY: 5
+  _hopDelay: 0.5

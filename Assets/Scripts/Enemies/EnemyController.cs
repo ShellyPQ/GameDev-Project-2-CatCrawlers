@@ -4,18 +4,10 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    #region Variables
-    [Header("Enemy Movement Properties")]
-    public Transform pointA;
-    public Transform pointB;
-    public float hopForceX = 3f;
-    public float hopForceY = 5f;
-    public float hopDelay = 0.5f;
-
-    [Header("Ground Check Properties")]
-    public Transform groundCheck;
-    public float checkRadius = 0.1f;
-    public LayerMask _groundLayer;
+    #region Variables 
+    [Header("Enemy Reference")]
+    [Tooltip("Assign the enemies AI")]
+    [SerializeField] GameObject _enemyAI;
 
     [Header("Enemy Stats")]
     public int maxHealth = 3;
@@ -29,16 +21,21 @@ public class EnemyController : MonoBehaviour
     [Header("Knockback")]
     public float knockBackForce = 5f;
     public float knockBackDuration = 0.2f;
-    private bool _isKnockedBack = false;
+    public bool _isKnockedBack = false;
 
     [Header("Damage Properties")]
     public int damage = 1;
     public float damageCooldown = 0.5f;
     private bool _canDamage = true;
 
-    private Rigidbody2D _rb;
-    private bool _movingToB = false;
-    private bool _isDead = false;
+    [HideInInspector] public Rigidbody2D _rb;    
+    public bool _isDead = false;
+
+    [Header("Ground Check Properties")]
+    [SerializeField] private Transform _groundCheck;
+    [SerializeField] private float _checkRadius = 0.1f;
+    [SerializeField] private LayerMask _groundLayer;
+
     #endregion
 
     #region Start
@@ -49,63 +46,27 @@ public class EnemyController : MonoBehaviour
         _rb.gravityScale = 2f;
 
         currentHealth = maxHealth;
-        originalColor = spriteRenderer.color;
-
-        StartCoroutine(EnemyBounce());
+        originalColor = spriteRenderer.color;        
     }
     #endregion
 
-    #region Method/Functions
+    #region Method/Functions    
 
-    #region Bounce Patrol Logic
-    private IEnumerator EnemyBounce()
+    #region Enemy Ground Check
+    public bool IsGrounded()
     {
-        while (!_isDead)
-        {
-            //skip if in knockback
-            if (_isKnockedBack)
-            {
-                yield return null;
-                continue;
-            }
-
-            //wait until grounded
-            yield return new WaitUntil(() => IsGrounded());
-            //small pause
-            yield return new WaitForSeconds(hopDelay);
-
-            //calculate direction and face the next direction
-            Vector2 targetPos = _movingToB ? pointB.position : pointA.position;
-            spriteRenderer.flipX = targetPos.x > transform.position.x;
-
-            //reset horizontal velocity
-            _rb.velocity = new Vector2(0, _rb.velocity.y);
-
-            //calculate hop distance
-            float distanceX = targetPos.x - transform.position.x;
-            Vector2 hopForce = new Vector2(distanceX, hopForceY);
-
-            //apply hop force
-            _rb.AddForce(hopForce, ForceMode2D.Impulse);
-
-            //flip target for next hope
-            _movingToB = !_movingToB;
-        }
-
-    }
-    private bool IsGrounded()
-    {
-        bool onGround = Physics2D.OverlapCircle(groundCheck.position, checkRadius, _groundLayer);
+        bool onGround = Physics2D.OverlapCircle(_groundCheck.position, _checkRadius, _groundLayer);
         bool fallingOrStill = _rb.velocity.y <= 0.01f;
-        return onGround && fallingOrStill;
 
+        return onGround && fallingOrStill;
     }
+
     private void OnDrawGizmosSelected()
     {
-        if (groundCheck != null)
+        if (_groundCheck != null)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(groundCheck.position, checkRadius);
+            Gizmos.DrawWireSphere(_groundCheck.position, _checkRadius);
         }
     }
     #endregion
@@ -194,9 +155,7 @@ public class EnemyController : MonoBehaviour
         //position collider so its bottom sits at y = 0;
         float spriteBottom = spriteRenderer.bounds.min.y - transform.position.y;
         corpseCol.offset = new Vector2(0f, spriteBottom + corpseCol.size.y / 2f);
-        gameObject.layer = LayerMask.NameToLayer("Corpse");
-
-       
+        gameObject.layer = LayerMask.NameToLayer("Corpse");       
     }
 
     private void OnCollisionEnter2D(Collision2D other)
