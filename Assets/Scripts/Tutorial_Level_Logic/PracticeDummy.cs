@@ -26,7 +26,7 @@ public class PracticeDummy : MonoBehaviour
     private void Start()
     {
         //disable the players attack at the start of the tutorial
-        _player.gameObject.GetComponent<PlayerAttack>().enabled = false;
+        _player.gameObject.GetComponent<MeleeAttack>().enabled = false;
     }
     #endregion
 

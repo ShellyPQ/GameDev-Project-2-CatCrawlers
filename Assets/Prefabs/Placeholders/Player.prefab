@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 7605274581668877297}
   - component: {fileID: 3762546144622299599}
   - component: {fileID: 1361755890090575282}
-  - component: {fileID: 7989877708633335635}
+  - component: {fileID: 502031367033763872}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -61,7 +61,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3167439010277693987}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -9.79, y: 3.973, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
@@ -180,7 +180,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.037207127, y: 1.9273306}
+  m_Offset: {x: 0.037207305, y: 1.6685381}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.46903345, y: 0.05067153}
@@ -191,7 +191,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.269452, y: 3.8232782}
+  m_Size: {x: 1.2860414, y: 3.3056931}
   m_EdgeRadius: 0
 --- !u!114 &3762546144622299599
 MonoBehaviour:
@@ -206,8 +206,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerSpeed: 5
-  _jumpForce: 10
-  _jumpTime: 0.25
+  _jumpForce: 9.5
+  _jumpTime: 0.3
   _extraHeight: 0.35
   _groundMask:
     serializedVersion: 2
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLives: 9
---- !u!114 &7989877708633335635
+--- !u!114 &502031367033763872
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -236,12 +236,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3167439010277693987}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20bea0c26277b7048ac3a847a899973a, type: 3}
+  m_Script: {fileID: 11500000, guid: 57c5849e79c9b0245a83ab558deefbdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 1
-  damage: 1
-  attackPoint: {fileID: 606451029887429086}
-  enemyMask:
+  _attackRange: 1
+  _damage: 1
+  _attackPoint: {fileID: 606451029887429086}
+  _enemyMask:
     serializedVersion: 2
     m_Bits: 128
+  _attackPointOffset: {x: 1, y: 0, z: 0}
+  _swipeParticlePrefab: {fileID: 2217024299524021158, guid: ce7939354bb92684aba867a3cf18620f, type: 3}
+  _particlePoolSize: 5

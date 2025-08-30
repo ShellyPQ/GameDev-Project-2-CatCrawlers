@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
     private void MovePlayer()
     {
         //get a reference to the player input script
-        _moveInput = PlayerInput.instance.moveInput.x;
+        _moveInput = InputManager.instance.moveInput.x;
 
         _rb.velocity = new Vector2(_moveInput * _playerSpeed, _rb.velocity.y);
 
@@ -96,11 +96,11 @@ public class PlayerController : MonoBehaviour
     //Check in what direction the player is checking
     private void DirCheck()
     {
-        if (PlayerInput.instance.moveInput.x > 0 && !_isFacingRight)
+        if (InputManager.instance.moveInput.x > 0 && !_isFacingRight)
         {
             FlipDir();
         }
-        else if (PlayerInput.instance.moveInput.x < 0 && _isFacingRight)
+        else if (InputManager.instance.moveInput.x < 0 && _isFacingRight)
         {
             FlipDir();
         }
@@ -132,7 +132,7 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
         //button was just pushed and the player is grounded
-        if (PlayerInput.instance.playerControls.Movement.Jump.WasPressedThisFrame() && GroundCheck())
+        if (InputManager.instance.playerControls.Movement.Jump.WasPressedThisFrame() && GroundCheck())
         {
             _isJumping = true;
             _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //button is being held
-        if (PlayerInput.instance.playerControls.Movement.Jump.IsPressed())
+        if (InputManager.instance.playerControls.Movement.Jump.IsPressed())
         {
             if (_jumpTimeCounter > 0 && _isJumping)
             {
@@ -159,7 +159,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //button was released this frame
-        if (PlayerInput.instance.playerControls.Movement.Jump.WasReleasedThisFrame())
+        if (InputManager.instance.playerControls.Movement.Jump.WasReleasedThisFrame())
         {
             _isJumping = false;
         }
