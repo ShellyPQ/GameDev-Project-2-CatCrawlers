@@ -26,10 +26,19 @@ public class PauseManager : MonoBehaviour
     }
     #endregion
 
+    #region Start
+    private void Start()
+    {
+        //ensure the pause panel is disabled on start
+        pausePanel.gameObject.SetActive(false);
+        isPaused = false;
+    }
+    #endregion
+
     #region Update
     private void Update()
     {
-        CheckPauseState();
+        CheckPauseState();      
     }
     #endregion
 
@@ -59,7 +68,9 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 0f;
         pausePanel.SetActive(true);
 
-        InputManager.playerInput.SwitchCurrentActionMap("UI");
+        //switch to UI action map
+        InputManager.instance.playerControls.UI.Enable();
+        InputManager.instance.playerControls.Movement.Disable();
     }
 
     public void UnpauseGame()
@@ -67,7 +78,10 @@ public class PauseManager : MonoBehaviour
         isPaused = false;
         Time.timeScale = 1f;
         pausePanel.SetActive(false);
-        InputManager.playerInput.SwitchCurrentActionMap("Movement");
+
+        //switch back to Movement action map
+        InputManager.instance.playerControls.Movement.Enable();
+        InputManager.instance.playerControls.UI.Disable();
     }
     #endregion
 }

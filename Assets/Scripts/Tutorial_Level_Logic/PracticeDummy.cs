@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PracticeDummy : MonoBehaviour
+public class PracticeDummy : MonoBehaviour, IDamageable
 {
     #region Variables
+    [Header("Dummy Settings")]
+    [SerializeField] private int _maxHealth = 1;
+    [SerializeField] private float _shakeDuration = 0.2f;
+    [SerializeField] private float _shakeStrength = 0.1f;
+
+    private int _currentHealth;
+    private bool _isDead = false;
+
+    [Header("Reference")]
+    [SerializeField] private Animator triggerAni;
+    private Collider2D _hitbox;
+
     [Header("References")]
     //Reference to player to access attack script
     private GameObject _player;
-
-    [Header("Properties")]
-    [Tooltip("Melee Training Dummy Trigger")]
-    [SerializeField] private int _DummyHealth = 1;
-    private bool _isDead = false;
     #endregion
 
     #region Awake
@@ -25,36 +32,86 @@ public class PracticeDummy : MonoBehaviour
     #region Start
     private void Start()
     {
-        //disable the players attack at the start of the tutorial
+        //disable the players melee and range attack at the start of the tutorial
         _player.gameObject.GetComponent<MeleeAttack>().enabled = false;
+        _player.gameObject.GetComponent<RangedAttack>().enabled = false;
+        
+        _currentHealth = _maxHealth;
+        _hitbox = GetComponent<Collider2D>();
     }
     #endregion
 
     #region Method/Functions
     public void TakeDamage(int dmg, Vector2 hitDirection)
     {
+        //have dummy shake when hit (only one hit will eliminate dummy - coroutine to allow this to fire then fire the Die function)
+
         if (_isDead)
         {
             return;
         }
 
-        _DummyHealth -= dmg;
+        _currentHealth -= dmg;
 
-        if (_DummyHealth <= 0)
+        //visual damage feedback
+        StartCoroutine(ShakeEffect());
+
+        if (_currentHealth <= 0)
         {
             Die();
         }
     }
 
+    //make the dummy shake when the player hits it
+    private IEnumerator ShakeEffect()
+    {
+        Vector3 originalPos = transform.localPosition;
+        float elapsed = 0f;
+
+        while (elapsed < _shakeDuration)
+        {
+            float x = Random.Range(-1f, 1f) * _shakeStrength;
+            float y = Random.Range(-1f, 1f) * _shakeStrength;
+
+            transform.localPosition = originalPos + new Vector3(x, y, 0);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localPosition = originalPos;
+    }
+
+    //disable dummy collider and trigger gate animation
     public void Die()
     {
         _isDead = true;
 
-        //trigger fall over animation
-
         //trigger gate animation
+        if (triggerAni != null)
+        {
+            triggerAni.SetBool("canProceed", true);
+        }
+        else 
+        {
+            Debug.Log("Gate animator not assigned in the inspector!");
+        }
 
-        //have dummy stay in background like the cat
+        //enable full yarn ammo after tutorial dummy is hit
+        if (_player != null)
+        {
+            var ranged = _player.GetComponent<RangedAttack>();
+            ranged?.UnlockMaxAmmo();
+            _player.GetComponent<MeleeAttack>().enabled = true;
+            _player.GetComponent<RangedAttack>().enabled = true;
+        }
+
+        //disable collider so player can walkthrough
+        if (_hitbox != null)
+        {
+            _hitbox.enabled = false;
+        }
+
+        Debug.Log("Melee Training Complete");       
     }
     #endregion
 

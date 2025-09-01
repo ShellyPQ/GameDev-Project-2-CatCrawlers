@@ -21,7 +21,7 @@ public class ScenesManager : MonoBehaviour
         MainMenu,
         Intro_Cutscene,
         Level_Select_Scene,
-        Tutorial_Level
+        Level_01
     }
     #endregion
 
@@ -61,7 +61,7 @@ public class ScenesManager : MonoBehaviour
     //Load the tutorial level
     public void LoadTutorialLevel()
     {
-        SceneManager.LoadScene(Scene.Tutorial_Level.ToString());
+        SceneManager.LoadScene(Scene.Level_01.ToString());
     }
 
     //Quit the game and or playmode (in unity) when this function/method is called

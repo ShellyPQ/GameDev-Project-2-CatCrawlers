@@ -6,34 +6,38 @@ public class DummyTrigger : MonoBehaviour
 {
     #region Variables
     [Header("Properties")]
-    [Tooltip("Trigger Checks")]
-    public bool canMelee = false;
-    public bool canRange = false;
+    [Tooltip("Trigger Type")]
+    [SerializeField] private bool isMeleeTrigger = false;
+    [SerializeField] private bool isRangeTrigger = false;
+    
     #endregion
 
     #region Trigger Check
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (gameObject.tag == "Melee Trigger" && collision.gameObject.tag == "Player")
+        //check to see if its the player
+        if (!collision.CompareTag("Player"))
         {
-            //let the player use melee combat
-            canMelee = true;
-            //Turn this collider off
-            gameObject.GetComponent<BoxCollider2D>().enabled = false;
-
-            //Test this trigger is working
-            Debug.Log("Melee can now be used");
+            return;
         }
-        else if (gameObject.tag == "Range Trigger" && collision.gameObject.tag == "Player")
+
+        //Enable melee attack
+        if (isMeleeTrigger && collision.TryGetComponent(out MeleeAttack meleeScript))
         {
-            //let the player use range combat
-            canRange = true;
-            //Turn this collider off
-            gameObject.GetComponent<BoxCollider2D>().enabled = false;
-
-            //Test this trigger is working
-            Debug.Log("Range can now be used");
+            meleeScript.enabled = true;
+            Debug.Log("Melee combat enabled");
         }
+
+        //Enable ranged attack
+        if ((isRangeTrigger && collision.TryGetComponent(out RangedAttack rangeScript)))
+        {
+            rangeScript.enabled = true;
+            Debug.Log("Range combat enabled");
+        }
+
+        //Disable this trigger so it only fires once
+        GetComponent<Collider2D>().enabled = false;
+
     }
     #endregion
 }

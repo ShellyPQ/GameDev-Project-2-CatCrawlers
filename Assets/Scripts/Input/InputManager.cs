@@ -8,13 +8,12 @@ public class InputManager : MonoBehaviour
     #region Variables
     public static InputManager instance;
 
-    public static PlayerInput playerInput;
-
     [HideInInspector] public PlayerControls playerControls;
 
     public bool pauseMenuOpen { get; private set; }
     public bool pauseMenuClose { get; private set; }
 
+    private InputAction _move;
     private InputAction _pauseMenuOpen;
     private InputAction _pauseMenuClose;
 
@@ -36,22 +35,16 @@ public class InputManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        playerInput = GetComponent<PlayerInput>();
 
         playerControls = new PlayerControls();
         //Get the vector 2 of in the player input and move it into my moveInput variable
-        playerControls.Movement.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
-        
-        _pauseMenuOpen = playerInput.actions["Pause"];
-        _pauseMenuClose = playerInput.actions["UnPause"];
-    }
-    #endregion
+        //playerControls.Movement.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
 
-    #region Update
-    private void Update()
-    {
-        pauseMenuOpen = _pauseMenuOpen.WasPressedThisFrame();
-        pauseMenuClose = _pauseMenuClose.WasPressedThisFrame();
+        //cache references to actions
+        _move = playerControls.Movement.Move;
+        _pauseMenuOpen = playerControls.Movement.Pause;
+        _pauseMenuClose = playerControls.UI.UnPause;
+
     }
     #endregion
 
@@ -59,11 +52,31 @@ public class InputManager : MonoBehaviour
     private void OnEnable()
     {
         playerControls.Enable();
+        _move.Enable();
+        _pauseMenuOpen.Enable();
+        _pauseMenuClose.Enable();
     }
 
     private void OnDisable()
     {
         playerControls.Disable();
+        _move.Disable();
+        _pauseMenuOpen.Disable();
+        _pauseMenuClose.Disable();
     }
     #endregion
+
+    #region Update
+    private void Update()
+    {
+        //cache movement
+        moveInput = _move.ReadValue<Vector2>();
+
+        //pause states
+        pauseMenuOpen = _pauseMenuOpen.WasPressedThisFrame();
+        pauseMenuClose = _pauseMenuClose.WasPressedThisFrame();        
+    }
+    #endregion
+
+ 
 }

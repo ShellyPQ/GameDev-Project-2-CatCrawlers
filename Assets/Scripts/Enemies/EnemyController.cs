@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IDamageable
 {
     #region Variables 
     [Header("Enemy Reference")]
     [Tooltip("Assign the enemies AI")]
     [SerializeField] GameObject _enemyAI;
+    [SerializeField] EnemyStunEffect _enemyStunEffect;
 
     [Header("Enemy Stats")]
     public int maxHealth = 3;
@@ -21,9 +22,10 @@ public class EnemyController : MonoBehaviour
     [Header("Knockback")]
     public float knockBackForce = 5f;
     public float knockBackDuration = 0.2f;
-    public bool _isKnockedBack = false;
+    [HideInInspector] public bool _isKnockedBack = false;
 
     [Header("Damage Properties")]
+    public bool canDamagePlayer = false;
     public int damage = 1;
     public float damageCooldown = 0.5f;
     private bool _canDamage = true;
@@ -80,10 +82,10 @@ public class EnemyController : MonoBehaviour
         }
 
         currentHealth -= dmg;
-        StartCoroutine(FlashRed());
 
+        StartCoroutine(FlashRed());
         //start knockback
-        StartCoroutine(HandleKnockback(hitDirection));
+        StartCoroutine(EnemyKnockback(hitDirection));
 
         if (currentHealth <= 0)
         {
@@ -91,7 +93,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private IEnumerator HandleKnockback(Vector2 dir)
+    private IEnumerator EnemyKnockback(Vector2 dir)
     {
         _isKnockedBack = true;
 
@@ -118,6 +120,32 @@ public class EnemyController : MonoBehaviour
         {
             spriteRenderer.color = originalColor;
         }        
+    }
+
+    public void Stun(float duration)
+    {
+        if (_isDead)
+        {
+            return;
+        }
+
+        StopAllCoroutines();
+        //stop movement/hops
+        _isKnockedBack = true;
+
+        if (_enemyStunEffect != null)
+        {
+            //triggers squeeze + twist
+            _enemyStunEffect.Stun();
+        }
+        StartCoroutine(StunCoroutine(duration));
+    }
+
+    private IEnumerator StunCoroutine(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        //resume movement/hops
+        _isKnockedBack = false;
     }
 
     private void Die()
@@ -160,7 +188,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (_isDead || !_canDamage)
+        if (!canDamagePlayer || _isDead || !_canDamage)
         {
             return;
         }

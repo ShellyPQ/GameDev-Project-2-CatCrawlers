@@ -15,8 +15,15 @@ public class SlimeAI : MonoBehaviour
     //[SerializeField] private float _hopForceX = 3f;
     [SerializeField] private float _hopForceY = 5f;
     [SerializeField] private float _hopDelay = 0.5f;
-    private bool _movingToB = false; 
+    private bool _movingToB = false;
 
+    #endregion
+
+    #region Awake
+    private void Awake()
+    {
+        _enemyController = GetComponent<EnemyController>();
+    }
     #endregion
 
     #region Start

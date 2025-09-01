@@ -66,8 +66,10 @@ public class MeleeAttack : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             Vector2 hitDir = (enemy.transform.position - transform.position).normalized;
+
             //apply damage to enemy
             enemy.GetComponent<EnemyController>()?.TakeDamage(_damage, hitDir);
+            enemy.GetComponent<PracticeDummy>()?.TakeDamage(_damage, hitDir);
         }
     }
    
