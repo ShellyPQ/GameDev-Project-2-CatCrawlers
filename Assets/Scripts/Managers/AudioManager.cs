@@ -28,7 +28,7 @@ public class AudioManager : MonoBehaviour
     #region Start
     private void Start()
     {
-        //Initialize sliders and text with current mixer values
+        //initialize sliders and text with current mixer values
         InitializeSlider("masterVolume", _masterSlider, _masterVolumeImage);
         InitializeSlider("musicVolume", _musicSlider, _musicVolumeImage);
         InitializeSlider("sfxVolume", _sfxSlider, _sfxVoumeImage);
@@ -88,7 +88,7 @@ public class AudioManager : MonoBehaviour
             //cache current slider value 
             _lastVolumes[mixer] = slider.value;
 
-            //Mute
+            //mute
             _audioMixer.SetFloat(mixer, -80f);
             _mutedMixers.Add(mixer);
 
@@ -112,7 +112,7 @@ public class AudioManager : MonoBehaviour
     #endregion
 
     #region Button/Slider Inspector Functions/Methods
-    //Methods for the inspector (button bindings)
+    //methods for the inspector (button bindings)
     public void SetMasterVolume(float value) => SetVolumeFromSlider("masterVolume", value, _masterVolumeImage);
     public void SetMusicVolume(float value) => SetVolumeFromSlider("musicVolume", value, _musicVolumeImage);
     public void SetSFXVolume(float value) => SetVolumeFromSlider("sfxVolume", value, _sfxVoumeImage);

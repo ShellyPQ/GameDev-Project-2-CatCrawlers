@@ -7,6 +7,7 @@ public class CameraManager : MonoBehaviour
 {
     public static CameraManager instance;
 
+    #region Variables
     [SerializeField] private CinemachineVirtualCamera[] _allVirtualCameras;
 
     [Header("Jump/Fall Pan Properties")]
@@ -31,6 +32,7 @@ public class CameraManager : MonoBehaviour
 
     private float _normYPanDamping;
     private Vector3 _normTrackedOffset;
+    #endregion
 
     #region Awake
     private void Awake()
@@ -53,7 +55,7 @@ public class CameraManager : MonoBehaviour
             }
         }
 
-        //Store the normal values
+        //store the normal values
         _normYPanDamping = _framingTransposer.m_YDamping;
         _normTrackedOffset = _framingTransposer.m_TrackedObjectOffset;
     }

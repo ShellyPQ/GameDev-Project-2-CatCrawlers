@@ -29,4 +29,8 @@ public class CollectibleManager : MonoBehaviour
     {
         _collectable.Collect(objectCollected);
     }
+    public CollectibleSOData GetCollectibleSO()
+    {
+        return _collectable;
+    }
 }

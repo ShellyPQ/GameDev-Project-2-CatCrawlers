@@ -23,6 +23,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     public float knockBackForce = 5f;
     public float knockBackDuration = 0.2f;
     [HideInInspector] public bool _isKnockedBack = false;
+    [HideInInspector] public bool _pauseAI = false;
 
     [Header("Damage Properties")]
     public bool canDamagePlayer = false;
@@ -40,10 +41,18 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     #endregion
 
-    #region Start
-    private void Start()
+    #region Awake
+    private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        //stop enemy from rotating when hit
+        _rb.freezeRotation = true; 
+    }
+    #endregion
+
+    #region Start
+    private void Start()
+    {        
         //ensure gravity is on
         _rb.gravityScale = 2f;
 
@@ -83,6 +92,8 @@ public class EnemyController : MonoBehaviour, IDamageable
 
         currentHealth -= dmg;
 
+        SFXManager.instance.playSFX("enemyHurt");
+
         StartCoroutine(FlashRed());
         //start knockback
         StartCoroutine(EnemyKnockback(hitDirection));
@@ -100,10 +111,10 @@ public class EnemyController : MonoBehaviour, IDamageable
         //reset vertical velocity to avoid stacking with jump
         _rb.velocity = Vector2.zero;
 
-        //Apply knockback force
+        //apply knockback force
         _rb.AddForce(dir * knockBackForce, ForceMode2D.Impulse);
 
-        //Wait for knockback duration
+        //wait for knockback duration
         yield return new WaitForSeconds(knockBackDuration);
 
         //wait until grounded to resume bouncing
@@ -129,9 +140,10 @@ public class EnemyController : MonoBehaviour, IDamageable
             return;
         }
 
-        StopAllCoroutines();
-        //stop movement/hops
-        _isKnockedBack = true;
+        //pause the enemy AI
+        _pauseAI = true;
+        //stop movement
+        _rb.velocity = Vector2.zero;
 
         if (_enemyStunEffect != null)
         {
@@ -145,7 +157,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     {
         yield return new WaitForSeconds(duration);
         //resume movement/hops
-        _isKnockedBack = false;
+        _pauseAI = false;
     }
 
     private void Die()

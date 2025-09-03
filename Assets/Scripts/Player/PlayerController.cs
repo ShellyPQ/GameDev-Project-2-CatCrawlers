@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     #region Variables
+    public static PlayerController instance;
 
     [Header("Movement Properties")]
     [Tooltip("Player movements speed")]
@@ -51,6 +52,10 @@ public class PlayerController : MonoBehaviour
     #region Awake
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
         _rb = GetComponent<Rigidbody2D>();
         _renderer = GetComponent<SpriteRenderer>();
         _playerCollider = GetComponent<Collider2D>();
@@ -69,8 +74,12 @@ public class PlayerController : MonoBehaviour
     #region Update
     private void Update()
     {
-        Jump();
+        if (PlayerHealth.instance != null && PlayerHealth.instance.IsKnockedBack())
+        {
+            return;
+        }
 
+        Jump();
         FallingSpeedDamp();
     }
     #endregion
@@ -78,6 +87,12 @@ public class PlayerController : MonoBehaviour
     #region FixedUpdate
     private void FixedUpdate()
     {
+        // Block movement if knocked back
+        if (PlayerHealth.instance != null && PlayerHealth.instance.IsKnockedBack())
+        {
+            return;
+        }
+        
         MovePlayer();
     }
     #endregion
@@ -121,7 +136,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             Vector3 rotator = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
-            transform.rotation = Quaternion.Euler(rotator); 
+            transform.rotation = Quaternion.Euler(rotator);
             _isFacingRight = !_isFacingRight;
 
             //turn the camera follow object
@@ -139,6 +154,9 @@ public class PlayerController : MonoBehaviour
 
             //reset the jump time counter
             _jumpTimeCounter = _jumpTime;
+
+            // Play jump SFX
+            SFXManager.instance.playSFX("jump");
         }
 
         //button is being held
@@ -166,7 +184,6 @@ public class PlayerController : MonoBehaviour
 
         DrawGroundCheck();
     }
-
     private void FallingSpeedDamp()
     {
         if (_isJumping)
@@ -221,7 +238,6 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(_playerCollider.bounds.center + new Vector3(_playerCollider.bounds.extents.x, 0), Vector2.down * (_playerCollider.bounds.extents.y + _extraHeight), rayColor);
         Debug.DrawRay(_playerCollider.bounds.center - new Vector3(_playerCollider.bounds.extents.x, 0), Vector2.down * (_playerCollider.bounds.extents.y + _extraHeight), rayColor);
         Debug.DrawRay(_playerCollider.bounds.center - new Vector3(_playerCollider.bounds.extents.x, _playerCollider.bounds.extents.y + _extraHeight), Vector2.right * (_playerCollider.bounds.extents.x * 2), rayColor);
-
     }
     #endregion
 }

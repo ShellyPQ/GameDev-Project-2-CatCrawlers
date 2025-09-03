@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlatformTrigger : MonoBehaviour
@@ -9,10 +6,9 @@ public class PlatformTrigger : MonoBehaviour
     [Header("References")]
     [Tooltip("The platform this button will trigger")]
     [SerializeField] GameObject _assignedPlatform;
-
-    private AnimatorController _ani;
     #endregion
 
+    #region Method/FUnctio
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //change the tag on the assigned platform to Untagged
@@ -26,4 +22,5 @@ public class PlatformTrigger : MonoBehaviour
 
         //Unlock SFX?
     }
+    #endregion
 }

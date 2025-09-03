@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PracticeDummy : MonoBehaviour, IDamageable
+public class MeleeDummy : MonoBehaviour, IDamageable
 {
     #region Variables
-    [Header("Dummy Settings")]
+    [Header("Dummy Properties")]
     [SerializeField] private int _maxHealth = 1;
     [SerializeField] private float _shakeDuration = 0.2f;
     [SerializeField] private float _shakeStrength = 0.1f;
@@ -34,7 +34,6 @@ public class PracticeDummy : MonoBehaviour, IDamageable
     {
         //disable the players melee and range attack at the start of the tutorial
         _player.gameObject.GetComponent<MeleeAttack>().enabled = false;
-        _player.gameObject.GetComponent<RangedAttack>().enabled = false;
         
         _currentHealth = _maxHealth;
         _hitbox = GetComponent<Collider2D>();

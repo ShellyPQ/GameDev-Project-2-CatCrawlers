@@ -12,9 +12,9 @@ public class SlimeAI : MonoBehaviour
     [Header("Enemy Movement Properties")]
     public Transform pointA;
     public Transform pointB;
-    //[SerializeField] private float _hopForceX = 3f;
     [SerializeField] private float _hopForceY = 5f;
     [SerializeField] private float _hopDelay = 0.5f;
+    //[SerializeField] private float _stunRecoverDelay = 0.2f; 
     private bool _movingToB = false;
 
     #endregion
@@ -36,10 +36,15 @@ public class SlimeAI : MonoBehaviour
     #region Bounce Patrol Logic
     private IEnumerator EnemyBounce()
     {
-        while (!_enemyController._isDead)
+        while (true)
         {
-            //skip if in knockback
-            if (_enemyController._isKnockedBack)
+            if (_enemyController._isDead)
+            {
+                yield break;
+            }               
+
+            //skip if in knockback or paused
+            if (_enemyController._isKnockedBack || _enemyController._pauseAI)
             {
                 yield return null;
                 continue;
@@ -47,8 +52,20 @@ public class SlimeAI : MonoBehaviour
 
             //wait until grounded
             yield return new WaitUntil(() => _enemyController.IsGrounded());
-            //small pause
+
+            if (_enemyController._isDead)
+            {
+                yield break;
+            }               
+
+            //wait before hopping
             yield return new WaitForSeconds(_hopDelay);
+
+            if (_enemyController._isDead || _enemyController._pauseAI)
+            {
+                //skip hop entirely if stunned or dead
+                continue; 
+            }                
 
             //calculate direction and face the next direction
             Vector2 targetPos = _movingToB ? pointB.position : pointA.position;
@@ -64,11 +81,10 @@ public class SlimeAI : MonoBehaviour
             //apply hop force
             _enemyController._rb.AddForce(hopForce, ForceMode2D.Impulse);
 
-            //flip target for next hope
+            //flip target for next hop
             _movingToB = !_movingToB;
-        }
+        }       
 
-    }
- 
+    } 
     #endregion
 }

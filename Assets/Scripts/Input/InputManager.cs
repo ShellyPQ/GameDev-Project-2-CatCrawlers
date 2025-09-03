@@ -76,7 +76,5 @@ public class InputManager : MonoBehaviour
         pauseMenuOpen = _pauseMenuOpen.WasPressedThisFrame();
         pauseMenuClose = _pauseMenuClose.WasPressedThisFrame();        
     }
-    #endregion
-
- 
+    #endregion 
 }

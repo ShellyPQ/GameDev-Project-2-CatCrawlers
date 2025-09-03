@@ -9,7 +9,10 @@ public class DummyTrigger : MonoBehaviour
     [Tooltip("Trigger Type")]
     [SerializeField] private bool isMeleeTrigger = false;
     [SerializeField] private bool isRangeTrigger = false;
-    
+
+    [Header("References")]
+    [SerializeField] private GameObject _ammoHUD;
+
     #endregion
 
     #region Trigger Check
@@ -25,14 +28,13 @@ public class DummyTrigger : MonoBehaviour
         if (isMeleeTrigger && collision.TryGetComponent(out MeleeAttack meleeScript))
         {
             meleeScript.enabled = true;
-            Debug.Log("Melee combat enabled");
         }
 
         //Enable ranged attack
         if ((isRangeTrigger && collision.TryGetComponent(out RangedAttack rangeScript)))
         {
             rangeScript.enabled = true;
-            Debug.Log("Range combat enabled");
+            _ammoHUD.SetActive(true);
         }
 
         //Disable this trigger so it only fires once

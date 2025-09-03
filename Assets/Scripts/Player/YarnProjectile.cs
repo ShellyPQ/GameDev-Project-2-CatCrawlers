@@ -8,16 +8,10 @@ public class YarnProjectile : MonoBehaviour
     [Header("Projectile Properties")]
     public float projectileSpeed = 10f;
     public float maxDistance = 5f;
-    public float stunDuration = 2f;
-
-    [Header("Visual Properties")]
-    [SerializeField] private ParticleSystem wrapEffectPrefab;
 
     private Vector3 _startPos;
     private Vector3 _dir;
-
-    //reference to player attack script for ammo
-    private RangedAttack _rangedAttack; 
+    private RangedAttack _rangedAttack;
     #endregion
 
     #region Update
@@ -33,13 +27,12 @@ public class YarnProjectile : MonoBehaviour
     #endregion
 
     #region Initialization
-    public void Initialize(Vector3 direction, float speed, float range, float stun, RangedAttack rangedAttack)
+    public void Initialize(Vector3 direction, float speed, float range, RangedAttack rangedAttack)
     {
         _dir = direction.normalized;
         _startPos = transform.position;
         projectileSpeed = speed;
         maxDistance = range;
-        stunDuration = stun;
         _rangedAttack = rangedAttack;
     }
     #endregion
@@ -47,30 +40,39 @@ public class YarnProjectile : MonoBehaviour
     #region Trigger Logic
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //enemy hit
+        //enemy hit (or ranged dummy)
         if (collision.CompareTag("Enemy"))
         {
             EnemyController enemy = collision.GetComponent<EnemyController>();
-            if (enemy != null)
-            {
-                enemy.Stun(stunDuration);
+            enemy?.Stun(2f);
 
-                //spawn wrap particle
-                if (wrapEffectPrefab != null)
-                {
-                    ParticleSystem wrap = Instantiate(wrapEffectPrefab, enemy.transform.position, Quaternion.identity);
-                    wrap.transform.parent = enemy.transform;
-                    wrap.Play();
-                    Destroy(wrap.gameObject, stunDuration);
-                }
+            //play hit sfx
+            SFXManager.instance.playSFX("yarnStun");
 
-                //consume ammo after successful enemy hit
-                _rangedAttack.ConsumeAmmo();
-            }
+            _rangedAttack?.ConsumeAmmo();
             Destroy(gameObject);
         }
-        //dummy or environment hit (puzzle hits)
-        else if (collision.CompareTag("PracticeDummy") || collision.CompareTag("Environment"))
+        else if (collision.CompareTag("RangedDummy"))
+        {
+            EnemyStunEffect stunEffect = collision.GetComponent<EnemyStunEffect>();
+            if (stunEffect != null)
+            {
+                stunEffect.Stun();
+            }
+
+            RangedDummy dummy = collision.GetComponent<RangedDummy>();
+            if (dummy != null)
+            {
+                dummy.Stun();
+            }
+
+            //play hit sfx
+            SFXManager.instance.playSFX("yarnStun");
+
+            _rangedAttack?.ConsumeAmmo();
+            Destroy(gameObject);
+        }
+        else if (collision.CompareTag("Environment"))
         {
             Destroy(gameObject);
         }

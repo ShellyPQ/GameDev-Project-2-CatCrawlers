@@ -8,12 +8,24 @@ public class CollectibleYarnBitSO : CollectibleSOData
     #region Variables
     [Header("Collectible Data")]
     [Tooltip("Current Yarn Bit Count")]
-    public int currentYarnBitCount = 1;
+    public int currentYarnAmount = 1;
 
+    [Header("Respawn Settings")]
+    public float respawnTime = 5f; 
     #endregion
 
     public override void Collect(GameObject objectCollected)
     {
-        //Call instance that will increment everytime the player collects a yarn bit
+        RangedAttack ranged = objectCollected.GetComponent<RangedAttack>();
+        if (ranged != null)
+        {
+            bool added = ranged.AddAmmo(currentYarnAmount);
+
+            if (added)
+            {
+                // Update the HUD for ammo
+                HUDManager.instance.UpdateAmmoText(ranged.GetAmmo());
+            }
+        }
     }
 }

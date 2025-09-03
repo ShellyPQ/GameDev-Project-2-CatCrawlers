@@ -13,6 +13,7 @@ public class HUDManager : MonoBehaviour
     [Tooltip("Text that will display how many paw tokens the player has collected")]
     [SerializeField] private TextMeshProUGUI _currentPawTokensText;
     [SerializeField] private TextMeshProUGUI _remainingLives;
+    [SerializeField] private TextMeshProUGUI _currentAmmoText;
     #endregion
 
     #region Awake
@@ -41,5 +42,13 @@ public class HUDManager : MonoBehaviour
     {
         _remainingLives.text = currentLives.ToString();
     }
+    public void UpdateAmmoText(int currentAmmo) 
+    {
+        if (_currentAmmoText != null)
+        {
+            _currentAmmoText.text = currentAmmo.ToString();
+        }            
+    }
+
     #endregion
 }

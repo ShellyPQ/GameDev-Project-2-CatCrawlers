@@ -20,10 +20,10 @@ public class CameraFollow : MonoBehaviour
     #region Awake
     private void Awake()
     {
-        //Assign the player object holding the player controller script
+        //assign the player object holding the player controller script
         _playerController = _playerTransform.gameObject.GetComponent<PlayerController>();
 
-        //Check in what direction the player is facing
+        //check in what direction the player is facing
         _isFacingRight = _playerController._isFacingRight;
     }
     #endregion
@@ -31,21 +31,21 @@ public class CameraFollow : MonoBehaviour
     #region LateUpdate
     private void LateUpdate()
     {
-        //Have this object (camera follow) follow the player's positions 
-        //The camera will follow this object instead of the player
+        //have this object (camera follow) follow the player's positions 
+        //the camera will follow this object instead of the player
         transform.position = _playerTransform.position;
     }
     #endregion
 
     #region Method/Functions
 
-    //Call this coroutine function when the player is moving in the oposite direction that the player sprite is facing
+    //call this coroutine function when the player is moving in the oposite direction that the player sprite is facing
     public void CallSpriteFlip()
     {
         _spriteRotationCoroutine = StartCoroutine(FlipYLerp());
     }
 
-    //Flip the object based on what direction the player is moving. Lerp this rotation to smooth out the camera movement
+    //flip the object based on what direction the player is moving. Lerp this rotation to smooth out the camera movement
     private IEnumerator FlipYLerp()
     {
         float startRotation = transform.localEulerAngles.y;
@@ -65,7 +65,7 @@ public class CameraFollow : MonoBehaviour
         }
     }
 
-    //Check in what direction the player is moving
+    //check in what direction the player is moving
     private float CheckEndRotation()
     {
         _isFacingRight = !_isFacingRight;

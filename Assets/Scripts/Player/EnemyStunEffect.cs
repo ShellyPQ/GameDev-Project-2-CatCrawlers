@@ -4,50 +4,41 @@ using UnityEngine;
 
 public class EnemyStunEffect : MonoBehaviour
 {
-    [Header("Squeeze Settings")]
+    #region Variables
+    [Header("Shake Settings")]
     public float duration = 0.5f;
-    public float scaleX = 1.2f;
-    public float scaleY = 0.8f;
-    public float twistAngle = 15f;
+    public float shakeStrength = 0.1f;
 
-    private Vector3 _originalScale;
-    private Quaternion _originalRotation;
+    private Vector3 _originalPosition;
     private bool _isStunned = false;
+    #endregion
 
+    #region Method/Functions
     public void Stun()
     {
         if (!_isStunned)
-            StartCoroutine(SqueezeAndTwist());
+        {
+            StartCoroutine(Shake());
+        }            
     }
 
-    private IEnumerator SqueezeAndTwist()
+    private IEnumerator Shake()
     {
         _isStunned = true;
-        _originalScale = transform.localScale;
-        _originalRotation = transform.rotation;
-
+        _originalPosition = transform.localPosition;
         float elapsed = 0f;
+
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            float t = Mathf.Sin(elapsed / duration * Mathf.PI);
-
-            // Squeeze
-            transform.localScale = new Vector3(
-                Mathf.Lerp(_originalScale.x, _originalScale.x * scaleX, t),
-                Mathf.Lerp(_originalScale.y, _originalScale.y * scaleY, t),
-                _originalScale.z
-            );
-
-            // Twist
-            float rotationZ = Mathf.Sin(elapsed / duration * Mathf.PI * 4) * twistAngle;
-            transform.rotation = Quaternion.Euler(0, 0, rotationZ);
-
+            float x = Random.Range(-1f, 1f) * shakeStrength;
+            float y = Random.Range(-1f, 1f) * shakeStrength;
+            transform.localPosition = _originalPosition + new Vector3(x, y, 0);
             yield return null;
         }
 
-        transform.localScale = _originalScale;
-        transform.rotation = _originalRotation;
+        transform.localPosition = _originalPosition;
         _isStunned = false;
     }
+    #endregion
 }

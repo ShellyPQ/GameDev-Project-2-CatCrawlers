@@ -276,26 +276,27 @@ public class UIManager : MonoBehaviour
     #region Event Listeners
     private void ButtonListeners()
     {
-        //button listeners
-        _startButton.onClick.AddListener(StartNewGame);
-        _quitButton.onClick.AddListener(QuitGame);
-        _defaultButton.onClick.AddListener(ResetToDefault);
-        _saveButton.onClick.AddListener(SaveSettings);
-        _backButton.onClick.AddListener(BackToMainMenu);
+        //null checks as I may use this script in other scenes
+        // Buttons
+        if (_startButton != null) _startButton.onClick.AddListener(StartNewGame);
+        if (_quitButton != null) _quitButton.onClick.AddListener(QuitGame);
+        if (_defaultButton != null) _defaultButton.onClick.AddListener(ResetToDefault);
+        if (_saveButton != null) _saveButton.onClick.AddListener(SaveSettings);
+        if (_backButton != null) _backButton.onClick.AddListener(BackToMainMenu);
 
-        //slider listeners
-        _brightnessSlider.onValueChanged.AddListener(OnBrightnessChanged);
-        _masterVolumeSlider.onValueChanged.AddListener(OnMasterVolumeChanged);
-        _musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
-        _sfxVolumeSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
+        // Sliders
+        if (_brightnessSlider != null) _brightnessSlider.onValueChanged.AddListener(OnBrightnessChanged);
+        if (_masterVolumeSlider != null) _masterVolumeSlider.onValueChanged.AddListener(OnMasterVolumeChanged);
+        if (_musicVolumeSlider != null) _musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
+        if (_sfxVolumeSlider != null) _sfxVolumeSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
 
-        //toggle listener
-        _fullScreenToggle.onValueChanged.AddListener(ToggleFullScreen);
-        _masterMuteToggle.onValueChanged.AddListener(OnMasterMuteChanged);
-        _musicMuteToggle.onValueChanged.AddListener(OnMusicMuteChanged);
-        _sfxMuteToggle.onValueChanged.AddListener(OnSFXMuteChanged);
+        // Toggles
+        if (_fullScreenToggle != null) _fullScreenToggle.onValueChanged.AddListener(ToggleFullScreen);
+        if (_masterMuteToggle != null) _masterMuteToggle.onValueChanged.AddListener(OnMasterMuteChanged);
+        if (_musicMuteToggle != null) _musicMuteToggle.onValueChanged.AddListener(OnMusicMuteChanged);
+        if (_sfxMuteToggle != null) _sfxMuteToggle.onValueChanged.AddListener(OnSFXMuteChanged);
 
-        //load saved settings into UI & AudioManager
+        // Load saved settings into UI & AudioManager
         LoadDefaultSettings();
     }
 

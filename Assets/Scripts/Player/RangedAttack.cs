@@ -10,19 +10,16 @@ public class RangedAttack : MonoBehaviour
     [SerializeField] private Transform _firePoint;
     [SerializeField] private float _yarnSpeed = 10f;
     [SerializeField] private float _maxRange = 5f;
-    [SerializeField] private int _maxAmmo = 3;
+    public int maxAmmo = 3;
 
-    [Header("Tutorial Settings")]
-    [SerializeField] private bool _isTutorial = true;
-    [SerializeField] private float _tutorialPickupRespawnTime = 5f;
-
-    private int _currentAmmo;
+    [SerializeField] private int _currentAmmo;
     #endregion
 
     #region Start
     private void Start()
     {
-        _currentAmmo = _isTutorial ? 1 : _maxAmmo;
+        //starting ammo 
+        _currentAmmo = 0;
     }
     #endregion
 
@@ -36,35 +33,52 @@ public class RangedAttack : MonoBehaviour
     }
     #endregion
 
-    #region Methods
+    #region Methods/Functions
     private void Shoot()
     {
-        //allow shooting even if ammo is 0 for puzzle use (set flag in projectile)
+        if (_currentAmmo <= 0)
+        {
+            Debug.Log("No ammo!");
+            return;
+        }
+
         GameObject yarn = Instantiate(_yarnPrefab, _firePoint.position, Quaternion.identity);
         YarnProjectile projectile = yarn.GetComponent<YarnProjectile>();
 
         if (projectile != null)
         {
-            float dir = transform.localScale.x > 0 ? 1f : -1f;
-            projectile.Initialize(Vector3.right * dir, _yarnSpeed, _maxRange, 2f, this);
+            float dir = PlayerController.instance._isFacingRight ? 1f : -1f;
+            Vector3 projectileDir = Vector3.right * dir;
+            projectile.Initialize(projectileDir, _yarnSpeed, _maxRange, this);
         }
     }
 
-    //called by YarnProjectile when hitting an enemy
+    //called by YarnProjectile when hitting an enemy or dummy
     public void ConsumeAmmo()
     {
         if (_currentAmmo > 0)
         {
             _currentAmmo--;
+
+            //update HUD
+            HUDManager.instance.UpdateAmmoText(_currentAmmo);
         }
     }
 
     public bool AddAmmo(int amount)
     {
-        if (_currentAmmo >= _maxAmmo)
+        if (_currentAmmo >= maxAmmo)
+        {
             return false;
+        }            
 
-        _currentAmmo = Mathf.Min(_currentAmmo + amount, _maxAmmo);
+        _currentAmmo = Mathf.Min(_currentAmmo + amount, maxAmmo);
+
+        SFXManager.instance.playSFX("yarnBall");
+
+        //update HUD
+        HUDManager.instance.UpdateAmmoText(_currentAmmo);
+
         return true;
     }
 
@@ -75,10 +89,7 @@ public class RangedAttack : MonoBehaviour
 
     public void UnlockMaxAmmo()
     {
-        _maxAmmo = 3;
-        _currentAmmo = Mathf.Min(_currentAmmo, _maxAmmo);
-        _isTutorial = false;
-        Debug.Log("Full yarn capacity unlocked");
+        _currentAmmo = maxAmmo;
     }
     #endregion
 }

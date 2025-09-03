@@ -8,12 +8,11 @@ public class PauseManager : MonoBehaviour
     public static PauseManager instance;
 
     #region Variables
-
     [Header("References")]
     [Tooltip("Pause Panel Reference")]
     public GameObject pausePanel;
+    public GameObject gameOverPanel;
     public bool isPaused { get; private set; }
-
     #endregion
 
     #region Awake
@@ -82,6 +81,22 @@ public class PauseManager : MonoBehaviour
         //switch back to Movement action map
         InputManager.instance.playerControls.Movement.Enable();
         InputManager.instance.playerControls.UI.Disable();
+    }
+
+    public void GameOver()
+    {
+        //pause the game
+        Time.timeScale = 0f;
+
+        //show the Game Over panel
+        if (gameOverPanel != null)
+        {
+            gameOverPanel.SetActive(true);
+        }           
+
+        //ensure UI input is enabled
+        InputManager.instance.playerControls.UI.Enable();
+        InputManager.instance.playerControls.Movement.Disable();
     }
     #endregion
 }

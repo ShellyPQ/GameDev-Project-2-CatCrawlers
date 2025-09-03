@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Enemy
   - TriggerPlatform
+  - Projectile
+  - MeleeDummy
+  - Environment
+  - RangedDummy
   layers:
   - Default
   - TransparentFX
@@ -17,7 +21,7 @@ TagManager:
   - Enemy
   - Corpse
   - Player
-  - 
+  - Projectile
   - 
   - 
   - 
