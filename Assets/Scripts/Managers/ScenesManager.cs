@@ -61,21 +61,21 @@ public class ScenesManager : MonoBehaviour
     //Load the tutorial level
     public void LoadTutorialLevel()
     {
-        SceneManager.LoadScene(Scene.Level_01.ToString());
+        SceneManager.LoadScene(Scene.Level_01.ToString());     
     }
 
     //restart level
     public void RestartLevel()
     {
         // Ensure movement input is active
-        InputManager.instance.playerControls.Movement.Enable();
-        InputManager.instance.playerControls.UI.Disable();
+        //InputManager.instance.playerControls.Movement.Enable();
+        //InputManager.instance.playerControls.UI.Disable();
 
         // Reload the current scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         // Reset time scale in case the game was paused
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
     }
 
     //Quit the game and or playmode (in unity) when this function/method is called

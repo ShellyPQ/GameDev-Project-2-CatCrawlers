@@ -21,6 +21,7 @@ public class Level1EndTrigger : MonoBehaviour
         }
     }
 
+    //check to see if all enemies are dead
     private bool AreAllEnemiesDead()
     {
         foreach (var enemy in enemies)
@@ -30,6 +31,7 @@ public class Level1EndTrigger : MonoBehaviour
         return true;
     }
 
+    //trigger door animation
     private void OpenDoor()
     {
         _doorOpened = true;
@@ -39,6 +41,7 @@ public class Level1EndTrigger : MonoBehaviour
         }
     }
 
+    //when entering the end level trigger
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (_levelCompleted) return;
@@ -50,6 +53,7 @@ public class Level1EndTrigger : MonoBehaviour
         }
     }
 
+    //when this is called, the level is now complete
     private void CompleteLevel()
     {
         // Pause the game and show panel 

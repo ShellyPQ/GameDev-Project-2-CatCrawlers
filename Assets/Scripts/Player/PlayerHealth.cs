@@ -69,6 +69,7 @@ public class PlayerHealth : MonoBehaviour
             GameOver();
     }
 
+    //visual feedback for when the player is hit
     private IEnumerator FlashRed()
     {
         Color original = _spriteRenderer.color;
@@ -87,6 +88,7 @@ public class PlayerHealth : MonoBehaviour
         _spriteRenderer.color = original;
     }
 
+    //knockback coroutine when the player is hit
     private IEnumerator KnockbackRoutine()
     {
         _isKnockedBack = true;
@@ -94,8 +96,10 @@ public class PlayerHealth : MonoBehaviour
         _isKnockedBack = false;
     }
 
+    //when the player is hit
     public bool IsKnockedBack() => _isKnockedBack;
 
+    //when the player dies
     private void GameOver()
     {
         _isDead = true;
