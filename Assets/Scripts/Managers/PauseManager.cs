@@ -68,8 +68,7 @@ public class PauseManager : MonoBehaviour
         pausePanel.SetActive(true);
 
         //switch to UI action map
-        InputManager.instance.playerControls.UI.Enable();
-        InputManager.instance.playerControls.Movement.Disable();
+        InputManager.instance.EnableUI();
     }
 
     public void UnpauseGame()
@@ -79,8 +78,7 @@ public class PauseManager : MonoBehaviour
         pausePanel.SetActive(false);
 
         //switch back to Movement action map
-        InputManager.instance.playerControls.Movement.Enable();
-        InputManager.instance.playerControls.UI.Disable();
+        InputManager.instance.EnableMovement();
     }
 
     public void GameOver()
@@ -95,8 +93,7 @@ public class PauseManager : MonoBehaviour
         }           
 
         //ensure UI input is enabled
-        InputManager.instance.playerControls.UI.Enable();
-        InputManager.instance.playerControls.Movement.Disable();
+        InputManager.instance.EnableUI();
     }
     #endregion
 }

@@ -44,7 +44,7 @@ public class MeleeAttack : MonoBehaviour
     private void Update()
     {
         //if left mouse click an if mouse click in the direction the player is facing
-        if (Input.GetMouseButtonDown(0) && IsClickInfront())
+        if (InputManager.instance.attackMelee)
         {
             Attack();
         }
@@ -85,16 +85,7 @@ public class MeleeAttack : MonoBehaviour
             _attackPoint.position = transform.position + new Vector3(_attackPointOffset.x * dir, _attackPointOffset.y, _attackPointOffset.z);
         }
     }
-    
-    private bool IsClickInfront()
-    {
-        //returns true if the player is clicking (mouse position) is in the direction the player is facing
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mouseWorldPos.z = transform.position.z;
 
-        float dir = _playerController._isFacingRight ? 1f : -1f;
-        return (mouseWorldPos.x - transform.position.x) * dir > 0f;
-    }
     #endregion
 
     #region Attack Particle Effect Method

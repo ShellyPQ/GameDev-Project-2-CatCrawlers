@@ -64,7 +64,6 @@ public class Level1EndTrigger : MonoBehaviour
         }
 
         // Switch to UI action map
-        InputManager.instance.playerControls.UI.Enable();
-        InputManager.instance.playerControls.Movement.Disable();
+        InputManager.instance.EnableUI();
     }
 }

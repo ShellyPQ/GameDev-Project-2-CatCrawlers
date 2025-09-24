@@ -26,7 +26,7 @@ public class RangedAttack : MonoBehaviour
     #region Update
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (InputManager.instance.attackRange)
         {
             Shoot();
         }

@@ -20471,7 +20471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerTransform: {fileID: 325484532}
-  _spriteYRotationTime: 0.15
+  _spriteYRotationTime: 2
 --- !u!1 &1896681898
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,14 +9,18 @@ public class InputManager : MonoBehaviour
     #region Variables
     public static InputManager instance;
 
-    [HideInInspector] public PlayerControls playerControls;
-
-    public bool pauseMenuOpen { get; private set; }
-    public bool pauseMenuClose { get; private set; }
+    [HideInInspector] public PlayerControls playerControls;   
 
     private InputAction _move;
     private InputAction _pauseMenuOpen;
     private InputAction _pauseMenuClose;
+    private InputAction _attackMelee;
+    private InputAction _attackRange;
+
+    public bool pauseMenuOpen { get; private set; }
+    public bool pauseMenuClose { get; private set; }
+    public bool attackMelee { get; private set; }
+    public bool attackRange { get; private set; }
 
     //this will hold the move input vector
     [HideInInspector] public Vector2 moveInput;
@@ -36,6 +40,8 @@ public class InputManager : MonoBehaviour
             _move = playerControls.Movement.Move;
             _pauseMenuOpen = playerControls.Movement.Pause;
             _pauseMenuClose = playerControls.UI.UnPause;
+            _attackMelee = playerControls.Movement.AttackMelee;
+            _attackRange = playerControls.Movement.AttackRange;
 
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
@@ -51,7 +57,16 @@ public class InputManager : MonoBehaviour
     {
         //reset when entering a new scene
         Time.timeScale = 1f;
-        EnableMovement();
+        
+        //ensure main menu and level select always us have the UI action map active
+        if (scene.name == ScenesManager.Scene.MainMenu.ToString() || scene.name == ScenesManager.Scene.Level_Select_Scene.ToString() || scene.name == ScenesManager.Scene.Intro_Cutscene.ToString())
+        {
+            EnableUI();
+        }
+        else
+        {
+            EnableMovement();
+        }
 
     }
 
@@ -76,7 +91,9 @@ public class InputManager : MonoBehaviour
 
         //pause states
         pauseMenuOpen = _pauseMenuOpen.WasPressedThisFrame();
-        pauseMenuClose = _pauseMenuClose.WasPressedThisFrame();        
+        pauseMenuClose = _pauseMenuClose.WasPressedThisFrame();
+        attackMelee = _attackMelee.WasPressedThisFrame();
+        attackRange = _attackRange.WasPressedThisFrame();
     }
     #endregion
 
@@ -91,6 +108,10 @@ public class InputManager : MonoBehaviour
             playerControls.Disable();
             //only enable the movement map
             playerControls.Movement.Enable();
+
+            //hide and lock cursor during gameplay
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }      
     }
 
@@ -103,6 +124,10 @@ public class InputManager : MonoBehaviour
             playerControls.Disable();
             //only enable the ui map
             playerControls.UI.Enable();
+
+            //show and unlock cursor in UI
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 

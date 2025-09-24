@@ -53,6 +53,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AttackMelee"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""9773b050-9ec2-4bcd-a2f8-b6ef75ff222e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AttackRange"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""85127afa-4a99-48c0-ae88-fdccb61c447a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -196,6 +214,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c78ba0f5-d3d3-4177-8fd1-78f9067909a1"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackMelee"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""535af9c1-4ac3-4a65-9680-8daf4907d23b"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackRange"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -751,6 +791,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
         m_Movement_Jump = m_Movement.FindAction("Jump", throwIfNotFound: true);
         m_Movement_Pause = m_Movement.FindAction("Pause", throwIfNotFound: true);
+        m_Movement_AttackMelee = m_Movement.FindAction("AttackMelee", throwIfNotFound: true);
+        m_Movement_AttackRange = m_Movement.FindAction("AttackRange", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -834,6 +876,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Movement_Move;
     private readonly InputAction m_Movement_Jump;
     private readonly InputAction m_Movement_Pause;
+    private readonly InputAction m_Movement_AttackMelee;
+    private readonly InputAction m_Movement_AttackRange;
     public struct MovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -841,6 +885,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Movement_Move;
         public InputAction @Jump => m_Wrapper.m_Movement_Jump;
         public InputAction @Pause => m_Wrapper.m_Movement_Pause;
+        public InputAction @AttackMelee => m_Wrapper.m_Movement_AttackMelee;
+        public InputAction @AttackRange => m_Wrapper.m_Movement_AttackRange;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -859,6 +905,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @AttackMelee.started += instance.OnAttackMelee;
+            @AttackMelee.performed += instance.OnAttackMelee;
+            @AttackMelee.canceled += instance.OnAttackMelee;
+            @AttackRange.started += instance.OnAttackRange;
+            @AttackRange.performed += instance.OnAttackRange;
+            @AttackRange.canceled += instance.OnAttackRange;
         }
 
         private void UnregisterCallbacks(IMovementActions instance)
@@ -872,6 +924,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @AttackMelee.started -= instance.OnAttackMelee;
+            @AttackMelee.performed -= instance.OnAttackMelee;
+            @AttackMelee.canceled -= instance.OnAttackMelee;
+            @AttackRange.started -= instance.OnAttackRange;
+            @AttackRange.performed -= instance.OnAttackRange;
+            @AttackRange.canceled -= instance.OnAttackRange;
         }
 
         public void RemoveCallbacks(IMovementActions instance)
@@ -1029,6 +1087,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnAttackMelee(InputAction.CallbackContext context);
+        void OnAttackRange(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

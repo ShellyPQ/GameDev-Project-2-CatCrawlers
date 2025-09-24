@@ -9,8 +9,8 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Transform _playerTransform;
 
     [Header("Sprite Rotation Properties")]
-    [Tooltip("Sprite rotation lerp time")]
-    [SerializeField] private float _spriteYRotationTime = 0.15f;
+    [Tooltip("Sprite rotation lerp time, higher = slower/smoother")]
+    [SerializeField] private float _spriteYRotationTime = 0.25f;
 
     private Coroutine _spriteRotationCoroutine;
     private PlayerController _playerController;
@@ -42,6 +42,10 @@ public class CameraFollow : MonoBehaviour
     //call this coroutine function when the player is moving in the oposite direction that the player sprite is facing
     public void CallSpriteFlip()
     {
+        if (_spriteRotationCoroutine != null)
+        {
+            StopCoroutine(_spriteRotationCoroutine);
+        }
         _spriteRotationCoroutine = StartCoroutine(FlipYLerp());
     }
 
@@ -49,16 +53,18 @@ public class CameraFollow : MonoBehaviour
     private IEnumerator FlipYLerp()
     {
         float startRotation = transform.localEulerAngles.y;
-        float endRotationAmount = CheckEndRotation();
-        float yRot = 0f;
+        float endRotation = CheckEndRotation();
 
         float elapsedTime = 0f;
+
         while (elapsedTime < _spriteYRotationTime)
         {
             elapsedTime += Time.deltaTime;
 
-            //lerp the y rotation
-            yRot = Mathf.Lerp(startRotation, endRotationAmount, (elapsedTime / _spriteYRotationTime));
+            //smoothstep for easing 
+            float t = Mathf.SmoothStep(0f, 1f, elapsedTime / _spriteYRotationTime);
+
+            float yRot = Mathf.LerpAngle(startRotation, endRotation, t);
             transform.rotation = Quaternion.Euler(0f, yRot, 0f);
 
             yield return null;
