@@ -26,7 +26,6 @@ public class ScenesManager : MonoBehaviour
     #endregion
 
     #region Function/Methods
-    //TO DO: REFACTOR THIS INTO A SWITCH STATEMENT 
 
     //Load in a specified scene
     public void LoadScene(Scene scene)
@@ -67,15 +66,8 @@ public class ScenesManager : MonoBehaviour
     //restart level
     public void RestartLevel()
     {
-        // Ensure movement input is active
-        //InputManager.instance.playerControls.Movement.Enable();
-        //InputManager.instance.playerControls.UI.Disable();
-
         // Reload the current scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
-        // Reset time scale in case the game was paused
-        //Time.timeScale = 1f;
     }
 
     //Quit the game and or playmode (in unity) when this function/method is called

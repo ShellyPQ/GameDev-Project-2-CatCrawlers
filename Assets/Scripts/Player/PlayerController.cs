@@ -72,7 +72,6 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-
     #region FixedUpdate
     private void FixedUpdate()
     {

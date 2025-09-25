@@ -1847,7 +1847,7 @@ Transform:
   m_GameObject: {fileID: 145899238}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 56.5, y: 18.25, z: 0}
+  m_LocalPosition: {x: 56.5, y: 14.46, z: 0}
   m_LocalScale: {x: 2, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2807,7 +2807,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 233924637}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 870652072003522981, guid: 7da6c9605cf55f542a56560b7fe8c0ab, type: 2}
   m_audioClip: {fileID: 8300000, guid: ede533e49c1c22d46ad522f287c8426a, type: 3}
@@ -4407,7 +4407,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 3123a2a6d61e8ba4e801b536f5d5bd91, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5009,6 +5009,7 @@ GameObject:
   - component: {fileID: 456391279}
   - component: {fileID: 456391282}
   - component: {fileID: 456391281}
+  - component: {fileID: 456391283}
   m_Layer: 0
   m_Name: Button
   m_TagString: Environment
@@ -5026,7 +5027,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.66, z: 0}
-  m_LocalScale: {x: 0.4875, y: 1, z: 1}
+  m_LocalScale: {x: 0.4875, y: 0.8375, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 56831511}
@@ -5141,6 +5142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _assignedPlatform: {fileID: 145899238}
+  _buttonAni: {fileID: 0}
 --- !u!61 &456391282
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5186,6 +5188,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9612725, y: 0.06500238}
   m_EdgeRadius: 0
+--- !u!95 &456391283
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456391277}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: baf34181cdf733447a5e2a00a04d46a2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &458880395
 GameObject:
   m_ObjectHideFlags: 0
@@ -5605,7 +5628,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: a51fe817670fee449950cebb046f0a9a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6451,7 +6474,7 @@ RectTransform:
   m_GameObject: {fileID: 579706351}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.83333325, y: 0.83333325, z: 0.83333325}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1995108015}
@@ -6459,8 +6482,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -6.58, y: 8.54}
-  m_SizeDelta: {x: 1364, y: 767}
+  m_AnchoredPosition: {x: 439.58328, y: 247.12497}
+  m_SizeDelta: {x: 1055, y: 593}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &579706353
 MonoBehaviour:
@@ -11369,7 +11392,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 64ee7b3d571e0bd4caa69675ce1d980d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -11757,7 +11780,7 @@ Transform:
   m_GameObject: {fileID: 1098923213}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 99.98549, y: 14.137001, z: -9.677083}
+  m_LocalPosition: {x: 5.3441143, y: 2.38655, z: -9.677083}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12017,7 +12040,7 @@ Transform:
   m_GameObject: {fileID: 1116430790}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 53, y: 14.5, z: 0}
+  m_LocalPosition: {x: 53, y: 15.07, z: 0}
   m_LocalScale: {x: 3, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13147,7 +13170,7 @@ Transform:
   m_GameObject: {fileID: 1221328136}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 106.1, y: 16.66, z: 0}
+  m_LocalPosition: {x: 7.92, y: 3.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16621,14 +16644,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b0ca73118583974981a44ae54e881a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jump: {fileID: 8300000, guid: 62b86e146770d414490ddd8471e950f8, type: 3}
-  land: {fileID: 8300000, guid: 50c38d58a3145a549970a3aad1fe61cc, type: 3}
-  playerHurt: {fileID: 8300000, guid: d860951a3a01cd44c82b9092312d3300, type: 3}
-  melee: {fileID: 8300000, guid: 40ac35e6cdde0234c8f712bbc0e80e23, type: 3}
+  jump: {fileID: 8300000, guid: d114916a8ec060942b96cce8c2ea83cd, type: 3}
+  land: {fileID: 8300000, guid: fdf359c972b44124496e90407bf3b13e, type: 3}
+  playerHurt: {fileID: 8300000, guid: 5c77a0d3c73fc48418e5cb7c5315ee3f, type: 3}
+  meleeSwipe: {fileID: 8300000, guid: 90bfdce34d783354592a1d24e29e2a19, type: 3}
   yarnStun: {fileID: 8300000, guid: d860951a3a01cd44c82b9092312d3300, type: 3}
   enemyHurt: {fileID: 8300000, guid: d860951a3a01cd44c82b9092312d3300, type: 3}
   pawToken: {fileID: 8300000, guid: 7cfe1ca230c2ead40a5ab2923ac4ea11, type: 3}
   yarnBall: {fileID: 8300000, guid: c4c72f021987fc04589b53f8d4b667a8, type: 3}
+  buttonPress: {fileID: 8300000, guid: d717c879288450d469c49e331ff54b01, type: 3}
+  sfxSettingsButton: {fileID: 8300000, guid: 5c77a0d3c73fc48418e5cb7c5315ee3f, type: 3}
   soundObject: {fileID: 5331809416122137942, guid: f06ce2dc0810a034b8e977b58ef29fb4, type: 3}
 --- !u!1001 &1665269501
 PrefabInstance:
@@ -17086,7 +17111,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 904021f475b91d04faf4e2719c45b7f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -18185,6 +18210,7 @@ GameObject:
   - component: {fileID: 1785724438}
   - component: {fileID: 1785724441}
   - component: {fileID: 1785724440}
+  - component: {fileID: 1785724442}
   m_Layer: 0
   m_Name: Button
   m_TagString: Environment
@@ -18201,8 +18227,8 @@ Transform:
   m_GameObject: {fileID: 1785724436}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6600002, z: 0}
-  m_LocalScale: {x: 0.4875, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.66214, z: 0}
+  m_LocalScale: {x: 0.4875, y: 0.8375, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 538730054}
@@ -18317,6 +18343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _assignedPlatform: {fileID: 1504954794}
+  _buttonAni: {fileID: 0}
 --- !u!61 &1785724441
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -18362,6 +18389,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9510999, y: 0.15921593}
   m_EdgeRadius: 0
+--- !u!95 &1785724442
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785724436}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: baf34181cdf733447a5e2a00a04d46a2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1786140618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20706,7 +20754,7 @@ Transform:
   m_GameObject: {fileID: 1905600329}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 99.98549, y: 14.137, z: -9.677083}
+  m_LocalPosition: {x: 1.8054905, y: 1.0970001, z: -9.677083}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -21109,6 +21157,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1221328137}
     m_Modifications:
     - target: {fileID: 502031367033763872, guid: 5b8b891f6b52aa44ebbfe97e74dc97d1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 502031367033763872, guid: 5b8b891f6b52aa44ebbfe97e74dc97d1, type: 3}
       propertyPath: _attackRange
       value: 0.8
       objectReference: {fileID: 0}
@@ -21122,7 +21174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3762546144622299599, guid: 5b8b891f6b52aa44ebbfe97e74dc97d1, type: 3}
       propertyPath: _jumpForce
-      value: 20
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 3762546144622299599, guid: 5b8b891f6b52aa44ebbfe97e74dc97d1, type: 3}
       propertyPath: _jumpHoldTime
@@ -21456,7 +21508,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.009, y: -0.192}
+  m_AnchoredPosition: {x: -524.44, y: -295.68}
   m_SizeDelta: {x: 115.85, y: 22.2364}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1995108016
@@ -23016,7 +23068,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: eb075b5c537d35e4f9e72970cb1e5d9e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

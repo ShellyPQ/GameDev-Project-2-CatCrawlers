@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -48,6 +49,8 @@ public class UIManager : MonoBehaviour
     private bool _tempMasterMute;
     private bool _tempMusicMute;
     private bool _tempSFXMute;
+
+    [SerializeField] private bool _buttonSFXPlaying = false;
     #endregion
 
     #region Start
@@ -62,8 +65,13 @@ public class UIManager : MonoBehaviour
     #region Button Functions
     //When the start button is pressed
     private void StartNewGame()
-    {
-        ScenesManager.Instance.LoadNewGame();
+    {       
+        StartCoroutine(ButtonPressSFX());       
+
+        if (_buttonSFXPlaying == false)
+        {
+            ScenesManager.Instance.LoadNewGame();
+        }        
     }
 
     //When the quit button is pressed
@@ -112,6 +120,16 @@ public class UIManager : MonoBehaviour
 
         //load saved values into UI
         LoadDefaultSettings();
+    }
+
+    IEnumerator ButtonPressSFX()
+    {
+        _buttonSFXPlaying = true;
+        // Play button sfx
+        SFXManager.instance.playSFX("buttonPress");
+        yield return new WaitForSeconds(.2f);
+        _buttonSFXPlaying = false;
+
     }
     #endregion
 
@@ -244,7 +262,7 @@ public class UIManager : MonoBehaviour
         _musicMuteToggle.isOn = _tempMusicMute;
         _sfxMuteToggle.isOn = _tempSFXMute;
 
-        _audioManager.ToggleMasterMute( _tempMasterMute);
+        _audioManager.ToggleMasterMute(_tempMasterMute);
         _audioManager.ToggleMusicMute(_tempMusicMute);
         _audioManager.ToggleSFXMute(_tempSFXMute);
     }
@@ -253,7 +271,7 @@ public class UIManager : MonoBehaviour
     #region Update Settings UI
     private void ApplyTempSettingsToUI()
     {
-        _brightnessSlider.value=_tempBrightness;
+        _brightnessSlider.value = _tempBrightness;
         SetBrightnessLevel(_tempBrightness);
 
         _fullScreenToggle.isOn = _tempFullScreen;

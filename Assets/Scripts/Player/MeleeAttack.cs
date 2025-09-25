@@ -70,9 +70,6 @@ public class MeleeAttack : MonoBehaviour
             //apply damage to enemy
             enemy.GetComponent<EnemyController>()?.TakeDamage(_damage, hitDir);
             enemy.GetComponent<MeleeDummy>()?.TakeDamage(_damage, hitDir);
-
-            //play melee hit sound
-            SFXManager.instance.playSFX("melee");
         }
     }
    
@@ -113,6 +110,9 @@ public class MeleeAttack : MonoBehaviour
 
         particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         particleSystem.Play();
+
+        //play melee hit sound
+        SFXManager.instance.playSFX("meleeSwipe");
     }
 
     private void InitializeParticlePools()

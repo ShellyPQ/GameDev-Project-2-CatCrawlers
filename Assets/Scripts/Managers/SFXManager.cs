@@ -11,11 +11,13 @@ public class SFXManager : MonoBehaviour
     public AudioClip jump;
     public AudioClip land;
     public AudioClip playerHurt;
-    public AudioClip melee;
+    public AudioClip meleeSwipe;
     public AudioClip yarnStun;
     public AudioClip enemyHurt;
     public AudioClip pawToken;
     public AudioClip yarnBall;
+    public AudioClip buttonPress;
+    public AudioClip sfxSettingsButton;
 
     //sound object
     public GameObject soundObject;
@@ -50,8 +52,8 @@ public class SFXManager : MonoBehaviour
             case "playerHurt":
                 SoundObjectCreation(playerHurt);
                 break;
-            case "melee":
-                SoundObjectCreation(melee);
+            case "meleeSwipe":
+                SoundObjectCreation(meleeSwipe);
                 break;
             case "yarnStun":
                 SoundObjectCreation(yarnStun);
@@ -64,6 +66,12 @@ public class SFXManager : MonoBehaviour
                 break;
             case "yarnBall":
                 SoundObjectCreation(yarnBall);
+                break;
+            case "buttonPress":
+                SoundObjectCreation(buttonPress);
+                break;
+            case "sfxSettingsButton":
+                SoundObjectCreation(sfxSettingsButton);
                 break;
             default:
                 break;
