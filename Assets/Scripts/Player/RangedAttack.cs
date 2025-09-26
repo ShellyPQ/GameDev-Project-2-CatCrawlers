@@ -19,7 +19,8 @@ public class RangedAttack : MonoBehaviour
     private void Start()
     {
         //starting ammo 
-        _currentAmmo = 0;
+        //_currentAmmo = 0;
+        _currentAmmo = maxAmmo;
     }
     #endregion
 

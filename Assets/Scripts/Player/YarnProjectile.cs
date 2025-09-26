@@ -69,7 +69,7 @@ public class YarnProjectile : MonoBehaviour
             //play hit sfx
             SFXManager.instance.playSFX("yarnStun");
 
-            _rangedAttack?.ConsumeAmmo();
+            //_rangedAttack?.ConsumeAmmo();
             Destroy(gameObject);
         }
         else if (collision.CompareTag("Environment"))
