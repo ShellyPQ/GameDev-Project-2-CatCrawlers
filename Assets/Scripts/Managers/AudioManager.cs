@@ -81,32 +81,33 @@ public class AudioManager : MonoBehaviour
         float snapped = SnapToIncrement(value);
         UpdateVolume(mixer, snapped, volumeImage);
     }
+
     public void ToggleMute(string mixer, Image volumeImage, bool isMuted, Slider slider)
     {
         if (isMuted)
         {
             //cache current slider value 
             _lastVolumes[mixer] = slider.value;
-
-            //mute
+            //mute (update mixer value)
             _audioMixer.SetFloat(mixer, -80f);
-            _mutedMixers.Add(mixer);
+            _mutedMixers.Add(mixer);            
 
             if (volumeImage != null)
             {
                 volumeImage.sprite = _volumeSprites[0];
+                Debug.Log(_lastVolumes[mixer]);
             }
         }
         else
         {
-            _mutedMixers.Remove(mixer);
+            _mutedMixers.Remove(mixer);            
 
             //restore cached volume
             if (_lastVolumes.TryGetValue(mixer, out float cachedVolume))
             {
                 slider.value = cachedVolume;
                 UpdateVolume(mixer, cachedVolume, volumeImage);                
-            }           
+            }
         }
     }
     #endregion

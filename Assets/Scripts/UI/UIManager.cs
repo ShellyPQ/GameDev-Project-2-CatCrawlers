@@ -65,13 +65,13 @@ public class UIManager : MonoBehaviour
     #region Button Functions
     //When the start button is pressed
     private void StartNewGame()
-    {       
-        StartCoroutine(ButtonPressSFX());       
+    {
+        StartCoroutine(ButtonPressSFX());
 
         if (_buttonSFXPlaying == false)
         {
             ScenesManager.Instance.LoadNewGame();
-        }        
+        }
     }
 
     //When the quit button is pressed
@@ -125,11 +125,11 @@ public class UIManager : MonoBehaviour
     IEnumerator ButtonPressSFX()
     {
         _buttonSFXPlaying = true;
+
         // Play button sfx
         SFXManager.instance.playSFX("buttonPress");
         yield return new WaitForSeconds(.2f);
         _buttonSFXPlaying = false;
-
     }
     #endregion
 
@@ -217,7 +217,7 @@ public class UIManager : MonoBehaviour
         SaveManager.SaveBrightness(_tempBrightness);
         SaveManager.SaveFullscreen(_tempFullScreen);
         SaveManager.SaveMasterVolume(_tempMasterVolume);
-        SaveManager.SaveMasterVolume(_tempMusicVolume);
+        SaveManager.SaveMusicVolume(_tempMusicVolume);
         SaveManager.SaveSFXVolume(_tempSFXVolume);
         SaveManager.SaveMasterMute(_tempMasterMute);
         SaveManager.SaveMusicMute(_tempMusicMute);
@@ -242,7 +242,7 @@ public class UIManager : MonoBehaviour
 
         //audio sliders
         _tempMasterVolume = SaveManager.LoadMasterVolume();
-        _tempMusicVolume = SaveManager.LoadMasterVolume();
+        _tempMusicVolume = SaveManager.LoadMusicVolume();
         _tempSFXVolume = SaveManager.LoadSFXVolume();
 
         _masterVolumeSlider.value = _tempMasterVolume;
