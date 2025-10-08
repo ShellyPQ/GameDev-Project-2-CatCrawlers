@@ -1201,7 +1201,7 @@ MonoBehaviour:
   _sfxSlider: {fileID: 583365716}
   _masterVolumeImage: {fileID: 7620557}
   _musicVolumeImage: {fileID: 1577538579}
-  _sfxVoumeImage: {fileID: 7910639}
+  _sfxVolumeImage: {fileID: 7910639}
   _volumeSprites:
   - {fileID: 21300000, guid: 5e1322b3a38ccc04181bfefddfcc1f79, type: 3}
   - {fileID: 21300000, guid: a576f91159516214cb465bb4568b43d8, type: 3}
@@ -1628,7 +1628,6 @@ MonoBehaviour:
   _sfxMuteToggle: {fileID: 1944443793}
   _audioManager: {fileID: 323226412}
   _menuEventManager: {fileID: 8437566015586036633}
-  _buttonSFXPlaying: 0
 --- !u!1 &557793110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1843,6 +1842,7 @@ GameObject:
   m_Component:
   - component: {fileID: 583365715}
   - component: {fileID: 583365716}
+  - component: {fileID: 583365717}
   m_Layer: 5
   m_Name: 'SFX_Slider '
   m_TagString: Untagged
@@ -1923,6 +1923,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &583365717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583365714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ca5be0918feff4aad2d907d4d0cd96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slider: {fileID: 583365716}
 --- !u!1 &615079952
 GameObject:
   m_ObjectHideFlags: 0

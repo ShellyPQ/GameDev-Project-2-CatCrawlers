@@ -38,44 +38,57 @@ public class SFXManager : MonoBehaviour
     #endregion
 
     #region Method/Behaviours
-    public void playSFX(string sfxName)
+
+    //method that holds the switch statement managing the audio clips that can be used
+    private AudioClip GetClipName(string sfxName)
     {
-        //data that will be called in other scripts to player the desired audio
         switch (sfxName)
         {
             case "jump":
-                SoundObjectCreation(jump);
-                break;
+                return (jump);
             case "land":
-                SoundObjectCreation(land);
-                break;
+                return (land);
             case "playerHurt":
-                SoundObjectCreation(playerHurt);
-                break;
+                return (playerHurt);
             case "meleeSwipe":
-                SoundObjectCreation(meleeSwipe);
-                break;
+                return (meleeSwipe);
             case "yarnStun":
-                SoundObjectCreation(yarnStun);
-                break;
+                return (yarnStun);
             case "enemyHurt":
-                SoundObjectCreation(enemyHurt);
-                break;
+                return (enemyHurt);
             case "pawToken":
-                SoundObjectCreation(pawToken);
-                break;
+                return (pawToken);
             case "yarnBall":
-                SoundObjectCreation(yarnBall);
-                break;
+                return (yarnBall);
             case "buttonPress":
-                SoundObjectCreation(buttonPress);
-                break;
+                return (buttonPress);
             case "sfxSettingsButton":
-                SoundObjectCreation(sfxSettingsButton);
-                break;
+                return (sfxSettingsButton);
             default:
-                break;
+                //if no clip is found based on the string name given, return null
+                return null;
         }
+    }
+
+    //play sfx of string called
+    public void playSFX(string sfxName)
+    {
+        //find the audio clip and store in variable
+        AudioClip clip = GetClipName(sfxName);
+
+        //if the clip was found
+        if (clip != null)
+        {
+            //create a sound object and play the clip
+            SoundObjectCreation(clip);
+        }
+    }
+
+    //return the audio clip without playing the sfx
+    public AudioClip GetClip(string sfxName)
+    {
+        //use this function to return what the audio clip is
+        return GetClipName(sfxName);
     }
     private void SoundObjectCreation(AudioClip clip)
     {

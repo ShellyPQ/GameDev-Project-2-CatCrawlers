@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,23 +40,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private AudioManager _audioManager;
     [SerializeField] private MenuEventManager _menuEventManager;
 
-
-    //temporary storage for unsaved settings
-    private float _tempBrightness;
-    private bool _tempFullScreen;
-    private float _tempMasterVolume;
-    private float _tempMusicVolume;
-    private float _tempSFXVolume;
-    private bool _tempMasterMute;
-    private bool _tempMusicMute;
-    private bool _tempSFXMute;
-
-    [SerializeField] private bool _buttonSFXPlaying = false;
     #endregion
 
     #region Start
-    private void Start()
+    private IEnumerator Start()
     {
+        //wait a frame to ensure AudioManager has fully initialized
+        yield return null;
+
         ButtonListeners();
     }
     #endregion
@@ -66,33 +58,29 @@ public class UIManager : MonoBehaviour
     //When the start button is pressed
     private void StartNewGame()
     {
-        StartCoroutine(ButtonPressSFX());
-
-        if (_buttonSFXPlaying == false)
-        {
-            ScenesManager.Instance.LoadNewGame();
-        }
+        StartCoroutine(PlaySFXThenLoad(() => ScenesManager.Instance.LoadNewGame()));
     }
 
     //When the quit button is pressed
     private void QuitGame()
     {
-        ScenesManager.Instance.QuitGame();
+        StartCoroutine(PlaySFXThenLoad(() => ScenesManager.Instance.QuitGame()));
         Debug.Log("You have quit the game!");
     }
 
     //reset playerprefs
     private void ResetToDefault()
     {
-        //hardcoded defaults
-        _tempBrightness = 0f;
-        _tempFullScreen = true;
-        _tempMasterVolume = 0.8f;
-        _tempMusicVolume = 0.8f;
-        _tempSFXVolume = 0.8f;
-        _tempMasterMute = false;
-        _tempMusicMute = false;
-        _tempSFXMute = false;
+        _brightnessSlider.value = 0f;
+        _fullScreenToggle.isOn = true;
+
+        _masterVolumeSlider.value = 0.8f;
+        _sfxVolumeSlider.value = 0.8f;
+        _musicVolumeSlider.value = 0.8f;
+
+        _masterMuteToggle.isOn = false;
+        _musicMuteToggle.isOn = false;
+        _sfxMuteToggle.isOn = false;
 
         ApplyTempSettingsToUI();
     }
@@ -122,14 +110,21 @@ public class UIManager : MonoBehaviour
         LoadDefaultSettings();
     }
 
-    IEnumerator ButtonPressSFX()
+    IEnumerator PlaySFXThenLoad(System.Action sceneChange)
     {
-        _buttonSFXPlaying = true;
+        //play button press sfx
+        var clip = SFXManager.instance.GetClip("buttonPress");
+        //get the clips length
+        float waitTime = clip != null ? clip.length : 0.2f;
 
-        // Play button sfx
+        //play the button press sfx
         SFXManager.instance.playSFX("buttonPress");
-        yield return new WaitForSeconds(.2f);
-        _buttonSFXPlaying = false;
+
+        //wait for the clips length
+        yield return new WaitForSeconds(waitTime);
+
+        //invoke the scene change
+        sceneChange?.Invoke();
     }
     #endregion
 
@@ -137,7 +132,6 @@ public class UIManager : MonoBehaviour
 
     private void OnBrightnessChanged(float value)
     {
-        _tempBrightness = value;
         SetBrightnessLevel(value);
     }
     public void SetBrightnessLevel(float value)
@@ -165,7 +159,6 @@ public class UIManager : MonoBehaviour
     #region Fullscreen Function
     public void ToggleFullScreen(bool isFullScreen)
     {
-        _tempFullScreen = isFullScreen;
         Screen.fullScreen = isFullScreen;
     }
     #endregion
@@ -174,19 +167,34 @@ public class UIManager : MonoBehaviour
 
     private void OnMasterVolumeChanged(float value)
     {
-        _tempMasterVolume = value;
+        float threshold = 0.01f;
+        bool shouldMute = value <= threshold;
+
+        _masterMuteToggle.SetIsOnWithoutNotify(shouldMute);
+        _masterMuteToggle.graphic.SetAllDirty();
+
         _audioManager.SetMasterVolume(value);
     }
 
     private void OnMusicVolumeChanged(float value)
     {
-        _tempMusicVolume = value;
+        float threshold = 0.01f;
+        bool shouldMute = value <= threshold;
+
+        _musicMuteToggle.SetIsOnWithoutNotify(shouldMute);
+        _musicMuteToggle.graphic.SetAllDirty();
+
         _audioManager.SetMusicVolume(value);
     }
 
     private void OnSFXVolumeChanged(float value)
     {
-        _tempSFXVolume = value;
+        float threshold = 0.01f;
+        bool shouldMute = value <= threshold;
+
+        _sfxMuteToggle.SetIsOnWithoutNotify(shouldMute);
+        _sfxMuteToggle.graphic.SetAllDirty();
+
         _audioManager.SetSFXVolume(value);
     }
 
@@ -195,18 +203,45 @@ public class UIManager : MonoBehaviour
     #region Volume Mute Toggles
     private void OnMasterMuteChanged(bool isMuted)
     {
-        _tempMasterMute = isMuted;
         _audioManager.ToggleMasterMute(isMuted);
+        UpdateChildVolumeVisuals(isMuted);
     }
     private void OnMusicMuteChanged(bool isMuted)
     {
-        _tempMusicMute = isMuted;
         _audioManager.ToggleMusicMute(isMuted);
     }
     private void OnSFXMuteChanged(bool isMuted)
     {
-        _tempSFXMute = isMuted;
         _audioManager.ToggleSFXMute(isMuted);
+    }
+    public void UpdateChildVolumeVisuals(bool masterMuted)
+    {
+        _musicMuteToggle.SetIsOnWithoutNotify(masterMuted);
+        _sfxMuteToggle.SetIsOnWithoutNotify(masterMuted);
+
+        if (masterMuted)
+        {
+            _musicVolumeSlider.SetValueWithoutNotify(masterMuted ? 0f : SaveManager.LoadMusicVolume());
+            _sfxVolumeSlider.SetValueWithoutNotify(masterMuted ? 0f : SaveManager.LoadSFXVolume());
+
+            _audioManager.ToggleMusicMute(masterMuted);
+            _audioManager.ToggleSFXMute(masterMuted);
+        }
+        else
+        {
+            float _musicVolume = SaveManager.LoadMusicVolume();
+            float _sfxVolume = SaveManager.LoadSFXVolume();
+
+            _musicVolumeSlider.SetValueWithoutNotify(_musicVolume);
+            _sfxVolumeSlider.SetValueWithoutNotify(_sfxVolume);
+
+            _audioManager.ToggleMusicMute(false);
+            _audioManager.ToggleSFXMute(false);
+
+            _audioManager.SetMusicVolume(_musicVolume);
+            _audioManager.SetSFXVolume(_sfxVolume);
+        }
+        
     }
     #endregion
 
@@ -214,14 +249,14 @@ public class UIManager : MonoBehaviour
     private void SaveSettings()
     {
         //save all current values
-        SaveManager.SaveBrightness(_tempBrightness);
-        SaveManager.SaveFullscreen(_tempFullScreen);
-        SaveManager.SaveMasterVolume(_tempMasterVolume);
-        SaveManager.SaveMusicVolume(_tempMusicVolume);
-        SaveManager.SaveSFXVolume(_tempSFXVolume);
-        SaveManager.SaveMasterMute(_tempMasterMute);
-        SaveManager.SaveMusicMute(_tempMusicMute);
-        SaveManager.SaveSFXMute(_tempSFXMute);
+        SaveManager.SaveBrightness(_brightnessSlider.value);
+        SaveManager.SaveFullscreen(_fullScreenToggle.isOn);
+        SaveManager.SaveMasterVolume(_masterVolumeSlider.value);
+        SaveManager.SaveMusicVolume(_musicVolumeSlider.value);
+        SaveManager.SaveSFXVolume(_sfxVolumeSlider.value);
+        SaveManager.SaveMasterMute(_masterMuteToggle.isOn);
+        SaveManager.SaveMusicMute(_musicMuteToggle.isOn);
+        SaveManager.SaveSFXMute(_sfxMuteToggle.isOn);
 
         Debug.Log("Settings Saved");
     }
@@ -230,64 +265,52 @@ public class UIManager : MonoBehaviour
     #region Load Settings
     private void LoadDefaultSettings()
     {
-        //brightness
-        _tempBrightness = SaveManager.LoadDefaultBrightness();
-        _brightnessSlider.value = _tempBrightness;
-        SetBrightnessLevel(_tempBrightness);
+        //load saved volume slider values
+        float _masterVolume = Mathf.Max(SaveManager.LoadMasterVolume());
+        float _musicVolume = Mathf.Max(SaveManager.LoadMusicVolume());
+        float _sfxVolume = Mathf.Max(SaveManager.LoadSFXVolume());
 
-        //fullscreen
-        _tempFullScreen = SaveManager.LoadFullscreen();
-        _fullScreenToggle.isOn = _tempFullScreen;
-        Screen.fullScreen = _tempFullScreen;
+        //load saved mute values
+        bool _masterVolumeMute = SaveManager.LoadMasterMute();
+        bool _masterMusicMute = SaveManager.LoadMusicMute();
+        bool _sfxMute = SaveManager.LoadSFXMute();
 
-        //audio sliders
-        _tempMasterVolume = SaveManager.LoadMasterVolume();
-        _tempMusicVolume = SaveManager.LoadMusicVolume();
-        _tempSFXVolume = SaveManager.LoadSFXVolume();
+        //update audio sliders
+        _masterVolumeSlider.SetValueWithoutNotify(_masterVolume);
+        _musicVolumeSlider.SetValueWithoutNotify(_musicVolume);
+        _sfxVolumeSlider.SetValueWithoutNotify(_sfxVolume);
 
-        _masterVolumeSlider.value = _tempMasterVolume;
-        _musicVolumeSlider.value = _tempMusicVolume;
-        _sfxVolumeSlider.value = _tempSFXVolume;
+        _audioManager.SetMasterVolume(_masterVolume);
+        _audioManager.SetMusicVolume(_musicVolume);
+        _audioManager.SetSFXVolume(_sfxVolume);
 
-        _audioManager.SetMasterVolume(_tempMasterVolume);
-        _audioManager.SetMusicVolume(_tempMusicVolume);
-        _audioManager.SetSFXVolume(_tempSFXVolume);
+        //update AudioManager with saved values
+        _audioManager.ToggleMasterMute(_masterVolumeMute);
+        _audioManager.ToggleMusicMute(_masterMusicMute);
+        _audioManager.ToggleSFXMute(_sfxMute);      
 
-        //audio mute toggles
-        _tempMasterMute = SaveManager.LoadMasterMute();
-        _tempMusicMute = SaveManager.LoadMusicMute();
-        _tempSFXMute = SaveManager.LoadSFXMute();
+        //update audio mute toggles
+        _masterMuteToggle.SetIsOnWithoutNotify(_masterVolumeMute);
+        _musicMuteToggle.SetIsOnWithoutNotify(_masterMusicMute);
+        _sfxMuteToggle.SetIsOnWithoutNotify(_sfxMute);
 
-        _masterMuteToggle.isOn = _tempMasterMute;
-        _musicMuteToggle.isOn = _tempMusicMute;
-        _sfxMuteToggle.isOn = _tempSFXMute;
-
-        _audioManager.ToggleMasterMute(_tempMasterMute);
-        _audioManager.ToggleMusicMute(_tempMusicMute);
-        _audioManager.ToggleSFXMute(_tempSFXMute);
+        //load brightness and fullscreen
+        _brightnessSlider.SetValueWithoutNotify(SaveManager.LoadDefaultBrightness());
+        SetBrightnessLevel(_brightnessSlider.value);
+        _fullScreenToggle.SetIsOnWithoutNotify(SaveManager.LoadFullscreen());
     }
     #endregion
 
     #region Update Settings UI
     private void ApplyTempSettingsToUI()
     {
-        _brightnessSlider.value = _tempBrightness;
-        SetBrightnessLevel(_tempBrightness);
+        _audioManager.SetMasterVolume(_masterVolumeSlider.value);
+        _audioManager.SetMusicVolume(_musicVolumeSlider.value);
+        _audioManager.SetSFXVolume(_sfxVolumeSlider.value);
 
-        _fullScreenToggle.isOn = _tempFullScreen;
-        Screen.fullScreen = _tempFullScreen;
-
-        _masterVolumeSlider.value = _tempMasterVolume;
-        _musicVolumeSlider.value = _tempMusicVolume;
-        _sfxVolumeSlider.value = _tempSFXVolume;
-
-        _audioManager.SetMasterVolume(_tempMasterVolume);
-        _audioManager.SetMusicVolume(_tempMusicVolume);
-        _audioManager.SetSFXVolume(_tempSFXVolume);
-
-        _audioManager.ToggleMasterMute(_tempMasterMute);
-        _audioManager.ToggleMusicMute(_tempMusicMute);
-        _audioManager.ToggleSFXMute(_tempSFXMute);
+        _audioManager.ToggleMasterMute(_masterMuteToggle.isOn);
+        _audioManager.ToggleMusicMute(_musicMuteToggle.isOn);
+        _audioManager.ToggleSFXMute(_sfxMuteToggle.isOn);
     }
     #endregion
 
