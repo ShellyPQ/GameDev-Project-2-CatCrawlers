@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -11,7 +12,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Jump Properties")]
     [SerializeField] private float _jumpForce = 19f;
-    [SerializeField] private float _jumpTime = 0.5f;
+    //[SerializeField] private float _jumpTime = 0.5f;
 
     [Header("Ground Check Properties")]
     [SerializeField] private float _extraHeight = 0.35f;
@@ -37,9 +38,14 @@ public class PlayerController : MonoBehaviour
     //Movement and jump states
     private float _moveInput;
     public bool _isFacingRight = true;
-    private bool _isJumping;
-    private bool _wasJumping;
-    private bool _wasFalling;
+
+    //in an if statement, used to clear out warning in unity console
+#pragma warning disable 0414
+    private bool _isJumping = false;
+#pragma warning restore 0414
+
+    //private bool _wasJumping = false;
+    //private bool _wasFalling = false;
 
     private RaycastHit2D _groundHit;
 
@@ -221,5 +227,6 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(_playerCollider.bounds.center - new Vector3(_playerCollider.bounds.extents.x, 0), Vector2.down * (_playerCollider.bounds.extents.y + _extraHeight), rayColor);
         Debug.DrawRay(_playerCollider.bounds.center - new Vector3(_playerCollider.bounds.extents.x, _playerCollider.bounds.extents.y + _extraHeight), Vector2.right * (_playerCollider.bounds.extents.x * 2), rayColor);
     }
+
     #endregion
 }
