@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - TriggerPlatform
+  - Projectile
+  - MeleeDummy
+  - Environment
+  - RangedDummy
   layers:
   - Default
   - TransparentFX
@@ -11,11 +17,11 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Enemy
+  - Corpse
+  - Player
+  - Projectile
   - 
   - 
   - 
