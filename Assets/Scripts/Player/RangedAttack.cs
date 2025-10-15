@@ -13,6 +13,16 @@ public class RangedAttack : MonoBehaviour
     public int maxAmmo = 3;
 
     [SerializeField] private int _currentAmmo;
+
+    private Animator _ani;
+    #endregion
+
+    #region Awake
+    private void Awake()
+    {
+        //set player animator on awake
+        _ani = GetComponent<Animator>();
+    }
     #endregion
 
     #region Start
@@ -30,6 +40,11 @@ public class RangedAttack : MonoBehaviour
         if (InputManager.instance.attackRange)
         {
             Shoot();
+
+            //animation triggers
+            _ani.SetBool("isAttacking", true);
+            _ani.SetInteger("attackType", 2); // 2 = ranged
+            _ani.SetTrigger("attackTrigger");
         }
     }
     #endregion

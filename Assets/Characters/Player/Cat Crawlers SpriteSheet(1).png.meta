@@ -1,0 +1,887 @@
+fileFormatVersion: 2
+guid: 49e1b325e0cbcd54a869168bc2f18331
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Yarn_Idle_1
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 808
+        width: 155
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14ef044edddcdf44ea668533046d602c
+      internalID: 1150517798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yarn_Idle_2
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 803
+        width: 165
+        height: 235
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eaed0fa8ee6a8e449854ea472415809d
+      internalID: 1494664927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yarn_Idle_3
+      rect:
+        serializedVersion: 2
+        x: 481
+        y: 809
+        width: 164
+        height: 227
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c30163bb3b0f5c445a6fd20d1b9a2eb1
+      internalID: 222444079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Swipe_Idle_1
+      rect:
+        serializedVersion: 2
+        x: 1057
+        y: 812
+        width: 155
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7a7c573667bde24fb0c2d9eb69029a6
+      internalID: -763786121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Swipe_Idle_2
+      rect:
+        serializedVersion: 2
+        x: 1236
+        y: 805
+        width: 165
+        height: 235
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2accaaef43d976f4aafc1ebad9a924a8
+      internalID: 81361393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Swipe_Idle_3
+      rect:
+        serializedVersion: 2
+        x: 1424
+        y: 805
+        width: 164
+        height: 227
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09825a2f423e0d64db67317f6d9ccc11
+      internalID: 1526705875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Swipe_Idle_4
+      rect:
+        serializedVersion: 2
+        x: 1641
+        y: 800
+        width: 154
+        height: 229
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c841d65d53f2a7247863b606406e4447
+      internalID: -433149714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yarn_Idle_4
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 797
+        width: 154
+        height: 229
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09d443c900329374c92557c46d18ef1c
+      internalID: -1864515638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yarn_Move_2
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 542
+        width: 165
+        height: 236
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b049a53738db704bb6c4d59b57ed28b
+      internalID: -2107005701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Swipe_Move_1
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 557
+        width: 155
+        height: 227
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a233432079c743743a5511c3e4ab0111
+      internalID: 1810479780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Swipe_Move_2
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 551
+        width: 165
+        height: 236
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e1ec8fd68712a542988fefc6a4c0608
+      internalID: 577668798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Swipe_Move_3
+      rect:
+        serializedVersion: 2
+        x: 1424
+        y: 549
+        width: 164
+        height: 233
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 396b51af8e7c21e4eb727c1725ef43fb
+      internalID: 1884868379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Swipe_Move_4
+      rect:
+        serializedVersion: 2
+        x: 1639
+        y: 549
+        width: 154
+        height: 230
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3f0cbcd48edd624b84e044653680090
+      internalID: -755943691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yarn_Move_1
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 549
+        width: 155
+        height: 227
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d9a47f61c21c234fa62c091321f02a7
+      internalID: 1039177653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yarn_Move_3
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 542
+        width: 164
+        height: 233
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd04909ec8008a14f8329202dd3d3831
+      internalID: -1159863618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yarn_Move_4
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 540
+        width: 154
+        height: 230
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57be2ab2cd74b134ba21b9d7b273a863
+      internalID: 879254609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jump_1
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 285
+        width: 165
+        height: 214
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 714674f0c5861274199643ee5d56e701
+      internalID: -1227913209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jump_2
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 258
+        width: 117
+        height: 251
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 124abb4e7f67a144fa61e75bd0df8188
+      internalID: -124053740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jump_3
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 266
+        width: 185
+        height: 237
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57273b9dc00ca6c46a54fe7745101676
+      internalID: -413319001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jump_4
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 268
+        width: 166
+        height: 203
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6cdc9c1f079f4d34e8708f0665a0f365
+      internalID: -1247845218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_1
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 259
+        width: 169
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b6b2c32cfb0061499318d1f0eb668c4
+      internalID: 533883937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_2
+      rect:
+        serializedVersion: 2
+        x: 1122
+        y: 257
+        width: 163
+        height: 227
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e92bb4171ee9804a83dc7681963fdb3
+      internalID: -1619933006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_1
+      rect:
+        serializedVersion: 2
+        x: 1345
+        y: 261
+        width: 156
+        height: 222
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 780dce37490649449b1b88749ebe6289
+      internalID: 730724507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_2
+      rect:
+        serializedVersion: 2
+        x: 1535
+        y: 253
+        width: 157
+        height: 230
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f48706a507f88e244b43a1a9af087d8c
+      internalID: -449701251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_3
+      rect:
+        serializedVersion: 2
+        x: 1711
+        y: 258
+        width: 156
+        height: 222
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 821269d0ee9c1884fa72ecb22c3dee80
+      internalID: 1242969423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Frenzy_1
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 18
+        width: 242
+        height: 191
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e5908159340ece4ebf2c33fbdd6d831
+      internalID: -1941298486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Frenzy_2
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 20
+        width: 223
+        height: 187
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffa31b26184bf7d42b43de591b1553fa
+      internalID: 1805576489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Frenzy_3
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 29
+        width: 235
+        height: 169
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 780a174ef4594ef4fae5a23283f25da7
+      internalID: -373211881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Frenzy_4
+      rect:
+        serializedVersion: 2
+        x: 827
+        y: 23
+        width: 227
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fa744f806444bc4db4310f91c899cde
+      internalID: 507477640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KO_1
+      rect:
+        serializedVersion: 2
+        x: 1128
+        y: 30
+        width: 225
+        height: 179
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3b21be7fb1ac6844a5b0425b4194265
+      internalID: 1033816998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KO_2
+      rect:
+        serializedVersion: 2
+        x: 1401
+        y: 29
+        width: 250
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be0d5a7ac51add840aff310f8c7c994a
+      internalID: -994156285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hurt
+      rect:
+        serializedVersion: 2
+        x: 1703
+        y: 35
+        width: 172
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f11e7ddc036e13c409417612f80a6b5f
+      internalID: 808852196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Cat Crawlers SpriteSheet(1)_10: 172842136
+      Cat Crawlers SpriteSheet(1)_11: 1307775515
+      Cat Crawlers SpriteSheet(1)_13: 910665473
+      Cat Crawlers SpriteSheet(1)_14: 1534002479
+      Cat Crawlers SpriteSheet(1)_15: -546506271
+      Cat Crawlers SpriteSheet(1)_16: 1327464132
+      Cat Crawlers SpriteSheet(1)_17: -2065056075
+      Cat Crawlers SpriteSheet(1)_18: -1934332901
+      Cat Crawlers SpriteSheet(1)_19: -1529316156
+      Cat Crawlers SpriteSheet(1)_20: 123673162
+      Cat Crawlers SpriteSheet(1)_21: -801918524
+      Cat Crawlers SpriteSheet(1)_27: 1917167052
+      Cat Crawlers SpriteSheet(1)_28: 743172356
+      Cat Crawlers SpriteSheet(1)_3: 491518803
+      Cat Crawlers SpriteSheet(1)_32: -571681971
+      Cat Crawlers SpriteSheet(1)_33: -1898657832
+      Cat Crawlers SpriteSheet(1)_34: 353194167
+      Cat Crawlers SpriteSheet(1)_35: 1735792699
+      Cat Crawlers SpriteSheet(1)_36: -706162275
+      Cat Crawlers SpriteSheet(1)_37: 1050069656
+      Cat Crawlers SpriteSheet(1)_38: 1463197691
+      Cat Crawlers SpriteSheet(1)_39: 479274120
+      Cat Crawlers SpriteSheet(1)_4: -1243329615
+      Cat Crawlers SpriteSheet(1)_40: -185428957
+      Cat Crawlers SpriteSheet(1)_41: 1026758359
+      Cat Crawlers SpriteSheet(1)_42: -1714833806
+      Cat Crawlers SpriteSheet(1)_43: 202315162
+      Cat Crawlers SpriteSheet(1)_53: 1831115683
+      Cat Crawlers SpriteSheet(1)_54: -1687600092
+      Cat Crawlers SpriteSheet(1)_9: -2000688703
+      Frenzy_1: -1941298486
+      Frenzy_2: 1805576489
+      Frenzy_3: -373211881
+      Frenzy_4: 507477640
+      Hurt: 808852196
+      Idle_1: 533883937
+      Idle_2: -1619933006
+      Jump_1: -1227913209
+      Jump_2: -124053740
+      Jump_3: -413319001
+      Jump_4: -1247845218
+      KO_1: 1033816998
+      KO_2: -994156285
+      Swipe_Idle_1: -763786121
+      Swipe_Idle_2: 81361393
+      Swipe_Idle_3: 1526705875
+      Swipe_Idle_4: -433149714
+      Swipe_Move_1: 1810479780
+      Swipe_Move_2: 577668798
+      Swipe_Move_3: 1884868379
+      Swipe_Move_4: -755943691
+      Walk_1: 730724507
+      Walk_2: -449701251
+      Walk_3: 1242969423
+      Yarn_Idle_1: 1150517798
+      Yarn_Idle_2: 1494664927
+      Yarn_Idle_3: 222444079
+      Yarn_Idle_4: -1864515638
+      Yarn_Move_1: 1039177653
+      Yarn_Move_2: -2107005701
+      Yarn_Move_3: -1159863618
+      Yarn_Move_4: 879254609
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

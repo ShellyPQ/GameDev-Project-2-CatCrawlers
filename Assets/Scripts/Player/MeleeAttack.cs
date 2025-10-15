@@ -27,6 +27,7 @@ public class MeleeAttack : MonoBehaviour
 
     //reference to the attached player controler
     private PlayerController _playerController;
+    private Animator _ani;
     #endregion
 
     #region Awake
@@ -34,6 +35,8 @@ public class MeleeAttack : MonoBehaviour
     {
         //assign the player controller on awake
         _playerController = GetComponent<PlayerController>();
+        //assign the player animator on awake
+        _ani = GetComponent<Animator>();
 
         //set up particle pool/array
         InitializeParticlePools();
@@ -47,12 +50,17 @@ public class MeleeAttack : MonoBehaviour
         if (InputManager.instance.attackMelee)
         {
             Attack();
+
+            //animation triggers
+            _ani.SetBool("isAttacking", true);
+            _ani.SetInteger("attackType", 1);
+            _ani.SetTrigger("attackTrigger");
         }
     }
     #endregion
 
     #region Melee Attack Method
-    private void Attack()
+    public void Attack()
     {
         //update attack point position
         UpdateAttackPoint();
@@ -61,7 +69,7 @@ public class MeleeAttack : MonoBehaviour
         SwipeParticle();
 
         //detect enemies in attack range
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(_attackPoint.position, _attackRange,_enemyMask);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(_attackPoint.position, _attackRange, _enemyMask);
 
         foreach (Collider2D enemy in hitEnemies)
         {
@@ -72,7 +80,7 @@ public class MeleeAttack : MonoBehaviour
             enemy.GetComponent<MeleeDummy>()?.TakeDamage(_damage, hitDir);
         }
     }
-   
+ 
     private void UpdateAttackPoint()
     {
         //move attack point in front of player based on what dir the player is facing
@@ -82,7 +90,6 @@ public class MeleeAttack : MonoBehaviour
             _attackPoint.position = transform.position + new Vector3(_attackPointOffset.x * dir, _attackPointOffset.y, _attackPointOffset.z);
         }
     }
-
     #endregion
 
     #region Attack Particle Effect Method
@@ -143,6 +150,7 @@ public class MeleeAttack : MonoBehaviour
             //show attack range during play testing (scene view)
             Gizmos.DrawWireSphere(_attackPoint.position, _attackRange);
         }
-    }  
+    }
     #endregion
 }
+

@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rb;
     private Collider2D _playerCollider;
     private CameraFollow _cameraFollow;
+    private Animator _ani;
 
     //Movement and jump states
     private float _moveInput;
@@ -63,6 +64,7 @@ public class PlayerController : MonoBehaviour
         _renderer = GetComponent<SpriteRenderer>();
         _playerCollider = GetComponent<Collider2D>();
         _cameraFollow = _cameraFollowObject.GetComponent<CameraFollow>();
+        _ani = GetComponent<Animator>();
     }
     #endregion
 
@@ -88,7 +90,38 @@ public class PlayerController : MonoBehaviour
         }
 
         MovePlayer();
+        #region Movement Animation Logic
+
+        _ani.SetFloat("speed", Mathf.Abs(_rb.velocity.x));
+        _ani.SetBool("isGrounded", GroundCheck());
+
+        #endregion
+
         ApplyExtraLift();
+        #region Jump Animation Logic
+
+        _ani.SetFloat("verticalVelocity", _rb.velocity.y);
+
+        if (!GroundCheck()) 
+        {
+            float yVel = Mathf.Abs(_rb.velocity.y);
+            _ani.speed = Mathf.Clamp(0.8f + yVel / 15f, 0.8f, 1.3f);
+        }
+        else
+        {
+            //reset speed when grounded
+            _ani.speed = 1f;
+        }
+
+        //if grounded but animation still in air, force it back to idle
+        if (GroundCheck() && _ani.GetCurrentAnimatorStateInfo(0).IsName("Jump_Float"))
+        {
+            //cancel the jump trigger
+            _ani.ResetTrigger("jumpPressed");
+            //force transition to locomotion blend tree
+            _ani.CrossFade("Locomotion", 0.05f);
+        }
+        #endregion
     }
     #endregion
 
@@ -155,6 +188,9 @@ public class PlayerController : MonoBehaviour
             _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
             _isJumping = true;
 
+            //trigger jump_start animation
+            _ani.SetTrigger("jumpPressed");
+
             // Play jump SFX
             SFXManager.instance.playSFX("jump");
         }
@@ -194,17 +230,13 @@ public class PlayerController : MonoBehaviour
 
     private bool GroundCheck()
     {
-        //create a box collider at the players feet to check if the player is grounded
-        _groundHit = Physics2D.BoxCast(_playerCollider.bounds.center, _playerCollider.bounds.size, 0f, Vector2.down, _extraHeight, _groundMask);
+        //create a box collider around the players feet only
+        Vector2 boxCenter = new Vector2(_playerCollider.bounds.center.x, _playerCollider.bounds.min.y + 0.05f);
+        Vector2 boxSize = new Vector2(_playerCollider.bounds.size.x * 0.9f, 0.1f);
 
-        if (_groundHit.collider != null)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        _groundHit = Physics2D.BoxCast(boxCenter, boxSize, 0f, Vector2.down, _extraHeight, _groundMask);
+
+        return _groundHit.collider != null;
     }
 
     #endregion
