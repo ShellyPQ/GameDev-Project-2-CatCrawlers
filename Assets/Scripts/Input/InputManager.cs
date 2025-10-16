@@ -66,6 +66,11 @@ public class InputManager : MonoBehaviour
         else
         {
             EnableMovement();
+
+            if (PlayerHealth.instance != null)
+            {
+                PlayerHealth.instance.ResetPlayerCollider();
+            }
         }
 
     }
