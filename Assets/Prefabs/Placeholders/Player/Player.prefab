@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 606451029887429086}
   m_Layer: 0
-  m_Name: attackPoint
+  m_Name: meleeAttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2328557712215096267}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.18, z: 0}
+  m_LocalPosition: {x: 0.71, y: 0.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5168265137796558245}
   - component: {fileID: 1735914244758615533}
+  - component: {fileID: 715679159676528929}
   - component: {fileID: 7078166088539414633}
   - component: {fileID: 4511933912963721384}
   - component: {fileID: 3762546144622299599}
@@ -68,6 +69,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 606451029887429086}
+  - {fileID: 2807096333358876832}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1735914244758615533
@@ -111,17 +113,38 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: c9014e437aaf66f40adde1853e24c7d0, type: 3}
+  m_Sprite: {fileID: -1619933006, guid: 49e1b325e0cbcd54a869168bc2f18331, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 5.09375, y: 7.09375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &715679159676528929
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3167439010277693987}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 97f758a9d43228347b206bc322c3e123, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!50 &7078166088539414633
 Rigidbody2D:
   serializedVersion: 4
@@ -137,7 +160,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 7
+  m_GravityScale: 1.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -181,8 +204,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.08576006, y: -0.22196968}
-  m_Size: {x: 1.8463053, y: 4.540514}
+  m_Offset: {x: 0.7, y: 0.05867362}
+  m_Size: {x: 2, y: 6.882653}
   m_Direction: 0
 --- !u!114 &3762546144622299599
 MonoBehaviour:
@@ -197,12 +220,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerSpeed: 5
-  _jumpForce: 9.5
-  _jumpTime: 0.3
+  _jumpForce: 8
   _extraHeight: 0.35
   _groundMask:
     serializedVersion: 2
     m_Bits: 64
+  _fallMultiplier: 2.5
+  _lowJumpMultiplier: 1.5
+  _gravityMultiplier: 0.5
   _cameraFollowObject: {fileID: 0}
   _isFacingRight: 1
 --- !u!114 &1361755890090575282
@@ -218,7 +243,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLives: 9
-  _currentLivesText: {fileID: 0}
 --- !u!114 &502031367033763872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,13 +255,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57c5849e79c9b0245a83ab558deefbdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackRange: 1
+  _attackRange: 0.8
   _damage: 1
   _attackPoint: {fileID: 606451029887429086}
   _enemyMask:
     serializedVersion: 2
     m_Bits: 128
-  _attackPointOffset: {x: 0.5, y: 0.1, z: 0}
+  _attackPointOffset: {x: 0.6, y: -0.2, z: 0}
   _swipeLeftPrefab: {fileID: 2217024299524021158, guid: ce7939354bb92684aba867a3cf18620f, type: 3}
   _swipeRightPrefab: {fileID: 2217024299524021158, guid: 1d75a877346c0074c81c6ca5688ca171, type: 3}
   _particlePoolSize: 3
@@ -253,9 +277,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dda216fe4fca4844a2e216b5d851a77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _yarnPrefab: {fileID: 0}
-  _firePoint: {fileID: 0}
-  _yarnSpeed: 10
+  _yarnPrefab: {fileID: 8023080403539492647, guid: 95e173a7f237d0b44a1dd49f665e5d8a, type: 3}
+  _firePoint: {fileID: 606451029887429086}
+  _yarnSpeed: 6
   _maxRange: 5
-  _maxAmmo: 3
-  _isTutorial: 1
+  maxAmmo: 3
+  _currentAmmo: 0
+--- !u!1 &6904852985100389277
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2807096333358876832}
+  m_Layer: 0
+  m_Name: 'rangeAttackPoint '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2807096333358876832
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6904852985100389277}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.71, y: 0.45, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5168265137796558245}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

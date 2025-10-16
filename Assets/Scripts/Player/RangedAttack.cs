@@ -42,9 +42,13 @@ public class RangedAttack : MonoBehaviour
             Shoot();
 
             //animation triggers
-            _ani.SetBool("isAttacking", true);
+            _ani.SetBool("isRangeAttacking", true);
             _ani.SetInteger("attackType", 2); // 2 = ranged
             _ani.SetTrigger("attackTrigger");
+        }
+        else if (!InputManager.instance.attackRange)
+        {
+            _ani.SetBool("isRangeAttacking", false);
         }
     }
     #endregion
@@ -86,7 +90,7 @@ public class RangedAttack : MonoBehaviour
         if (_currentAmmo >= maxAmmo)
         {
             return false;
-        }            
+        }
 
         _currentAmmo = Mathf.Min(_currentAmmo + amount, maxAmmo);
 

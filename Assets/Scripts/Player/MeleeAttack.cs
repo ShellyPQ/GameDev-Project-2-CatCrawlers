@@ -52,10 +52,16 @@ public class MeleeAttack : MonoBehaviour
             Attack();
 
             //animation triggers
-            _ani.SetBool("isAttacking", true);
+            _ani.SetBool("isMeleeAttacking", true);
             _ani.SetInteger("attackType", 1);
             _ani.SetTrigger("attackTrigger");
         }
+        else if (!InputManager.instance.attackMelee) 
+        {
+            _ani.SetBool("isMeleeAttacking", false);
+            _ani.SetTrigger("attackTrigger");
+        }
+
     }
     #endregion
 

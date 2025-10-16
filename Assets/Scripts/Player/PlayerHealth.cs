@@ -14,6 +14,7 @@ public class PlayerHealth : MonoBehaviour
 
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
+    private Animator _ani;
 
     private bool _isDead = false;
     private bool _isKnockedBack = false;
@@ -29,7 +30,11 @@ public class PlayerHealth : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }            
+        }
+
+        _rb = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _ani = GetComponent<Animator>();
     }
     #endregion
 
@@ -38,24 +43,26 @@ public class PlayerHealth : MonoBehaviour
     {
         _currentLives = maxLives;
         HUDManager.instance.UpdateRemainingLivesText(_currentLives);
-
-        _rb = GetComponent<Rigidbody2D>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
     #endregion
 
     #region Method/Functions
     public void TakeDamage(int dmg, Vector2 knockbackDir, float knockbackForce)
     {
-        if (_isDead) return;
+        if (_isDead) 
+        {
+            return;
+        }
 
         //clamp lives
         _currentLives = Mathf.Max(_currentLives - dmg, 0);
         HUDManager.instance.UpdateRemainingLivesText(_currentLives);
 
+        _ani.SetBool("isHurt", true);
+
         SFXManager.instance.playSFX("playerHurt");
 
-        //apply knockback
+        //apply knockback & trigger hurt animation
         if (_rb != null)
         {
             _rb.velocity = Vector2.zero; 
@@ -66,7 +73,10 @@ public class PlayerHealth : MonoBehaviour
         StartCoroutine(FlashRed());
 
         if (_currentLives <= 0)
+        {
+            //_ani.SetBool("isKO", true);
             GameOver();
+        }
     }
 
     //visual feedback for when the player is hit
@@ -85,6 +95,7 @@ public class PlayerHealth : MonoBehaviour
             yield return null;
         }
 
+        _ani.SetBool("isHurt", false);
         _spriteRenderer.color = original;
     }
 
