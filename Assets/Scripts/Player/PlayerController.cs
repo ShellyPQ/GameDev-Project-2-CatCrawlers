@@ -128,8 +128,9 @@ public class PlayerController : MonoBehaviour
     #region LateUpdate
     private void LateUpdate()
     {
+        bool isGrounded = GroundCheck();
         //smooth camera pan based on Y velocity
-        CameraManager.instance.smoothFollowY(_rb.velocity.y);
+        CameraManager.instance.smoothFollowY(_rb.velocity.y, isGrounded);
     }
     #endregion
 
