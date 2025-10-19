@@ -2246,7 +2246,7 @@ MonoBehaviour:
   _sfxSlider: {fileID: 1049928291}
   _masterVolumeImage: {fileID: 1966562892}
   _musicVolumeImage: {fileID: 559751548}
-  _sfxVoumeImage: {fileID: 737482229}
+  _sfxVolumeImage: {fileID: 0}
   _volumeSprites:
   - {fileID: 21300000, guid: 5e1322b3a38ccc04181bfefddfcc1f79, type: 3}
   - {fileID: 21300000, guid: a576f91159516214cb465bb4568b43d8, type: 3}
@@ -4062,6 +4062,9 @@ MonoBehaviour:
   - {fileID: 862835983}
   - {fileID: 1083376691}
   - {fileID: 1105331195}
+  - {fileID: 9530101}
+  - {fileID: 1477252516}
+  - {fileID: 389252884}
   _firstSelected: {fileID: 1208634091}
   _navigateReference: {fileID: -780654584290154323, guid: 325a03ea1c1a14d44b46eff45579788e, type: 3}
   _selectedAnimationScale: 1.1
