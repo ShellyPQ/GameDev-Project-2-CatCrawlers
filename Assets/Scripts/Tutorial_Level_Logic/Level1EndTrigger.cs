@@ -38,6 +38,8 @@ public class Level1EndTrigger : MonoBehaviour
         if (doorAnimator != null)
         {
             doorAnimator.SetTrigger("canProceed");
+            // Play gate open SFX
+            SFXManager.instance.playSFX("doorUnlock");
         }
     }
 

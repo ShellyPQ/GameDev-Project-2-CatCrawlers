@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -92,8 +93,12 @@ public class UIManager : MonoBehaviour
 
         //hide setting panel
         _settingsPanel.SetActive(false);
-        _mainMenuPanel.SetActive(true);
 
+        if (SceneManager.GetActiveScene().name == ScenesManager.Scene.MainMenu.ToString())
+        {
+            _mainMenuPanel.SetActive(true);
+        }
+       
         //discard unsaved changes, reload saved values
         LoadDefaultSettings();
     }

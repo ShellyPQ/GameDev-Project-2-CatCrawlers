@@ -85,10 +85,15 @@ public class MeleeDummy : MonoBehaviour, IDamageable
     {
         _isDead = true;
 
+        //trigger particle effect
+        GetComponent<DummyParticle>()?.PlayParticleEffect();
+
         //trigger gate animation
         if (triggerAni != null)
         {
             triggerAni.SetBool("canProceed", true);
+            // Play gate open SFX
+            SFXManager.instance.playSFX("doorUnlock");
         }
         else 
         {
@@ -109,8 +114,6 @@ public class MeleeDummy : MonoBehaviour, IDamageable
         {
             _hitbox.enabled = false;
         }
-
-        Debug.Log("Melee Training Complete");       
     }
     #endregion
 

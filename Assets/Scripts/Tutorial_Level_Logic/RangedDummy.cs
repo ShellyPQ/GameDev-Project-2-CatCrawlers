@@ -11,6 +11,7 @@ public class RangedDummy : MonoBehaviour
     private Collider2D _hitbox;
     private GameObject _player;
     private bool _isStunned = false;
+    private bool _isDestroyed = false;
 
     [Header("References")]
     [SerializeField] private GameObject _ammoHUD;
@@ -45,13 +46,36 @@ public class RangedDummy : MonoBehaviour
         // Trigger subtle shake
         _stunEffect?.Stun();
 
+        DummyDestroyed();
+
         // Disable collider so player can walk through
         if (_hitbox != null)
             _hitbox.enabled = false;
 
         // Trigger door animation
         _triggerAni?.SetBool("canProceed", true);
+        // Play gate open SFX
+        SFXManager.instance.playSFX("doorUnlock");
+    }
 
-        Debug.Log("Ranged Tutorial Complete");
+    public void DummyDestroyed()
+    {
+        if (_isDestroyed)
+        {
+            return;
+        }
+
+        _isDestroyed = true;
+
+        //trigger particle effect
+        GetComponent<DummyParticle>()?.PlayParticleEffect();
+
+        //disable collider 
+        var hitBox = GetComponent<Collider2D>();
+        
+        if (hitBox != null)
+        {
+            hitBox.enabled = false;
+        }
     }
 }

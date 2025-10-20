@@ -14,6 +14,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _jumpForce = 19f;
     //[SerializeField] private float _jumpTime = 0.5f;
 
+    [Header("Double Jump Properties")]
+    [Tooltip("Player Jumpforce when jumping again during double jump.")]
+    [SerializeField] private float _doubleJumpForce = 3f;
+    [Tooltip("Particle System Prefab used during double jump.")]
+    [SerializeField] private ParticleSystem _doubleJumpParticle;
+
+    private bool _hasDoubleJumped;
+
     [Header("Ground Check Properties")]
     [SerializeField] private float _extraHeight = 0.35f;
     [SerializeField] private LayerMask _groundMask;
@@ -77,6 +85,18 @@ public class PlayerController : MonoBehaviour
         }
 
         Jump();
+
+        #region Double Jump Grounded Check
+
+        bool isGrounded = GroundCheck();
+
+        //reset coyote timer if player is grounded
+        if (isGrounded)
+        {
+            _hasDoubleJumped = false;
+        }
+
+        #endregion
     }
     #endregion
 
@@ -102,7 +122,7 @@ public class PlayerController : MonoBehaviour
 
         _ani.SetFloat("verticalVelocity", _rb.velocity.y);
 
-        if (!GroundCheck()) 
+        if (!GroundCheck())
         {
             float yVel = Mathf.Abs(_rb.velocity.y);
             _ani.speed = Mathf.Clamp(0.8f + yVel / 15f, 0.8f, 1.3f);
@@ -183,26 +203,70 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        //button was pressed and the player is grounded
-        if (InputManager.instance.playerControls.Movement.Jump.WasPressedThisFrame() && GroundCheck())
+        bool jumpPressed = InputManager.instance.playerControls.Movement.Jump.WasPressedThisFrame();
+        bool jumpReleased = InputManager.instance.playerControls.Movement.Jump.WasReleasedThisFrame();
+        bool isGrounded = GroundCheck();
+
+        //normal jump
+        if (jumpPressed && isGrounded)
         {
-            _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
-            _isJumping = true;
-
-            //trigger jump_start animation
-            _ani.SetTrigger("jumpPressed");
-
-            // Play jump SFX
-            SFXManager.instance.playSFX("jump");
+            PerformJump(_jumpForce);
+            return;
         }
 
-        //button was released this frame
-        if (InputManager.instance.playerControls.Movement.Jump.WasReleasedThisFrame())
+        //coyote jump
+        if (jumpPressed && !isGrounded && !_hasDoubleJumped)
+        {
+            PerformJump(_doubleJumpForce);
+            _hasDoubleJumped = true;
+
+            //play particles effect
+            if (_doubleJumpParticle != null)
+            {
+                Vector3 spawnPos = new Vector3(_playerCollider.bounds.center.x, _playerCollider.bounds.center.y - .5f, 0);
+
+                ParticleSystem particles = Instantiate(_doubleJumpParticle, spawnPos, Quaternion.identity);
+                particles.Play();
+                Destroy(particles.gameObject, particles.main.duration + particles.main.startLifetime.constantMax);
+            }
+            
+            return;
+        }
+
+        if (jumpReleased)
         {
             _isJumping = false;
         }
 
+        ////button was pressed and the player is grounded
+        //if (InputManager.instance.playerControls.Movement.Jump.WasPressedThisFrame() && GroundCheck())
+        //{
+        //    _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
+        //    _isJumping = true;
+
+        //    //trigger jump_start animation
+        //    _ani.SetTrigger("jumpPressed");
+
+        //    // Play jump SFX
+        //    SFXManager.instance.playSFX("jump");
+        //}
+
+        ////button was released this frame
+        //if (InputManager.instance.playerControls.Movement.Jump.WasReleasedThisFrame())
+        //{
+        //    _isJumping = false;
+        //}
+
         DrawGroundCheck();
+    }
+
+    private void PerformJump(float jumpStrength)
+    {
+        _rb.velocity = new Vector2(_rb.velocity.x, jumpStrength);
+        _isJumping = true;
+
+        _ani.SetTrigger("jumpPressed");
+        SFXManager.instance.playSFX("jump");
     }
 
     private void ApplyExtraLift()

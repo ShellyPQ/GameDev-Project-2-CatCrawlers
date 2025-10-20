@@ -18,6 +18,8 @@ public class SFXManager : MonoBehaviour
     public AudioClip yarnBall;
     public AudioClip buttonPress;
     public AudioClip sfxSettingsButton;
+    public AudioClip dummyExplosion;
+    public AudioClip doorUnlock;
 
     //sound object
     public GameObject soundObject;
@@ -64,6 +66,10 @@ public class SFXManager : MonoBehaviour
                 return (buttonPress);
             case "sfxSettingsButton":
                 return (sfxSettingsButton);
+            case "dummyExplosion":
+                return (dummyExplosion);
+            case "doorUnlock":
+                return (doorUnlock);
             default:
                 //if no clip is found based on the string name given, return null
                 return null;

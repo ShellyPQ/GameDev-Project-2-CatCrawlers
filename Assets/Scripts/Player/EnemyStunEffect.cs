@@ -40,5 +40,6 @@ public class EnemyStunEffect : MonoBehaviour
         transform.localPosition = _originalPosition;
         _isStunned = false;
     }
+
     #endregion
 }

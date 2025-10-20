@@ -12,6 +12,7 @@ public class PauseManager : MonoBehaviour
     [Tooltip("Pause Panel Reference")]
     public GameObject pausePanel;
     public GameObject gameOverPanel;
+
     public bool isPaused { get; private set; }
     #endregion
 
