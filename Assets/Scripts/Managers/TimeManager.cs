@@ -30,7 +30,6 @@ public class TimeManager : MonoBehaviour
         }
 
         instance = this;
-        DontDestroyOnLoad(gameObject);
     }
     #endregion
 
