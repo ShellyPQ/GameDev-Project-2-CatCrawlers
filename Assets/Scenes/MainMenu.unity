@@ -1919,7 +1919,7 @@ MonoBehaviour:
   m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.8
+  m_Value: 0.1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2680,7 +2680,7 @@ MonoBehaviour:
   m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.8
+  m_Value: 0.3
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2813,6 +2813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b0ca73118583974981a44ae54e881a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sfxMixerGroup: {fileID: 3575277454773694277, guid: 7da6c9605cf55f542a56560b7fe8c0ab, type: 2}
   jump: {fileID: 8300000, guid: d114916a8ec060942b96cce8c2ea83cd, type: 3}
   land: {fileID: 8300000, guid: fdf359c972b44124496e90407bf3b13e, type: 3}
   playerHurt: {fileID: 8300000, guid: 5c77a0d3c73fc48418e5cb7c5315ee3f, type: 3}
@@ -2823,6 +2824,8 @@ MonoBehaviour:
   yarnBall: {fileID: 8300000, guid: c4c72f021987fc04589b53f8d4b667a8, type: 3}
   buttonPress: {fileID: 8300000, guid: de8a3c60ee723944b8aa2c538e1f7dca, type: 3}
   sfxSettingsButton: {fileID: 8300000, guid: 5c77a0d3c73fc48418e5cb7c5315ee3f, type: 3}
+  dummyExplosion: {fileID: 0}
+  doorUnlock: {fileID: 0}
   soundObject: {fileID: 5331809416122137942, guid: f06ce2dc0810a034b8e977b58ef29fb4, type: 3}
 --- !u!1 &929399462
 GameObject:
@@ -3105,7 +3108,7 @@ MonoBehaviour:
   m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.8
+  m_Value: 0.3
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

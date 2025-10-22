@@ -6,11 +6,15 @@ public class CurrencyManager : MonoBehaviour
 {
     //Singleton
     public static CurrencyManager instance;
+    //subscribe to challenge event
+    public static event System.Action OnTokenCollected;
 
     #region Variables
+
     [Header("Properties")]
     [Tooltip("How many paw tokens does the player have")]
     public int _currentPawTokenAmount = 0;
+
     #endregion
 
     #region Awake
@@ -36,6 +40,9 @@ public class CurrencyManager : MonoBehaviour
 
         //Update text display when this function is called
         HUDManager.instance.UpdateCurrencyText(_currentPawTokenAmount);
+
+        //fire challenge event
+        OnTokenCollected?.Invoke();
     }
     #endregion
 }

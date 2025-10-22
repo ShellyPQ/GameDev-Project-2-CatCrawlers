@@ -57,10 +57,22 @@ public class ScenesManager : MonoBehaviour
         SceneManager.LoadScene(Scene.Level_Select_Scene.ToString());
     }
 
-    //Load the tutorial level
-    public void LoadTutorialLevel()
+    //Load level 1
+    public void LoadLevel_01()
     {
-        SceneManager.LoadScene(Scene.Level_01.ToString());     
+        SceneManager.LoadScene(Scene.Level_01.ToString());
+    }
+
+    //Load level 2
+    public void LoadLevel_02()
+    {
+        Debug.Log("Loading Level_02");
+    }
+
+    //Load level 3
+    public void LoadLevel_03()
+    {
+        Debug.Log("Loading Level_03");
     }
 
     //restart level

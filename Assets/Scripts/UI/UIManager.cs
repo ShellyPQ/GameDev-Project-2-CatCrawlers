@@ -75,9 +75,9 @@ public class UIManager : MonoBehaviour
         _brightnessSlider.value = 0f;
         _fullScreenToggle.isOn = true;
 
-        _masterVolumeSlider.value = 0.8f;
-        _sfxVolumeSlider.value = 0.8f;
-        _musicVolumeSlider.value = 0.8f;
+        _masterVolumeSlider.value = 0.3f;
+        _sfxVolumeSlider.value = 0.1f;
+        _musicVolumeSlider.value = 0.3f;
 
         _masterMuteToggle.isOn = false;
         _musicMuteToggle.isOn = false;

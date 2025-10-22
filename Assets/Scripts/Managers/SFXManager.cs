@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SFXManager : MonoBehaviour
 {
     public static SFXManager instance;
 
     #region Variables
+    [Header("Mixer Group")]
+    [SerializeField] private AudioMixerGroup _sfxMixerGroup;
+
     [Header("SFX Clips")]
     public AudioClip jump;
     public AudioClip land;
@@ -100,10 +104,19 @@ public class SFXManager : MonoBehaviour
     {
         //create SoundObject gameobject
         GameObject newObject = Instantiate(soundObject, transform);
+        AudioSource source = newObject.GetComponent<AudioSource>();
+
+        //assign the mixergroup before playing
+        if (_sfxMixerGroup != null)
+        {
+            source.outputAudioMixerGroup = _sfxMixerGroup;
+        }
+
         //assign audioclip to audio source
-        newObject.GetComponent<AudioSource>().clip = clip;
-        //place the audio
-        newObject.GetComponent<AudioSource>().Play();
+        source.clip = clip;        
+        source.Play();
+
+        Debug.Log($"Playing {clip.name} through mixer: {source.outputAudioMixerGroup?.name ?? "None"}");
     }
     #endregion
 }

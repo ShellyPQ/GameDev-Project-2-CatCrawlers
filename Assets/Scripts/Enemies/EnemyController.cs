@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour, IDamageable
 {
+    //subcribe to challenge event
+    public static event System.Action OnEnemyDied;
+
     #region Variables 
     [Header("Enemy Reference")]
     [Tooltip("Assign the enemies AI")]
@@ -195,7 +198,10 @@ public class EnemyController : MonoBehaviour, IDamageable
         //position collider so its bottom sits at y = 0;
         float spriteBottom = spriteRenderer.bounds.min.y - transform.position.y;
         corpseCol.offset = new Vector2(0f, spriteBottom + corpseCol.size.y / 2f);
-        gameObject.layer = LayerMask.NameToLayer("Corpse");       
+        gameObject.layer = LayerMask.NameToLayer("Corpse");
+
+        //trigger challange event
+        OnEnemyDied?.Invoke();
     }
 
     private void OnCollisionEnter2D(Collision2D other)
