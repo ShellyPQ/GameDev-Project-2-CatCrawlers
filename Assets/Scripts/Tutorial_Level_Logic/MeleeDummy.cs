@@ -14,7 +14,8 @@ public class MeleeDummy : MonoBehaviour, IDamageable
     private bool _isDead = false;
 
     [Header("Reference")]
-    [SerializeField] private Animator triggerAni;
+    [SerializeField] private Animator _triggerAni_1;
+    [SerializeField] private Animator _triggerAni_2;
     private Collider2D _hitbox;
 
     [Header("References")]
@@ -89,9 +90,15 @@ public class MeleeDummy : MonoBehaviour, IDamageable
         GetComponent<DummyParticle>()?.PlayParticleEffect();
 
         //trigger gate animation
-        if (triggerAni != null)
+        if (_triggerAni_1 != null)
         {
-            triggerAni.SetBool("canProceed", true);
+            _triggerAni_1.SetBool("canProceed", true);
+            _triggerAni_2.SetBool("canProceed", true);
+
+            //disable colliders on doors
+            _triggerAni_1.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            _triggerAni_2.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+
             // Play gate open SFX
             SFXManager.instance.playSFX("doorUnlock");
         }

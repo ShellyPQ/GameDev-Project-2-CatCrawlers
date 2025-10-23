@@ -6,7 +6,8 @@ using UnityEngine;
 public class RangedDummy : MonoBehaviour
 {
     [Header("Dummy Properties")]
-    [SerializeField] private Animator _triggerAni;
+    [SerializeField] private Animator _triggerAni_1;
+    [SerializeField] private Animator _triggerAni_2;
     private EnemyStunEffect _stunEffect;
     private Collider2D _hitbox;
     private GameObject _player;
@@ -53,7 +54,13 @@ public class RangedDummy : MonoBehaviour
             _hitbox.enabled = false;
 
         // Trigger door animation
-        _triggerAni?.SetBool("canProceed", true);
+        _triggerAni_1?.SetBool("canProceed", true);
+        _triggerAni_2?.SetBool("canProceed", true);
+
+        //disable colliders on doors
+        _triggerAni_1.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        _triggerAni_2.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+
         // Play gate open SFX
         SFXManager.instance.playSFX("doorUnlock");
     }
