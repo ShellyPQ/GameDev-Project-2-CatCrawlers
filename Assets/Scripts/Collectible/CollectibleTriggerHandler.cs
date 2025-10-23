@@ -11,7 +11,7 @@ public class CollectibleTriggerHandler : MonoBehaviour
 
     //reference to our collectable manager
     private CollectibleManager _collectableManager;
-    private SpriteRenderer _spriteRenderer;
+    private MeshRenderer _meshRenderer;
     private Collider2D _collider;
     private ParticleSystem _particle;
     private ParticleSystem.MainModule _particleMain;
@@ -23,7 +23,7 @@ public class CollectibleTriggerHandler : MonoBehaviour
     private void Awake()
     {
         _collectableManager = GetComponent<CollectibleManager>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _meshRenderer = GetComponentInChildren<MeshRenderer>();
         _collider = GetComponent<Collider2D>();
         _particle = GetComponentInChildren<ParticleSystem>();
 
@@ -44,7 +44,7 @@ public class CollectibleTriggerHandler : MonoBehaviour
             SFXManager.instance.playSFX("pawToken");
 
             //disable visuals & collider
-            _spriteRenderer.enabled = false;
+            _meshRenderer.enabled = false;
             _collider.enabled = false;
 
             //fade out particle
@@ -96,7 +96,7 @@ public class CollectibleTriggerHandler : MonoBehaviour
             if (playerRanged != null && playerRanged.GetAmmo() < playerRanged.maxAmmo)
             {
                 //respawn collectible
-                _spriteRenderer.enabled = true;
+                _meshRenderer.enabled = true;
                 _collider.enabled = true;
 
                 if (_particle != null)

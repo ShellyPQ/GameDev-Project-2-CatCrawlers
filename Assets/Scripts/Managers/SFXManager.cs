@@ -115,8 +115,6 @@ public class SFXManager : MonoBehaviour
         //assign audioclip to audio source
         source.clip = clip;        
         source.Play();
-
-        Debug.Log($"Playing {clip.name} through mixer: {source.outputAudioMixerGroup?.name ?? "None"}");
     }
     #endregion
 }
