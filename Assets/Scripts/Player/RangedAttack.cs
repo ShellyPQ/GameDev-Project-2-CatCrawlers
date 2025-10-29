@@ -80,8 +80,6 @@ public class RangedAttack : MonoBehaviour
         {
             _currentAmmo--;
 
-            //update HUD
-            HUDManager.instance.UpdateAmmoText(_currentAmmo);
         }
     }
 
@@ -95,9 +93,6 @@ public class RangedAttack : MonoBehaviour
         _currentAmmo = Mathf.Min(_currentAmmo + amount, maxAmmo);
 
         SFXManager.instance.playSFX("yarnBall");
-
-        //update HUD
-        HUDManager.instance.UpdateAmmoText(_currentAmmo);
 
         return true;
     }

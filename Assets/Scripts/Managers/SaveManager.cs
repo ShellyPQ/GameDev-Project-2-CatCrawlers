@@ -171,8 +171,6 @@ public class SaveManager : MonoBehaviour
 
         return LoadLevelComplete(level - 1);
      }
-
-
     #endregion
 
     #region Reset

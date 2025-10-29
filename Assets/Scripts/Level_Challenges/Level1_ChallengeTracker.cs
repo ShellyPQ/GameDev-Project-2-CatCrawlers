@@ -98,7 +98,6 @@ public class Level1_ChallengeTracker : MonoBehaviour
             SaveManager.SaveChallengeComplete(1, 1);
             PlayerPrefs.Save();
             ChallengeManager.instance?.MarkChallengeComplete(1, 1);
-            Debug.Log("Challenge 1 : All coins collected complete!");
         }
     }
 
@@ -112,7 +111,6 @@ public class Level1_ChallengeTracker : MonoBehaviour
             SaveManager.SaveChallengeComplete(1, 2);
             PlayerPrefs.Save();
             ChallengeManager.instance?.MarkChallengeComplete(1, 2);
-            Debug.Log("Challenge 2: Completed under 2 minutes complete!");
         }
     }
 
@@ -128,7 +126,6 @@ public class Level1_ChallengeTracker : MonoBehaviour
             SaveManager.SaveChallengeComplete(1, 3);
             PlayerPrefs.Save();
             ChallengeManager.instance?.MarkChallengeComplete(1, 3);
-            Debug.Log("Challenge 3: All cats collected complete!");
         }
     }
 

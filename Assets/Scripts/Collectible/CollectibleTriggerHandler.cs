@@ -16,7 +16,6 @@ public class CollectibleTriggerHandler : MonoBehaviour
     private ParticleSystem _particle;
     private ParticleSystem.MainModule _particleMain;
 
-    private bool _isRespawning = false;
     #endregion
 
     #region Awake
@@ -52,16 +51,6 @@ public class CollectibleTriggerHandler : MonoBehaviour
             {
                 StartCoroutine(FadeOutParticle(_fadeOutTime));
             }
-
-            //start respawn check if not already running
-            if (!_isRespawning)
-            {
-                CollectibleYarnBitSO yarnData = _collectableManager.GetCollectibleSO() as CollectibleYarnBitSO;
-                if (yarnData != null && yarnData.respawnTime > 0)
-                {
-                    StartCoroutine(RespawnCheck(yarnData.respawnTime));
-                }
-            }
         }
     }
 
@@ -82,32 +71,6 @@ public class CollectibleTriggerHandler : MonoBehaviour
 
         _particle.Stop();
         _particle.Clear();
-    }
-
-    private IEnumerator RespawnCheck(float delay)
-    {
-        _isRespawning = true;
-
-        while (true)
-        {
-            yield return new WaitForSeconds(delay);
-
-            RangedAttack playerRanged = GameObject.FindGameObjectWithTag("Player")?.GetComponent<RangedAttack>();
-            if (playerRanged != null && playerRanged.GetAmmo() < playerRanged.maxAmmo)
-            {
-                //respawn collectible
-                _meshRenderer.enabled = true;
-                _collider.enabled = true;
-
-                if (_particle != null)
-                {
-                    StartCoroutine(FadeInParticle(_fadeOutTime));
-                }
-
-                _isRespawning = false;
-                yield break; 
-            }
-        }       
     }
 
     private IEnumerator FadeInParticle(float duration)

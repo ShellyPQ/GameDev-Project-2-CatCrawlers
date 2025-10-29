@@ -24,7 +24,7 @@ public class CollectibleYarnBitSO : CollectibleSOData
             if (added)
             {
                 // Update the HUD for ammo
-                HUDManager.instance.UpdateAmmoText(ranged.GetAmmo());
+                return;
             }
         }
     }

@@ -179,7 +179,6 @@ public class EnemyController : MonoBehaviour, IDamageable
         //Reset color and swap sprite
         spriteRenderer.color = originalColor;
         spriteRenderer.sprite = catSprite;
-
         //move behind player visually
         spriteRenderer.sortingOrder -= 1;
 
@@ -193,11 +192,14 @@ public class EnemyController : MonoBehaviour, IDamageable
         //add a new collider for corpse physics
         BoxCollider2D corpseCol = gameObject.AddComponent<BoxCollider2D>();
         corpseCol.isTrigger = false;
-        corpseCol.size = new Vector2(spriteRenderer.bounds.size.x * 0.8f, 0.2f);
+        corpseCol.size = new Vector2(spriteRenderer.sprite.bounds.size.x * 0.8f, 0.2f);
 
         //position collider so its bottom sits at y = 0;
-        float spriteBottom = spriteRenderer.bounds.min.y - transform.position.y;
-        corpseCol.offset = new Vector2(0f, spriteBottom + corpseCol.size.y / 2f);
+        Bounds localBounds = spriteRenderer.sprite.bounds;
+        //float spriteBottom = spriteRenderer.bounds.min.y - transform.position.y;
+        float offsetY = localBounds.min.y + corpseCol.size.y * 0.5f;
+        corpseCol.offset = new Vector2(0f, offsetY);
+
         gameObject.layer = LayerMask.NameToLayer("Corpse");
 
         //trigger challange event

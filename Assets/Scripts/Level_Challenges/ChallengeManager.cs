@@ -25,6 +25,7 @@ public class ChallengeManager : MonoBehaviour
     [TextArea] public string[] level2Challenges;
     [TextArea] public string[] level3Challenges;
 
+
     private int _currentlevel = 1;
     #endregion
 
@@ -79,7 +80,7 @@ public class ChallengeManager : MonoBehaviour
         }
 
         if (selectedChallenges == null) return;
-    
+
         //update challenge text
         for (int i = 0; i < _challengeTexts.Length; i++)
         {
@@ -90,6 +91,7 @@ public class ChallengeManager : MonoBehaviour
         UpdatePawMarker();
         //apply text strikethrough
         ApplyStrikethroughs();
+
     }
 
     public void MarkChallengeComplete(int level, int challengeIndex)
