@@ -34,7 +34,7 @@ public class ChallengeManager : MonoBehaviour
     {
         if (instance != null && instance != this)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
             return;
         }
         instance = this;
@@ -66,7 +66,6 @@ public class ChallengeManager : MonoBehaviour
         switch (level)
         {
             case 1:
-                selectedChallenges = level1Challenges;
                 break;
             case 2:
                 selectedChallenges = level2Challenges;

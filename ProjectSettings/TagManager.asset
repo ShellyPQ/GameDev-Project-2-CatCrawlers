@@ -10,11 +10,12 @@ TagManager:
   - MeleeDummy
   - Environment
   - RangedDummy
+  - Mud
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Mud
+  - 
   - Water
   - UI
   - Ground

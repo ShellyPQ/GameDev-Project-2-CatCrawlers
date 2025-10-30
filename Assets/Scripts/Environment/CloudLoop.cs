@@ -51,8 +51,8 @@ public class CloudLoop : MonoBehaviour
     }
     #endregion
 
-    #region Update
-    private void Update()
+    #region FixedUpdate
+    private void FixedUpdate()
     {
         //update the camera bounds each frame (if camera is moving)
         Vector3 leftEdge = _mainCamera.ViewportToWorldPoint(new Vector3(0, 0.5f, Mathf.Abs(_mainCamera.transform.position.z)));
