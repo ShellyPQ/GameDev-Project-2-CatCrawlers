@@ -11,12 +11,12 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: 00fdff81d1378dd41823b36fb16dfdd1, type: 3}
   m_Parent: {fileID: -876546973899608171, guid: 00fdff81d1378dd41823b36fb16dfdd1, type: 3}
   m_ModifiedSerializedProperties: 2
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
   m_InvalidKeywords:
   - _EMISSION
   - _ENVIRONMENTREFLECTIONS_OFF
   - _GLOSSYREFLECTIONS_OFF
-  - _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
   - _SPECULARHIGHLIGHTS_OFF
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
@@ -31,7 +31,6 @@ Material:
     m_Ints: []
     m_Floats:
     - _QueueControl: 0
-    - _Speed: 1
     m_Colors: []
   m_BuildTextureStacks: []
 --- !u!114 &4766890690482660146
