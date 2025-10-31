@@ -24323,7 +24323,7 @@ Transform:
   m_GameObject: {fileID: 1098923213}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.255162, y: 2.37615, z: -9.677083}
+  m_LocalPosition: {x: 10.255049, y: 2.37615, z: -9.677083}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25714,7 +25714,7 @@ Transform:
   m_GameObject: {fileID: 1155696222}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 488.4, y: 77.3, z: -79.90157}
+  m_LocalPosition: {x: 487.3, y: 82, z: -79.90157}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -35603,8 +35603,9 @@ GameObject:
   - component: {fileID: 1637877430}
   - component: {fileID: 1637877432}
   - component: {fileID: 1637877431}
+  - component: {fileID: 1637877433}
   m_Layer: 0
-  m_Name: Square (4)
+  m_Name: BossDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35620,7 +35621,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -56.42804, y: 83.6, z: 0}
-  m_LocalScale: {x: 0.76348877, y: 5.1605244, z: 1}
+  m_LocalScale: {x: 0.76348877, y: 5.469485, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 816458918}
@@ -35722,6 +35723,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1637877433
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637877429}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ed21b948d9cd6fe44a5c214b6b98f7cd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1640374701
 GameObject:
   m_ObjectHideFlags: 0
