@@ -11,6 +11,7 @@ TagManager:
   - Environment
   - RangedDummy
   - Mud
+  - Frenzy
   layers:
   - Default
   - TransparentFX
