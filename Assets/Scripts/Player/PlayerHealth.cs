@@ -165,8 +165,6 @@ public class PlayerHealth : MonoBehaviour
         Vector2 targetSize = new Vector2(startSize.x, startSize.y - shrinkAmount);
         Vector2 targetOffset = new Vector2(startOffset.x, startOffset.y + (shrinkAmount / 2f));
 
-        Debug.Log($"Final collider size: {targetSize}, offset: {targetOffset}");
-
         while (elapsed < duration)
         {
             elapsed += Time.unscaledDeltaTime; 

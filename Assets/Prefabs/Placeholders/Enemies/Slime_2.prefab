@@ -58,7 +58,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a7ff92845c474fe4c8321cd21a5604c1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3f57c1bbe23319c45a30703bcebe6919, type: 3}
+  m_Sprite: {fileID: -1218594840, guid: 55067017c7333284f99966bba0e0fa17, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -152,8 +152,8 @@ BoxCollider2D:
   m_Offset: {x: -0.009858608, y: 0.18793869}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.41208792, y: 0.47435898}
-    oldSize: {x: 19.2, y: 10.8}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.46, y: 1.58}
     newSize: {x: 19.2, y: 10.8}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -175,19 +175,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyAI: {fileID: 6201400018669481777}
-  _enemyStunEffect: {fileID: 0}
+  _enemyStunEffect: {fileID: 7890138564713697141}
   maxHealth: 1
   spriteRenderer: {fileID: 4844932025895848947}
-  catSprite: {fileID: 21300000, guid: 6d48a33d306732248b149b22e00f6e6b, type: 3}
+  catSprite: {fileID: 21300000, guid: 5400b97f694e0b04a964b9f02916f8c4, type: 3}
   knockBackForce: 5
   knockBackDuration: 0.2
   _isKnockedBack: 0
-  canDamagePlayer: 0
+  _pauseAI: 0
+  canDamagePlayer: 1
   damage: 1
   damageCooldown: 0.5
   _rb: {fileID: 0}
   _isDead: 0
-  _groundCheck: {fileID: 0}
+  _groundCheck: {fileID: 3178306447398909510}
   _checkRadius: 0.1
   _groundLayer:
     serializedVersion: 2
@@ -199,15 +200,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6201400018669481777}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c159c033c6dea44aad62eae56f0e158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pointA: {fileID: 0}
   pointB: {fileID: 0}
-  _hopForceY: 5
-  _hopDelay: 0.5
+  _hopForceY: 10
+  _hopDelay: 1
 --- !u!114 &7890138564713697141
 MonoBehaviour:
   m_ObjectHideFlags: 0

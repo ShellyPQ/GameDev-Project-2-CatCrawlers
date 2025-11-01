@@ -89,7 +89,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a7ff92845c474fe4c8321cd21a5604c1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,7 +110,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6e2a3b39599df4d4f88c3e8ef4e0caf9, type: 3}
+  m_Sprite: {fileID: 192363089, guid: cd21c665366263b44be78f946b59eba8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -180,18 +180,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.11897135, y: 0.15721071}
+  m_Offset: {x: 0.13214874, y: 0.04858017}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5487637, y: 0.47435892}
-    oldSize: {x: 19.2, y: 10.8}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.4, y: 1.56}
     newSize: {x: 19.2, y: 10.8}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.8054104, y: 1.6610692}
+  m_Size: {x: 2.6753998, y: 1.6298599}
   m_EdgeRadius: 0
 --- !u!114 &8915753044596429734
 MonoBehaviour:
@@ -206,14 +206,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyAI: {fileID: 6493674211621813125}
-  _enemyStunEffect: {fileID: 0}
+  _enemyStunEffect: {fileID: 5418450350853512574}
   maxHealth: 1
   spriteRenderer: {fileID: 1017586264668449285}
-  catSprite: {fileID: 21300000, guid: 6d48a33d306732248b149b22e00f6e6b, type: 3}
+  catSprite: {fileID: 21300000, guid: cfcf32d2f8ab6474f93954a3834271f7, type: 3}
   knockBackForce: 5
   knockBackDuration: 0.2
   _isKnockedBack: 0
-  canDamagePlayer: 0
+  _pauseAI: 0
+  canDamagePlayer: 1
   damage: 1
   damageCooldown: 0.5
   _rb: {fileID: 0}

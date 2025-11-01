@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement Properties")]
     [Tooltip("Player movements speed")]
-    [SerializeField] private float _playerSpeed = 5f;
+    public float playerSpeed = 5f;
 
     [Header("Jump Properties")]
     [SerializeField] private float _jumpForce = 19f;
@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour
         //get a reference to the player input script
         _moveInput = InputManager.instance.moveInput.x;
 
-        _rb.velocity = new Vector2(_moveInput * _playerSpeed, _rb.velocity.y);
+        _rb.velocity = new Vector2(_moveInput * playerSpeed, _rb.velocity.y);
 
         DirCheck();
     }

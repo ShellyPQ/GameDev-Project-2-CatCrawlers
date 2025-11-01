@@ -34,7 +34,6 @@ public class DummyTrigger : MonoBehaviour
         if ((isRangeTrigger && collision.TryGetComponent(out RangedAttack rangeScript)))
         {
             rangeScript.enabled = true;
-            _ammoHUD.SetActive(true);
         }
 
         //Disable this trigger so it only fires once

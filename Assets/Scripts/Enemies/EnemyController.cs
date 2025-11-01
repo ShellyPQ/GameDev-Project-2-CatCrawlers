@@ -21,6 +21,8 @@ public class EnemyController : MonoBehaviour, IDamageable
     public SpriteRenderer spriteRenderer;
     public Sprite catSprite;
     private Color originalColor;
+    private MaterialPropertyBlock _materialPropertyBlock;
+    private static readonly int _dissolveProperty = Shader.PropertyToID("_DissolveAmount");
 
     [Header("Knockback")]
     public float knockBackForce = 5f;
@@ -34,7 +36,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     public float damageCooldown = 0.5f;
     private bool _canDamage = true;
 
-    [HideInInspector] public Rigidbody2D _rb;    
+    [HideInInspector] public Rigidbody2D _rb;
     public bool _isDead = false;
 
     [Header("Ground Check Properties")]
@@ -49,18 +51,23 @@ public class EnemyController : MonoBehaviour, IDamageable
     {
         _rb = GetComponent<Rigidbody2D>();
         //stop enemy from rotating when hit
-        _rb.freezeRotation = true; 
+        _rb.freezeRotation = true;
     }
     #endregion
 
     #region Start
     private void Start()
-    {        
+    {
         //ensure gravity is on
         _rb.gravityScale = 2f;
 
         currentHealth = maxHealth;
-        originalColor = spriteRenderer.color;        
+        originalColor = spriteRenderer.color;
+
+        _materialPropertyBlock = new MaterialPropertyBlock();
+        spriteRenderer.GetPropertyBlock(_materialPropertyBlock);
+        _materialPropertyBlock.SetFloat(_dissolveProperty, 0f);
+        spriteRenderer.SetPropertyBlock(_materialPropertyBlock);
     }
     #endregion
 
@@ -123,6 +130,8 @@ public class EnemyController : MonoBehaviour, IDamageable
         //wait until grounded to resume bouncing
         yield return new WaitUntil(() => IsGrounded());
 
+        Animator ani = GetComponent<Animator>();
+
         _isKnockedBack = false;
     }
 
@@ -133,7 +142,7 @@ public class EnemyController : MonoBehaviour, IDamageable
         if (!_isDead)
         {
             spriteRenderer.color = originalColor;
-        }        
+        }
     }
 
     public void Stun(float duration)
@@ -166,7 +175,12 @@ public class EnemyController : MonoBehaviour, IDamageable
     private void Die()
     {
         _isDead = true;
+
+        Animator ani = GetComponent<Animator>();
+        if(ani != null) ani.enabled = false;
+
         StopAllCoroutines();
+        StartCoroutine(DissolveEnemy());
 
         //stop bounce AI logic but keep gravity
         _isKnockedBack = false;
@@ -174,11 +188,10 @@ public class EnemyController : MonoBehaviour, IDamageable
         //Keep gravity, but kill sideways movement
         _rb.velocity = Vector2.zero;
         _rb.isKinematic = false;
-        _rb.gravityScale = 2f;       
+        _rb.gravityScale = 2f;
 
         //Reset color and swap sprite
         spriteRenderer.color = originalColor;
-        spriteRenderer.sprite = catSprite;
         //move behind player visually
         spriteRenderer.sortingOrder -= 1;
 
@@ -214,7 +227,7 @@ public class EnemyController : MonoBehaviour, IDamageable
         }
 
         if (other.gameObject.tag == "Player")
-        {   
+        {
             PlayerHealth player = other.gameObject.GetComponent<PlayerHealth>();
             if (player != null)
             {
@@ -234,6 +247,44 @@ public class EnemyController : MonoBehaviour, IDamageable
         _canDamage = false;
         yield return new WaitForSeconds(damageCooldown);
         _canDamage = true;
+    }
+
+    private IEnumerator DissolveEnemy()
+    {
+        float duration = 0.5f;
+        float t = 0f;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime / duration;
+
+            float dissolveValue = Mathf.Lerp(0f, 1f, t);
+            spriteRenderer.GetPropertyBlock(_materialPropertyBlock);
+            _materialPropertyBlock.SetFloat(_dissolveProperty, dissolveValue);
+            spriteRenderer.SetPropertyBlock(_materialPropertyBlock);
+
+            yield return null;
+        }
+
+        //swap sprite when fully dissolved
+        spriteRenderer.sprite = catSprite;
+
+        //reset timer
+        t = 0f;
+
+        //show the new sprite (dissolving again)
+        while (t < 1f)
+        {
+            t += Time.deltaTime / duration;
+
+            float dissolveValue = Mathf.Lerp(1f, 0f, t);
+            spriteRenderer.GetPropertyBlock(_materialPropertyBlock);
+            _materialPropertyBlock.SetFloat(_dissolveProperty, dissolveValue);
+            spriteRenderer.SetPropertyBlock(_materialPropertyBlock);
+
+            yield return null;
+        }
+
     }
     #endregion
 
