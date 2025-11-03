@@ -85,6 +85,5 @@ public class CameraFollow : MonoBehaviour
             return 180f;
         }
     }
-
     #endregion
 }

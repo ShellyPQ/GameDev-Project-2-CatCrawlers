@@ -12,6 +12,8 @@ TagManager:
   - RangedDummy
   - Mud
   - Frenzy
+  - ButtonA
+  - ButtonB
   layers:
   - Default
   - TransparentFX

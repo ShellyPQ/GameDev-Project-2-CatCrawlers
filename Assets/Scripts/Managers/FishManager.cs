@@ -25,7 +25,8 @@ public class FishManager : MonoBehaviour
     {
         currentFishCount += value;
 
-        //update UI
+        //update UI to display fish collectibles collected
+        HUDManager.instance.UpdateFishCollectibleText(value);        
     }
     #endregion
 }

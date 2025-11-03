@@ -17,6 +17,8 @@ public class CollectibleFishSO : CollectibleSOData
     {
         FishManager.instance.IncreaseFishCount(fishValue);
 
+        //trigger UI to appear for the first time
+
         //notify challenge track 
 
         //notify UI
