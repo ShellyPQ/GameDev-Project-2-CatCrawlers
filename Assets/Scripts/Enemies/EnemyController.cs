@@ -100,6 +100,13 @@ public class EnemyController : MonoBehaviour, IDamageable
             return;
         }
 
+        if (CatnipDamageSystem.frenzyActive)
+        {
+            currentHealth = 0;
+            Die();
+            return;
+        }
+
         currentHealth -= dmg;
 
         SFXManager.instance.playSFX("enemyHurt");
@@ -177,7 +184,7 @@ public class EnemyController : MonoBehaviour, IDamageable
         _isDead = true;
 
         Animator ani = GetComponent<Animator>();
-        if(ani != null) ani.enabled = false;
+        if (ani != null) ani.enabled = false;
 
         StopAllCoroutines();
         StartCoroutine(DissolveEnemy());
