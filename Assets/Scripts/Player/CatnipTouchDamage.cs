@@ -12,6 +12,9 @@ public class CatnipTouchDamage : MonoBehaviour
 
         if (enemy != null && !enemy._isDead)
         {
+            //play sfx
+            SFXManager.instance.playSFX("dummyExplosion");
+
             //pass a direction so enemy still reacts to damage
             Vector2 hitDir = (enemy.transform.position - transform.position).normalized;
             enemy.TakeDamage(enemy.maxHealth, hitDir);

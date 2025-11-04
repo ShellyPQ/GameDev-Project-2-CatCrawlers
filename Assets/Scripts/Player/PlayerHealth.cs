@@ -18,6 +18,7 @@ public class PlayerHealth : MonoBehaviour
 
     private bool _isDead = false;
     private bool _isKnockedBack = false;
+    private bool _invulnerable = false;
     #endregion
 
     #region Awake
@@ -49,7 +50,7 @@ public class PlayerHealth : MonoBehaviour
     #region Method/Functions
     public void TakeDamage(int dmg, Vector2 knockbackDir, float knockbackForce)
     {
-        if (_isDead)
+        if (_isDead || _invulnerable)
         {
             return;
         }
@@ -77,6 +78,13 @@ public class PlayerHealth : MonoBehaviour
             //_ani.SetBool("isKO", true);
             GameOver();
         }
+    }
+
+    public bool SetInvulnerable(bool value)
+    {
+        _invulnerable = value;
+        
+        return _invulnerable;
     }
 
     //visual feedback for when the player is hit

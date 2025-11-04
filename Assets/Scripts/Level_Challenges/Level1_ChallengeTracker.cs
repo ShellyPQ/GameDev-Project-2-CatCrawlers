@@ -13,7 +13,7 @@ public class Level1_ChallengeTracker : MonoBehaviour
     [Tooltip("Put all enemies being tracked here")]
     [SerializeField] private EnemyController[] _slimes;
     [Tooltip("Reference to the collider holding the level 1 end trigger.")]
-    [SerializeField] private Level1EndTrigger _level1EndTrigger;
+    [SerializeField] private LevelEndTrigger _level1EndTrigger;
 
     private int totalTokens;
     private int totalSlimes;
@@ -49,7 +49,7 @@ public class Level1_ChallengeTracker : MonoBehaviour
         //subscribe to global events
         CurrencyManager.OnTokenCollected += OnTokenCollected;
         EnemyController.OnEnemyDied += OnEnemyDied;
-        Level1EndTrigger.OnLevelCompleted += OnLevelCompleted;
+        LevelEndTrigger.OnLevelCompleted += OnLevelCompleted;
     }
     #endregion
 
@@ -59,7 +59,7 @@ public class Level1_ChallengeTracker : MonoBehaviour
         //unsubcribe to prevent memory leaks
         CurrencyManager.OnTokenCollected -= OnTokenCollected;
         EnemyController.OnEnemyDied -= OnEnemyDied;
-        Level1EndTrigger.OnLevelCompleted -= OnLevelCompleted;
+        LevelEndTrigger.OnLevelCompleted -= OnLevelCompleted;
     }
     #endregion
 
