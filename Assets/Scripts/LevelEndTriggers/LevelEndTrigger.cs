@@ -44,6 +44,7 @@ public class LevelEndTrigger : MonoBehaviour
         //trigger challenge event
         OnLevelCompleted?.Invoke();
 
+        Debug.Log("Opening level panel. Panel reference: " + levelCompletePanel);
         // Pause the game and show panel 
         Time.timeScale = 0f;
         if (levelCompletePanel != null)
