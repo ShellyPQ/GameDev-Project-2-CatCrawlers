@@ -21,7 +21,7 @@ public class ScenesManager : MonoBehaviour
         MainMenu,
         Intro_Cutscene,
         Level_Select_Scene,
-        Level_01, 
+        Level_01,
         Level_02,
         Level_03
     }

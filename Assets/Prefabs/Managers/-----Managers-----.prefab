@@ -59,8 +59,14 @@ MonoBehaviour:
   - Collect all coins
   - Speedy cat! 2 min clear
   - Collect all cats
-  level2Challenges: []
-  level3Challenges: []
+  level2Challenges:
+  - Collect all coins
+  - Collect all fishies!
+  - Complete level with all 9 lives!
+  level3Challenges:
+  - Collect all coins
+  - Collect all fishies!
+  - Defeat boss with all 9 lives remaining
 --- !u!114 &8529963696502499646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,7 +199,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1460023221757588543}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
@@ -329,6 +335,9 @@ MonoBehaviour:
   sfxSettingsButton: {fileID: 8300000, guid: 5c77a0d3c73fc48418e5cb7c5315ee3f, type: 3}
   dummyExplosion: {fileID: 8300000, guid: 0f3f4777035bc4a4f8f67ee8072742e0, type: 3}
   doorUnlock: {fileID: 8300000, guid: ba688b46d3aa9ef43a01c3e2712636dc, type: 3}
+  waterSplash: {fileID: 0}
+  catFrenzyPurr: {fileID: 0}
+  catFrenzyMeow: {fileID: 0}
   soundObject: {fileID: 5331809416122137942, guid: f06ce2dc0810a034b8e977b58ef29fb4, type: 3}
 --- !u!1 &2483202725016789410
 GameObject:
@@ -656,7 +665,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2223420107641371730
 Transform:
   m_ObjectHideFlags: 0
@@ -854,6 +863,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentPawTokensText: {fileID: 0}
   _remainingLives: {fileID: 0}
+  _fishCollectibleText: {fileID: 0}
 --- !u!1 &9033254624704169233
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,39 +903,7 @@ Transform:
   - {fileID: 7836406696799355927}
   - {fileID: 921883130215789407}
   - {fileID: 2595239537230506011}
-  - {fileID: 2873235210952847322}
   - {fileID: 3724293004191408785}
   - {fileID: 2223420107641371730}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &9142129073264467588
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2873235210952847322}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2873235210952847322
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9142129073264467588}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7348370635984794175}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -2440,6 +2440,7 @@ GameObject:
   - component: {fileID: 725887930}
   - component: {fileID: 725887929}
   - component: {fileID: 725887928}
+  - component: {fileID: 725887931}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2521,6 +2522,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &725887931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725887927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &737482227
 GameObject:
   m_ObjectHideFlags: 0
@@ -3125,13 +3170,13 @@ MonoBehaviour:
   - Speedy cat! 2-min clear
   - Collect all cats
   level2Challenges:
-  - Challenge 1 here
-  - Challenge 2 here
-  - Challenge 3 here
+  - Collect all coins
+  - Collect all fishies!
+  - Complete level with all 9 lives!
   level3Challenges:
-  - Challenge 1 here
-  - Challenge 2 here
-  - Challenge 3 here
+  - Collect all coins
+  - Collect all fishies!
+  - Defeat boss with all 9 lives remaining
 --- !u!1 &942753240
 GameObject:
   m_ObjectHideFlags: 0
@@ -4418,8 +4463,8 @@ GameObject:
   - component: {fileID: 1208634093}
   - component: {fileID: 1208634092}
   - component: {fileID: 1208634091}
-  - component: {fileID: 1208634095}
   - component: {fileID: 1208634094}
+  - component: {fileID: 1208634095}
   m_Layer: 5
   m_Name: SnowyTundra_Button
   m_TagString: Untagged
@@ -4686,6 +4731,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SelectableButtons:
   - {fileID: 862835983}
+  - {fileID: 1093434238}
+  - {fileID: 1208634091}
   - {fileID: 1083376691}
   - {fileID: 1105331195}
   - {fileID: 9530101}
@@ -4755,8 +4802,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Challenge Text Here
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e7cfa6aba8ddcdb42af195130b756518, type: 2}
-  m_sharedMaterial: {fileID: -1953617718777704070, guid: e7cfa6aba8ddcdb42af195130b756518, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 68c67baafe1933048889f04a24f755db, type: 2}
+  m_sharedMaterial: {fileID: 5894905912124595887, guid: 68c67baafe1933048889f04a24f755db, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4840,6 +4887,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1351939482}
   - component: {fileID: 1351939481}
+  - component: {fileID: 1351939483}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -4924,6 +4972,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1351939483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351939480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &1368434126
 GameObject:
   m_ObjectHideFlags: 0
@@ -5211,8 +5282,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Challenge Text Here
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e7cfa6aba8ddcdb42af195130b756518, type: 2}
-  m_sharedMaterial: {fileID: -1953617718777704070, guid: e7cfa6aba8ddcdb42af195130b756518, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 68c67baafe1933048889f04a24f755db, type: 2}
+  m_sharedMaterial: {fileID: 5894905912124595887, guid: 68c67baafe1933048889f04a24f755db, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6367,8 +6438,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Challenge Text Here
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e7cfa6aba8ddcdb42af195130b756518, type: 2}
-  m_sharedMaterial: {fileID: -1953617718777704070, guid: e7cfa6aba8ddcdb42af195130b756518, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 68c67baafe1933048889f04a24f755db, type: 2}
+  m_sharedMaterial: {fileID: 5894905912124595887, guid: 68c67baafe1933048889f04a24f755db, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

@@ -33,11 +33,12 @@ public class TimeManager : MonoBehaviour
     }
     #endregion
 
-
+    #region Start
     private void Start()
     {
         StartTimer();    
     }
+    #endregion
 
     #region Update
     private void Update()
