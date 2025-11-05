@@ -27,6 +27,7 @@ public class SFXManager : MonoBehaviour
     public AudioClip waterSplash;
     public AudioClip catFrenzyPurr;
     public AudioClip catFrenzyMeow;
+    public AudioClip bossHurt;
 
     //sound object
     public GameObject soundObject;
@@ -81,6 +82,8 @@ public class SFXManager : MonoBehaviour
                 return (waterSplash);
             case "catFrenzyPurr":
                 return (catFrenzyPurr);
+            case "bossHurt":
+                return (bossHurt);
             default:
                 //if no clip is found based on the string name given, return null
                 return null;

@@ -6,6 +6,8 @@ public class EnemyController : MonoBehaviour, IDamageable
 {
     //subcribe to challenge event
     public static event System.Action OnEnemyDied;
+    //subscribe to challenge event
+    public static event System.Action OnLevelCompleted;
 
     #region Variables 
     [Header("Enemy Reference")]
@@ -13,9 +15,15 @@ public class EnemyController : MonoBehaviour, IDamageable
     [SerializeField] GameObject _enemyAI;
     [SerializeField] EnemyStunEffect _enemyStunEffect;
 
+    [Header("References")]
+    [SerializeField] private GameObject levelCompletePanel;
+
     [Header("Enemy Stats")]
     public int maxHealth = 3;
     private int currentHealth;
+
+    [Header("Boss Properties")]
+    public bool isBoss = false;
 
     [Header("Visual Properties")]
     public SpriteRenderer spriteRenderer;
@@ -109,20 +117,33 @@ public class EnemyController : MonoBehaviour, IDamageable
 
         currentHealth -= dmg;
 
-        SFXManager.instance.playSFX("enemyHurt");
+        if (isBoss)
+            SFXManager.instance.playSFX("bossHurt");
+        else
+            SFXManager.instance.playSFX("enemyHurt");
 
-        StartCoroutine(FlashRed());
-        //start knockback
-        StartCoroutine(EnemyKnockback(hitDirection));
+        if (!_isDead)
+        {
+            StartCoroutine(FlashRed());
+            //start knockback
+            StartCoroutine(EnemyKnockback(hitDirection));
+        }       
 
         if (currentHealth <= 0)
         {
+            _isDead = true;
+            spriteRenderer.color = originalColor;
+            StopAllCoroutines();
             Die();
+            return;
         }
     }
 
     private IEnumerator EnemyKnockback(Vector2 dir)
     {
+        //boss doesn't get knocked back
+        if (isBoss) yield break;
+
         _isKnockedBack = true;
 
         //reset vertical velocity to avoid stacking with jump
@@ -144,6 +165,8 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     private IEnumerator FlashRed()
     {
+        if (_isDead) yield break;
+
         spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(0.1f);
         if (!_isDead)
@@ -183,46 +206,69 @@ public class EnemyController : MonoBehaviour, IDamageable
     {
         _isDead = true;
 
+        if (isBoss)
+        {
+            _rb.velocity = Vector2.zero;
+            _rb.isKinematic = true;
+            _rb.gravityScale = 0f;
+
+            // disable hitbox
+            Collider2D enemyCollider = GetComponent<Collider2D>();
+            if (enemyCollider != null) enemyCollider.enabled = false;
+
+            // disable AI
+            if (_enemyAI != null)
+            {
+                var aiScript = _enemyAI.GetComponent<MonoBehaviour>();
+                if (aiScript != null) aiScript.enabled = false;
+            }
+
+            // stop animator so dissolve works
+            Animator _ani = GetComponent<Animator>();
+            if (_ani != null) _ani.enabled = false;
+
+            // return music to normal
+            GolemBossAI bossAI = GetComponent<GolemBossAI>();
+            if (bossAI != null && MusicManager.instance != null)
+                MusicManager.instance.PlayMusic(bossAI.normalMusic, 0.3f);
+
+            SFXManager.instance.playSFX("bossHurt");
+
+            StartCoroutine(DissolveAndCreateBossCorpse());
+
+            return;
+        }
+
         Animator ani = GetComponent<Animator>();
         if (ani != null) ani.enabled = false;
 
         StopAllCoroutines();
         StartCoroutine(DissolveEnemy());
 
-        //stop bounce AI logic but keep gravity
         _isKnockedBack = false;
-
-        //Keep gravity, but kill sideways movement
         _rb.velocity = Vector2.zero;
         _rb.isKinematic = false;
         _rb.gravityScale = 2f;
 
-        //Reset color and swap sprite
         spriteRenderer.color = originalColor;
-        //move behind player visually
         spriteRenderer.sortingOrder -= 1;
 
-        //disable the enemys current collider 
         Collider2D enemyCol = GetComponent<Collider2D>();
         if (enemyCol != null)
         {
             enemyCol.enabled = false;
         }
 
-        //add a new collider for corpse physics
         BoxCollider2D corpseCol = gameObject.AddComponent<BoxCollider2D>();
         corpseCol.isTrigger = false;
         corpseCol.size = new Vector2(spriteRenderer.sprite.bounds.size.x * 0.8f, 0.2f);
 
-        //position collider so its bottom sits at y = 0;
         Bounds localBounds = spriteRenderer.sprite.bounds;
-        //float spriteBottom = spriteRenderer.bounds.min.y - transform.position.y;
         float offsetY = localBounds.min.y + corpseCol.size.y * 0.5f;
         corpseCol.offset = new Vector2(0f, offsetY);
 
         gameObject.layer = LayerMask.NameToLayer("Corpse");
 
-        //trigger challange event
         OnEnemyDied?.Invoke();
     }
 
@@ -293,6 +339,49 @@ public class EnemyController : MonoBehaviour, IDamageable
         }
 
     }
+
+    private IEnumerator DissolveAndCreateBossCorpse()
+    {
+        //run dissolve first
+        yield return StartCoroutine(DissolveEnemy());
+
+        //then add corpse collider
+        BoxCollider2D bossCorpseCol = gameObject.AddComponent<BoxCollider2D>();
+        bossCorpseCol.isTrigger = false;
+        bossCorpseCol.size = new Vector2(spriteRenderer.bounds.size.x * 0.8f, 0.2f);
+
+        Bounds rBounds = spriteRenderer.bounds;
+        float offsetbossY = (bossCorpseCol.size.y * 0.5f) - rBounds.extents.y;
+        bossCorpseCol.offset = new Vector2(0f, offsetbossY);
+
+        gameObject.layer = LayerMask.NameToLayer("Corpse");
+
+        OnEnemyDied?.Invoke();
+
+        CompleteLevel();        
+    }
+
+    private void CompleteLevel()
+    {
+        //save level completion
+        SaveManager.SaveLevelComplete(1);
+        PlayerPrefs.Save();
+        //_levelCompleted = true;
+
+        //trigger challenge event
+        OnLevelCompleted?.Invoke();
+
+        // Pause the game and show panel 
+        Time.timeScale = 0f;
+        if (levelCompletePanel != null)
+        {
+            levelCompletePanel.SetActive(true);
+        }
+
+        // Switch to UI action map
+        InputManager.instance.EnableUI();
+    }
+
     #endregion
 
     #endregion

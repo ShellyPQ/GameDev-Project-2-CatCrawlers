@@ -11,6 +11,8 @@ public class PlayerHealth : MonoBehaviour
     [Header("Properties")]
     public int maxLives = 9;
     private int _currentLives;
+    public Transform bossRespawnPoint;
+    public bool inBossFight = false;
 
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
@@ -44,6 +46,12 @@ public class PlayerHealth : MonoBehaviour
     {
         _currentLives = maxLives;
         HUDManager.instance.UpdateRemainingLivesText(_currentLives);
+
+        if (RespawnManager.respawnAtBoss)
+        {
+            transform.position = bossRespawnPoint.position;
+            RespawnManager.respawnAtBoss = false;
+        }
     }
     #endregion
 
@@ -130,6 +138,13 @@ public class PlayerHealth : MonoBehaviour
         _isDead = true;
 
         _rb.velocity = Vector3.zero;
+
+        if (inBossFight)   // or whatever bool you track
+        {
+            RespawnManager.respawnAtBoss = true;
+            ScenesManager.Instance.RestartLevel();
+            return;
+        }
 
         //disable player attack scripts so they cant hit enemies (just to make sure)
         var rangeAttack = GetComponent<RangedAttack>();

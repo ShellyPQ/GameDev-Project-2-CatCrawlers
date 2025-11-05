@@ -36,7 +36,8 @@ public class ScenesManager : MonoBehaviour
     //Load in the scene that will start a new game
     public void LoadNewGame()
     {
-        SceneManager.LoadScene(Scene.Intro_Cutscene.ToString());
+        //SceneManager.LoadScene(Scene.Intro_Cutscene.ToString());
+        SceneManager.LoadScene(Scene.Level_Select_Scene.ToString());
     }
 
     //Load the next scene (when a level is complete)

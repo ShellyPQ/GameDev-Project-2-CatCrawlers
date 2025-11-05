@@ -11,11 +11,20 @@ public class BossIcicleProjectile : MonoBehaviour
     public int damage = 1;
     public Vector2 direction = Vector2.left;
 
+    private Vector3 _baseScale;
     #endregion
 
     #region Start
     private void Start()
     {
+        //cache the prefab’s natural scale and normalize direction
+        _baseScale = transform.localScale;
+        direction = direction.sqrMagnitude > 0f ? direction.normalized : Vector2.left;
+
+        //flip only on X to face travel dir without ruining size
+        float x = Mathf.Abs(_baseScale.x) * (direction.x < 0f ? -1f : 1f);
+        transform.localScale = new Vector3(x, _baseScale.y, _baseScale.z);
+
         Destroy(gameObject, lifetime);
     }
     #endregion
@@ -23,7 +32,7 @@ public class BossIcicleProjectile : MonoBehaviour
     #region Update
     private void Update()
     {
-        transform.Translate(direction * speed * Time.deltaTime);
+        transform.Translate((Vector3)direction * speed * Time.deltaTime, Space.World);
     }
     #endregion
 
@@ -32,9 +41,9 @@ public class BossIcicleProjectile : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Vector2 knockDir  = (collision.transform.position - transform.position).normalized;
+            Vector2 knockDir = (collision.transform.position - transform.position).normalized;
             collision.GetComponent<PlayerHealth>()?.TakeDamage(damage, knockDir, 5f);
-            OnHit();
+            Destroy(gameObject);
         }
     }
     #endregion

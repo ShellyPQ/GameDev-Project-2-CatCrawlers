@@ -13,10 +13,21 @@ public class GolemBossAI : MonoBehaviour
     public Transform firePoint;
     public GameObject icicleProjectile;
 
+    [Header("Slam Spikes")]
+    public Animator spikeSet1;
+    public Animator spikeSet2;
+    private int slamIndex = 0;
+
+    [Header("Boss Music")]
+    public AudioClip bossMusic;
+    public AudioClip normalMusic;
+    public float fadeTime = 0.3f;
+
     private Animator _ani;
     private EnemyController _enemy;
-
     private bool isAttacking = false;
+
+    private readonly int isCat = Animator.StringToHash("isCat");
 
     #endregion
 
@@ -29,7 +40,7 @@ public class GolemBossAI : MonoBehaviour
         //boss hp override
         _enemy.maxHealth = 3;
         //_enemy.canDamagePlayer = false;
-        //_enemy.isBoss = true;
+        _enemy.isBoss = true;
     }
     #endregion
 
@@ -38,7 +49,13 @@ public class GolemBossAI : MonoBehaviour
     {
         if (bossActive) return;
         bossActive = true;
-        StartCoroutine(BossLoop());
+
+        if (MusicManager.instance != null && bossMusic != null)
+            MusicManager.instance.PlayMusic(bossMusic, fadeTime);
+        else
+            Debug.Log("Boss music or music manager is mising");
+
+            StartCoroutine(BossLoop());
     }
 
     private IEnumerator BossLoop()
@@ -74,20 +91,29 @@ public class GolemBossAI : MonoBehaviour
     //animation event
     public void DoSlamEffect()
     {
-        //BossSpikeSpawner.instance.SpawnSpikes();
-        //screenshake effect
+        slamIndex++;
+
+        if (slamIndex % 2 == 1)
+            spikeSet1.SetTrigger("iceUp");
+        else
+            spikeSet2.SetTrigger("iceUp");
     }
 
     //animation event
     public void FireIcicle()
     {
+        //decide horizontal direction toward the player
+        Vector2 toPlayer = PlayerHealth.instance.transform.position - firePoint.position;
+        float dirX = Mathf.Sign(toPlayer.x);
+
+        //instantiate with neutral rotation
         GameObject proj = Instantiate(icicleProjectile, firePoint.position, Quaternion.identity);
 
-        BossIcicleProjectile icicle = proj.GetComponent<BossIcicleProjectile>();
+        proj.transform.localScale = icicleProjectile.transform.localScale;
 
-        //straight shot toward player but only horizontal
-        Vector2 dir = PlayerHealth.instance.transform.position - firePoint.position; ;
-        icicle.direction = new Vector2(Mathf.Sin(dir.x), 0);
+        var icicle = proj.GetComponent<BossIcicleProjectile>();
+        if (icicle != null)
+            icicle.direction = new Vector2(dirX, 0f);
     }
 
     //animation event 
