@@ -21,7 +21,9 @@ public class ScenesManager : MonoBehaviour
         MainMenu,
         Intro_Cutscene,
         Level_Select_Scene,
-        Level_01
+        Level_01,
+        Level_02,
+        Level_03
     }
     #endregion
 
@@ -66,13 +68,13 @@ public class ScenesManager : MonoBehaviour
     //Load level 2
     public void LoadLevel_02()
     {
-        Debug.Log("Loading Level_02");
+        SceneManager.LoadScene(Scene.Level_02.ToString());
     }
 
     //Load level 3
     public void LoadLevel_03()
     {
-        Debug.Log("Loading Level_03");
+        SceneManager.LoadScene(Scene.Level_03.ToString());
     }
 
     //restart level

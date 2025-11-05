@@ -39,6 +39,11 @@ public class PauseManager : MonoBehaviour
     private void Update()
     {
         CheckPauseState();      
+
+        if ( isPaused)
+        {
+
+        }
     }
     #endregion
 

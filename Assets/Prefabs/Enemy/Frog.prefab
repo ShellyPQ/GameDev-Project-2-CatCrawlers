@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2690272323169936302}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,7 +237,7 @@ MonoBehaviour:
   knockBackDuration: 0.2
   _isKnockedBack: 0
   _pauseAI: 0
-  canDamagePlayer: 0
+  canDamagePlayer: 1
   damage: 1
   damageCooldown: 0.5
   _rb: {fileID: 0}
@@ -281,10 +281,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   mouthPoint: {fileID: 7690169508123444834}
-  maxTongueLength: 2.2
+  maxTongueLength: 21
   extendSpeed: 8
   retractSpeed: 160
-  tongueTipRadius: 0.2
+  tongueTipRadius: 0.15
   attackCooldown: 2
 --- !u!1 &8370938053580268969
 GameObject:
@@ -295,7 +295,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7690169508123444834}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MouthPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

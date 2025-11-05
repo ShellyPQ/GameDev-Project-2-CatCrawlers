@@ -66,6 +66,7 @@ public class ChallengeManager : MonoBehaviour
         switch (level)
         {
             case 1:
+                selectedChallenges = level1Challenges;
                 break;
             case 2:
                 selectedChallenges = level2Challenges;

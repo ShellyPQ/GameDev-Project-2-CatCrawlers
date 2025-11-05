@@ -16,7 +16,6 @@ public class CatnipFrenzyBuff : MonoBehaviour
     [Header("VisualFX")]
     [Tooltip("Panel that changes colours when buff is active.")]
     [SerializeField] private ScriptableRendererFeature _frenzyShaderFeature;
-    [SerializeField] private Material _frenzyShader;
 
     [Header("Frenzy Collider Size")]
     [SerializeField] private Vector2 frenzyColliderSize = new Vector2(2f, 5f);

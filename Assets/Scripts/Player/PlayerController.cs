@@ -238,25 +238,6 @@ public class PlayerController : MonoBehaviour
             _isJumping = false;
         }
 
-        ////button was pressed and the player is grounded
-        //if (InputManager.instance.playerControls.Movement.Jump.WasPressedThisFrame() && GroundCheck())
-        //{
-        //    _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
-        //    _isJumping = true;
-
-        //    //trigger jump_start animation
-        //    _ani.SetTrigger("jumpPressed");
-
-        //    // Play jump SFX
-        //    SFXManager.instance.playSFX("jump");
-        //}
-
-        ////button was released this frame
-        //if (InputManager.instance.playerControls.Movement.Jump.WasReleasedThisFrame())
-        //{
-        //    _isJumping = false;
-        //}
-
         DrawGroundCheck();
     }
 
