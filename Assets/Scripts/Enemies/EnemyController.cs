@@ -1,0 +1,388 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class EnemyController : MonoBehaviour, IDamageable
+{
+    //subcribe to challenge event
+    public static event System.Action OnEnemyDied;
+    //subscribe to challenge event
+    public static event System.Action OnLevelCompleted;
+
+    #region Variables 
+    [Header("Enemy Reference")]
+    [Tooltip("Assign the enemies AI")]
+    [SerializeField] GameObject _enemyAI;
+    [SerializeField] EnemyStunEffect _enemyStunEffect;
+
+    [Header("References")]
+    [SerializeField] private GameObject levelCompletePanel;
+
+    [Header("Enemy Stats")]
+    public int maxHealth = 3;
+    private int currentHealth;
+
+    [Header("Boss Properties")]
+    public bool isBoss = false;
+
+    [Header("Visual Properties")]
+    public SpriteRenderer spriteRenderer;
+    public Sprite catSprite;
+    private Color originalColor;
+    private MaterialPropertyBlock _materialPropertyBlock;
+    private static readonly int _dissolveProperty = Shader.PropertyToID("_DissolveAmount");
+
+    [Header("Knockback")]
+    public float knockBackForce = 5f;
+    public float knockBackDuration = 0.2f;
+    [HideInInspector] public bool _isKnockedBack = false;
+    [HideInInspector] public bool _pauseAI = false;
+
+    [Header("Damage Properties")]
+    public bool canDamagePlayer = false;
+    public int damage = 1;
+    public float damageCooldown = 0.5f;
+    private bool _canDamage = true;
+
+    [HideInInspector] public Rigidbody2D _rb;
+    public bool _isDead = false;
+
+    [Header("Ground Check Properties")]
+    [SerializeField] private Transform _groundCheck;
+    [SerializeField] private float _checkRadius = 0.1f;
+    [SerializeField] private LayerMask _groundLayer;
+
+    #endregion
+
+    #region Awake
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+        //stop enemy from rotating when hit
+        _rb.freezeRotation = true;
+    }
+    #endregion
+
+    #region Start
+    private void Start()
+    {
+        //ensure gravity is on
+        _rb.gravityScale = 2f;
+
+        currentHealth = maxHealth;
+        originalColor = spriteRenderer.color;
+
+        _materialPropertyBlock = new MaterialPropertyBlock();
+        spriteRenderer.GetPropertyBlock(_materialPropertyBlock);
+        _materialPropertyBlock.SetFloat(_dissolveProperty, 0f);
+        spriteRenderer.SetPropertyBlock(_materialPropertyBlock);
+    }
+    #endregion
+
+    #region Method/Functions    
+
+    #region Enemy Ground Check
+    public bool IsGrounded()
+    {
+        bool onGround = Physics2D.OverlapCircle(_groundCheck.position, _checkRadius, _groundLayer);
+        bool fallingOrStill = _rb.velocity.y <= 0.01f;
+
+        return onGround && fallingOrStill;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (_groundCheck != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(_groundCheck.position, _checkRadius);
+        }
+    }
+    #endregion
+
+    #region Damage & Death Logic
+    public void TakeDamage(int dmg, Vector2 hitDirection)
+    {
+        if (_isDead)
+        {
+            return;
+        }
+
+        if (CatnipDamageSystem.frenzyActive)
+        {
+            currentHealth = 0;
+            Die();
+            return;
+        }
+
+        currentHealth -= dmg;
+
+        if (isBoss)
+            SFXManager.instance.playSFX("bossHurt");
+        else
+            SFXManager.instance.playSFX("enemyHurt");
+
+        if (!_isDead)
+        {
+            StartCoroutine(FlashRed());
+            //start knockback
+            StartCoroutine(EnemyKnockback(hitDirection));
+        }       
+
+        if (currentHealth <= 0)
+        {
+            _isDead = true;
+            spriteRenderer.color = originalColor;
+            StopAllCoroutines();
+            Die();
+            return;
+        }
+    }
+
+    private IEnumerator EnemyKnockback(Vector2 dir)
+    {
+        //boss doesn't get knocked back
+        if (isBoss) yield break;
+
+        _isKnockedBack = true;
+
+        //reset vertical velocity to avoid stacking with jump
+        _rb.velocity = Vector2.zero;
+
+        //apply knockback force
+        _rb.AddForce(dir * knockBackForce, ForceMode2D.Impulse);
+
+        //wait for knockback duration
+        yield return new WaitForSeconds(knockBackDuration);
+
+        //wait until grounded to resume bouncing
+        yield return new WaitUntil(() => IsGrounded());
+
+        Animator ani = GetComponent<Animator>();
+
+        _isKnockedBack = false;
+    }
+
+    private IEnumerator FlashRed()
+    {
+        if (_isDead) yield break;
+
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        if (!_isDead)
+        {
+            spriteRenderer.color = originalColor;
+        }
+    }
+
+    public void Stun(float duration)
+    {
+        if (_isDead)
+        {
+            return;
+        }
+
+        //pause the enemy AI
+        _pauseAI = true;
+        //stop movement
+        _rb.velocity = Vector2.zero;
+
+        if (_enemyStunEffect != null)
+        {
+            //triggers squeeze + twist
+            _enemyStunEffect.Stun();
+        }
+        StartCoroutine(StunCoroutine(duration));
+    }
+
+    private IEnumerator StunCoroutine(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        //resume movement/hops
+        _pauseAI = false;
+    }
+
+    private void Die()
+    {
+        _isDead = true;
+
+        if (isBoss)
+        {
+            _rb.velocity = Vector2.zero;
+            _rb.isKinematic = true;
+            _rb.gravityScale = 0f;
+
+            // disable hitbox
+            Collider2D enemyCollider = GetComponent<Collider2D>();
+            if (enemyCollider != null) enemyCollider.enabled = false;
+
+            // disable AI
+            if (_enemyAI != null)
+            {
+                var aiScript = _enemyAI.GetComponent<MonoBehaviour>();
+                if (aiScript != null) aiScript.enabled = false;
+            }
+
+            // stop animator so dissolve works
+            Animator _ani = GetComponent<Animator>();
+            if (_ani != null) _ani.enabled = false;
+
+            // return music to normal
+            GolemBossAI bossAI = GetComponent<GolemBossAI>();
+            if (bossAI != null && MusicManager.instance != null)
+                MusicManager.instance.PlayMusic(bossAI.normalMusic, 0.3f);
+
+            SFXManager.instance.playSFX("bossHurt");
+
+            StartCoroutine(DissolveAndCreateBossCorpse());
+
+            return;
+        }
+
+        Animator ani = GetComponent<Animator>();
+        if (ani != null) ani.enabled = false;
+
+        StopAllCoroutines();
+        StartCoroutine(DissolveEnemy());
+
+        _isKnockedBack = false;
+        _rb.velocity = Vector2.zero;
+        _rb.isKinematic = false;
+        _rb.gravityScale = 2f;
+
+        spriteRenderer.color = originalColor;
+        spriteRenderer.sortingOrder -= 1;
+
+        Collider2D enemyCol = GetComponent<Collider2D>();
+        if (enemyCol != null)
+        {
+            enemyCol.enabled = false;
+        }
+
+        BoxCollider2D corpseCol = gameObject.AddComponent<BoxCollider2D>();
+        corpseCol.isTrigger = false;
+        corpseCol.size = new Vector2(spriteRenderer.sprite.bounds.size.x * 0.8f, 0.2f);
+
+        Bounds localBounds = spriteRenderer.sprite.bounds;
+        float offsetY = localBounds.min.y + corpseCol.size.y * 0.5f;
+        corpseCol.offset = new Vector2(0f, offsetY);
+
+        gameObject.layer = LayerMask.NameToLayer("Corpse");
+
+        OnEnemyDied?.Invoke();
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (!canDamagePlayer || _isDead || !_canDamage)
+        {
+            return;
+        }
+
+        if (other.gameObject.tag == "Player")
+        {
+            PlayerHealth player = other.gameObject.GetComponent<PlayerHealth>();
+            if (player != null)
+            {
+                //direction from enemy to player
+                Vector2 knockbackDir = (other.transform.position - transform.position).normalized;
+
+                float playerKnockbackForce = 5f;
+                player.TakeDamage(damage, knockbackDir, playerKnockbackForce);
+
+                StartCoroutine(DamageCooldown());
+            }
+        }
+    }
+
+    private IEnumerator DamageCooldown()
+    {
+        _canDamage = false;
+        yield return new WaitForSeconds(damageCooldown);
+        _canDamage = true;
+    }
+
+    private IEnumerator DissolveEnemy()
+    {
+        float duration = 0.5f;
+        float t = 0f;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime / duration;
+
+            float dissolveValue = Mathf.Lerp(0f, 1f, t);
+            spriteRenderer.GetPropertyBlock(_materialPropertyBlock);
+            _materialPropertyBlock.SetFloat(_dissolveProperty, dissolveValue);
+            spriteRenderer.SetPropertyBlock(_materialPropertyBlock);
+
+            yield return null;
+        }
+
+        //swap sprite when fully dissolved
+        spriteRenderer.sprite = catSprite;
+
+        //reset timer
+        t = 0f;
+
+        //show the new sprite (dissolving again)
+        while (t < 1f)
+        {
+            t += Time.deltaTime / duration;
+
+            float dissolveValue = Mathf.Lerp(1f, 0f, t);
+            spriteRenderer.GetPropertyBlock(_materialPropertyBlock);
+            _materialPropertyBlock.SetFloat(_dissolveProperty, dissolveValue);
+            spriteRenderer.SetPropertyBlock(_materialPropertyBlock);
+
+            yield return null;
+        }
+
+    }
+
+    private IEnumerator DissolveAndCreateBossCorpse()
+    {
+        //run dissolve first
+        yield return StartCoroutine(DissolveEnemy());
+
+        //then add corpse collider
+        BoxCollider2D bossCorpseCol = gameObject.AddComponent<BoxCollider2D>();
+        bossCorpseCol.isTrigger = false;
+        bossCorpseCol.size = new Vector2(spriteRenderer.bounds.size.x * 0.8f, 0.2f);
+
+        Bounds rBounds = spriteRenderer.bounds;
+        float offsetbossY = (bossCorpseCol.size.y * 0.5f) - rBounds.extents.y;
+        bossCorpseCol.offset = new Vector2(0f, offsetbossY);
+
+        gameObject.layer = LayerMask.NameToLayer("Corpse");
+
+        OnEnemyDied?.Invoke();
+
+        CompleteLevel();        
+    }
+
+    private void CompleteLevel()
+    {
+        //save level completion
+        SaveManager.SaveLevelComplete(1);
+        PlayerPrefs.Save();
+        //_levelCompleted = true;
+
+        //trigger challenge event
+        OnLevelCompleted?.Invoke();
+
+        // Pause the game and show panel 
+        Time.timeScale = 0f;
+        if (levelCompletePanel != null)
+        {
+            levelCompletePanel.SetActive(true);
+        }
+
+        // Switch to UI action map
+        InputManager.instance.EnableUI();
+    }
+
+    #endregion
+
+    #endregion
+}

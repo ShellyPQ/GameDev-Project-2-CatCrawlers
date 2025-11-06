@@ -1,0 +1,461 @@
+fileFormatVersion: 2
+guid: 185b1e9a0bb163e4f9baea4a243ff63b
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Cat Crawlers SpriteSheet_FrogUPDATED_0
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 828
+        width: 184
+        height: 169
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37fb7f117a63adf468cd8c77a744cbf6
+      internalID: 607576388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cat Crawlers SpriteSheet_FrogUPDATED_1
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 824
+        width: 174
+        height: 173
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8db4fa7adf6fc5b46a2c49f124de7486
+      internalID: 394112761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cat Crawlers SpriteSheet_FrogUPDATED_2
+      rect:
+        serializedVersion: 2
+        x: 1353
+        y: 805
+        width: 429
+        height: 163
+      alignment: 9
+      pivot: {x: 0.84, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 292f3a0b3adf7324db071ca60763fdcc
+      internalID: -1569925608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cat Crawlers SpriteSheet_FrogUPDATED_3
+      rect:
+        serializedVersion: 2
+        x: 1354
+        y: 607
+        width: 429
+        height: 164
+      alignment: 9
+      pivot: {x: 0.84, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5af76c539aa4ae7428785297241791e1
+      internalID: -1773670304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cat Crawlers SpriteSheet_FrogUPDATED_4
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 15
+        width: 149
+        height: 437
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5faf73813d11c21448d3c6b4c2aa6329
+      internalID: 720737034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cat Crawlers SpriteSheet_FrogUPDATED_5
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 12
+        width: 149
+        height: 437
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5af07b9b3eecd30438a4abb2a989af86
+      internalID: 1654597343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cat Crawlers SpriteSheet_FrogUPDATED_6
+      rect:
+        serializedVersion: 2
+        x: 1356
+        y: 417
+        width: 429
+        height: 161
+      alignment: 9
+      pivot: {x: 0.84, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8be7242663c39e840bbf59108ef07774
+      internalID: 1121855238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cat Crawlers SpriteSheet_FrogUPDATED_7
+      rect:
+        serializedVersion: 2
+        x: 1358
+        y: 230
+        width: 429
+        height: 158
+      alignment: 9
+      pivot: {x: 0.84, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17bafb53dabaddd47bb702e82c200952
+      internalID: -1124395015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cat Crawlers SpriteSheet_FrogUPDATED_8
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 18
+        width: 149
+        height: 437
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b46c9ea1408298498f2570a668c3089
+      internalID: -1265851800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cat Crawlers SpriteSheet_FrogUPDATED_9
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 15
+        width: 149
+        height: 437
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aad1d7d9c44f6f3478df9dfd8c801a14
+      internalID: 747298837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cat Crawlers SpriteSheet_FrogUPDATED_10
+      rect:
+        serializedVersion: 2
+        x: 754
+        y: 13
+        width: 149
+        height: 437
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61805c44bedb0de43bfd32d265a963c1
+      internalID: -1462390516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cat Crawlers SpriteSheet_FrogUPDATED_11
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 12
+        width: 145
+        height: 158
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7a18f763724c694789205db04acf3b6
+      internalID: -1977771109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cat Crawlers SpriteSheet_FrogUPDATED_12
+      rect:
+        serializedVersion: 2
+        x: 1125
+        y: 12
+        width: 141
+        height: 153
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92519344ca28c284d82980c2ddaeaddf
+      internalID: 1843191061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cat Crawlers SpriteSheet_FrogUPDATED_13
+      rect:
+        serializedVersion: 2
+        x: 1356
+        y: 35
+        width: 429
+        height: 153
+      alignment: 9
+      pivot: {x: 0.84, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45a9ce1607617ca41a02691f13dc19ac
+      internalID: 736871664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Cat Crawlers SpriteSheet_FrogUPDATED_0: 607576388
+      Cat Crawlers SpriteSheet_FrogUPDATED_1: 394112761
+      Cat Crawlers SpriteSheet_FrogUPDATED_10: -1462390516
+      Cat Crawlers SpriteSheet_FrogUPDATED_11: -1977771109
+      Cat Crawlers SpriteSheet_FrogUPDATED_12: 1843191061
+      Cat Crawlers SpriteSheet_FrogUPDATED_13: 736871664
+      Cat Crawlers SpriteSheet_FrogUPDATED_2: -1569925608
+      Cat Crawlers SpriteSheet_FrogUPDATED_3: -1773670304
+      Cat Crawlers SpriteSheet_FrogUPDATED_4: 720737034
+      Cat Crawlers SpriteSheet_FrogUPDATED_5: 1654597343
+      Cat Crawlers SpriteSheet_FrogUPDATED_6: 1121855238
+      Cat Crawlers SpriteSheet_FrogUPDATED_7: -1124395015
+      Cat Crawlers SpriteSheet_FrogUPDATED_8: -1265851800
+      Cat Crawlers SpriteSheet_FrogUPDATED_9: 747298837
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
