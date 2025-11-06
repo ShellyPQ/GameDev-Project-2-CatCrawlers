@@ -13,7 +13,7 @@ public class Level1_ChallengeTracker : MonoBehaviour
     [Tooltip("Put all enemies being tracked here")]
     [SerializeField] private EnemyController[] _slimes;
     [Tooltip("Reference to the collider holding the level 1 end trigger.")]
-    [SerializeField] private LevelEndTrigger _level1EndTrigger;
+    [SerializeField] private Level2EndTrigger _level1EndTrigger;
 
     private int totalTokens;
     private int totalSlimes;

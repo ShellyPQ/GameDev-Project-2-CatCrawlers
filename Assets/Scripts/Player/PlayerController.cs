@@ -44,6 +44,11 @@ public class PlayerController : MonoBehaviour
     private CameraFollow _cameraFollow;
     private Animator _ani;
 
+    [Header("Sliding on Ice Properties")]
+    private bool onIce = false;
+    [SerializeField] private float iceAcceleration = 0.12f;
+    [SerializeField] private float iceFriction = 0.01f;
+
     //Movement and jump states
     private float _moveInput;
     public bool _isFacingRight = true;
@@ -160,7 +165,22 @@ public class PlayerController : MonoBehaviour
         //get a reference to the player input script
         _moveInput = InputManager.instance.moveInput.x;
 
-        _rb.velocity = new Vector2(_moveInput * playerSpeed, _rb.velocity.y);
+        if (onIce)
+        {
+            //smooth slide on ice
+            float targetSpeed = _moveInput * playerSpeed;
+            float newX = Mathf.Lerp(_rb.velocity.x, targetSpeed, iceAcceleration);
+            _rb.velocity = new Vector2(newX, _rb.velocity.y);
+            
+            if (Mathf.Abs(_moveInput) < 0.1f)
+            {
+                newX = Mathf.Lerp(_rb.velocity.x, 0, iceFriction);
+                _rb.velocity = new Vector2(newX, _rb.velocity.y);
+            }
+        }else
+        {
+            _rb.velocity = new Vector2(_moveInput * playerSpeed, _rb.velocity.y);
+        }        
 
         DirCheck();
     }
@@ -268,6 +288,13 @@ public class PlayerController : MonoBehaviour
             _rb.velocity += Vector2.up * Physics2D.gravity.y * (_lowJumpMultiplier - 1) * Time.deltaTime;
         }
 
+    }
+
+    public void SetIceState(bool isOnIce, float acceleration, float friction)
+    {
+        onIce = isOnIce;
+        iceAcceleration = acceleration;
+        iceFriction = friction;
     }
 
     #endregion
