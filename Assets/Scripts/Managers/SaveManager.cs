@@ -142,7 +142,7 @@ public class SaveManager : MonoBehaviour
 
     public static bool LoadLevelComplete(int level)
     {
-        return PlayerPrefs.GetInt(GetLevelKey(level)) == 1;
+        return PlayerPrefs.GetInt(GetLevelKey(level), 0) == 1;
     }
 
     #endregion

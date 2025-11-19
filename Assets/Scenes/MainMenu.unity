@@ -2510,6 +2510,7 @@ GameObject:
   m_Component:
   - component: {fileID: 832470783}
   - component: {fileID: 832470782}
+  - component: {fileID: 832470784}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -2594,6 +2595,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 215827456}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &832470784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832470781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &857310897
 GameObject:
   m_ObjectHideFlags: 0
@@ -2826,6 +2850,10 @@ MonoBehaviour:
   sfxSettingsButton: {fileID: 8300000, guid: 5c77a0d3c73fc48418e5cb7c5315ee3f, type: 3}
   dummyExplosion: {fileID: 0}
   doorUnlock: {fileID: 0}
+  waterSplash: {fileID: 0}
+  catFrenzyPurr: {fileID: 0}
+  catFrenzyMeow: {fileID: 0}
+  bossHurt: {fileID: 0}
   soundObject: {fileID: 5331809416122137942, guid: f06ce2dc0810a034b8e977b58ef29fb4, type: 3}
 --- !u!1 &929399462
 GameObject:
@@ -5452,8 +5480,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: CAT RISING
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e7cfa6aba8ddcdb42af195130b756518, type: 2}
-  m_sharedMaterial: {fileID: -1953617718777704070, guid: e7cfa6aba8ddcdb42af195130b756518, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 68c67baafe1933048889f04a24f755db, type: 2}
+  m_sharedMaterial: {fileID: 5894905912124595887, guid: 68c67baafe1933048889f04a24f755db, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5537,6 +5565,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1860339050}
   - component: {fileID: 1860339051}
+  - component: {fileID: 1860339052}
   m_Layer: 0
   m_Name: SaveManager
   m_TagString: Untagged
@@ -5569,6 +5598,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e88cdd2e0215154a8cf305922892faa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1860339052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860339049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa078b209b420e4285cafaeb37d568e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1881904944
